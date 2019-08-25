@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.todosdialer.todosdialer.OrderResultActivity"
+    tools:showIn="@layout/activity_order_result">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_radius_white_line"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="@string/term_confirm_reservation"
+            android:textColor="@color/color_blue_gray"
+            android:textSize="15sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_language_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_basic_nation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_smartphone_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_basic_nation_telecom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_language_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_out_nation"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_date_range_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_out_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_out_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_flight_takeoff_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_out_airport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_date_range_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_in_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/text_in_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="1dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_flight_land_white_24dp"
+                android:tint="@color/color_blue_gray" />
+
+            <TextView
+                android:id="@+id/text_in_airport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_radius_white_line"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:text="@string/term_payment_info"
+            android:textColor="@color/color_blue_gray"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/text_order_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:textColor="@color/text_label"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/text_label"
+            android:textSize="13sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/term_payment_way"
+            android:textColor="@color/text_label"
+            android:textSize="15sp" />
+
+        <RadioGroup
+            android:id="@+id/radio_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/radio_credit_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/payment_credit_card"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+
+            <RadioButton
+                android:id="@+id/radio_mobile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payment_mobile"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+
+
+            <RadioButton
+                android:id="@+id/radio_ars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/payment_ars"
+                android:textColor="@color/text_label"
+                android:textSize="13sp" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btn_order_state_name"
+            android:layout_width="120dp"
+            android:layout_height="36dp"
+            android:layout_gravity="right"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_sub"
+            android:textColor="@color/color_white"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+</LinearLayout>

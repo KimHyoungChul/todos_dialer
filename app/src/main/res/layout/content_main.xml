@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.todosdialer.todosdialer.MainActivity"
+    tools:showIn="@layout/activity_main_body">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_pad"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_dialpad_white_24dp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary">
+
+            <ImageButton
+                android:id="@+id/btn_call_log"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:background="@color/colorPrimary"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_query_builder_white_24dp" />
+
+            <TextView
+                android:id="@+id/text_unchecked_missed_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@+id/btn_call_log"
+                android:background="@color/colorPrimary"
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
+                android:textColor="@color/color_white"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <ImageButton
+            android:id="@+id/btn_contact"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_contact_phone_white_24dp" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary">
+
+            <ImageButton
+                android:id="@+id/btn_message"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_centerInParent="true"
+                android:background="@color/colorPrimary"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_textsms_white_24dp" />
+
+            <TextView
+                android:id="@+id/text_unread_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="4dp"
+                android:layout_toEndOf="@+id/btn_message"
+                android:background="@drawable/btn_sub"
+                android:paddingBottom="2dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="2dp"
+                android:textColor="@color/color_white"
+                android:textSize="13sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+</LinearLayout>

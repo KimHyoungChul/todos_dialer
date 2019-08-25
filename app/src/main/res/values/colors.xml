@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1b3645</color>
+        // 활성버튼 색(등록/수정 등)
+    <color name="colorPrimaryDark">#081025</color>
+
+    <color name="colorSub">#E36159</color>
+    // 비활성버튼 색(취소/삭제 등)
+    <color name="colorSubDark">#C35149</color>
+    <color name="colorSubLight">#f9ebc6</color>
+    <color name="colorAccent">#0088CC</color>
+
+
+    <color name="color_white">#ffffff</color>
+    <color name="color_white_dark">#ececec</color>
+    <color name="line_gray">#dedcdc</color>
+    <color name="light_gray">#e1e1e1</color>
+
+
+    <color name="text_primary">#ffffff</color>
+    <color name="bg_alpha_light_grey">#11CFCFCF</color>
+    <color name="bg_alpha_grey">#77CFCFCF</color>
+    <color name="text_label_light">#616161</color>
+    <color name="text_label">#313131</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="bg_profile">#0088CC</color>
+    <color name="bg_color_dark">#d1cfcf</color>
+    //original colorprimaryDark
+    <color name="color_blue_light">#0077BB</color>
+    //original colorPrimary
+    <color name="color_blue_gray">#0088CC</color>
+</resources>

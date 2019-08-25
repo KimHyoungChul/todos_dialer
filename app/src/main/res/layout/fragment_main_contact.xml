@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_dark"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color_dark"
+        android:baselineAligned="false"
+        android:padding="5dp">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_keyword"
+            android:layout_width="369dp"
+            android:layout_height="39dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/bg_input_primary"
+            android:drawablePadding="8dp"
+            android:inputType="text"
+            android:maxLength="20"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="4dp"
+            android:textColor="@color/text_label"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/mbtn_UserSearch"
+            android:layout_width="35dp"
+            android:layout_height="37dp"
+            android:background="#00ff0000"
+            android:layout_alignTop="@id/edit_keyword"
+            android:layout_alignBottom="@id/edit_keyword"
+            android:layout_alignRight="@id/edit_keyword"
+            app:srcCompat="@drawable/ic_search_black_24dp" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_color_dark"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/text_total_size"
+            android:layout_width="366dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="12dp"
+            android:baselineAligned="false"
+            android:text="@string/term_whole"
+            android:textColor="@color/text_label"
+            android:textSize="15sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/friend_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_contents_white"
+            android:padding="5dp" />
+    </LinearLayout>
+
+</LinearLayout>

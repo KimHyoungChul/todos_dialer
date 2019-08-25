@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color_white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="1dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="13dp"
+            android:layout_height="20dp">
+
+            <ImageView
+                android:id="@+id/img_state_out"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_call_made_white_24dp"
+                android:tint="@color/colorPrimary"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/img_state_missed"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_call_missed_white_24dp"
+                android:tint="@color/colorSub" />
+
+            <ImageView
+                android:id="@+id/img_state_in"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_call_received_white_24dp"
+                android:tint="@color/colorPrimary"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="1dp" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_person_photo"
+            android:layout_width="15dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_account_circle_white_24dp" />
+
+        <LinearLayout
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_person_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="bottom"
+                android:textColor="@color/text_label"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_person_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="bottom"
+                android:textColor="@color/text_label"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="123dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_label"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/text_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_label"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_name"
+            app:srcCompat="@android:drawable/ic_delete" />
+
+        <ImageView
+            android:id="@+id/btn_message"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_textsms_white_24dp"
+            android:tint="@color/colorSub" />
+
+        <ImageView
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_call_white_24dp"
+            android:tint="@color/colorPrimary" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:background="@color/color_white_dark" />
+
+</LinearLayout>

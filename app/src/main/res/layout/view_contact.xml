@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_person"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_person_photo"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_account_circle_white_24dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_person_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:textColor="@color/text_label"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_person_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:textColor="@color/text_label"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/btn_message"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/app_name"
+        android:padding="4dp"
+        android:src="@drawable/ic_textsms_white_24dp"
+        android:tint="@color/colorSub" />
+
+    <View
+        android:id="@+id/view_between"
+        android:layout_width="16dp"
+        android:layout_height="1dp" />
+
+    <ImageView
+        android:id="@+id/btn_call"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:contentDescription="@string/app_name"
+        android:padding="4dp"
+        android:src="@drawable/ic_call_white_24dp"
+        android:tint="@color/colorPrimary" />
+</LinearLayout>

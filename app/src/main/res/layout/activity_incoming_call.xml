@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pad_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:gravity="center_horizontal"
+    tools:context="com.todosdialer.todosdialer.IncomingCallActivity">
+
+    <TextView
+        android:id="@+id/text_f_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:minHeight="50dp"
+        android:textColor="@color/color_white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/text_f_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_f_name"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="72dp"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp" />
+
+    <TextView
+        android:id="@+id/text_call_timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/text_f_phone_number"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="00:00:00"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_f_photo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_account_circle_48dp" />
+
+    <LinearLayout
+        android:id="@+id/container_btn_calling"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="72dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="42dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_speaker"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/btn_primary"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_volume_up_white_24dp" />
+
+            <ImageButton
+                android:id="@+id/btn_pad"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:background="@drawable/bg_circle_primary"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_dialpad_white_24dp" />
+
+            <ImageButton
+                android:id="@+id/btn_blue_tooth"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/btn_primary"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/ic_bluetooth_white_24dp" />
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/btn_end_call"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_sub"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_call_end_white_24dp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/container_waiting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="72dp"
+        android:paddingLeft="60dp"
+        android:paddingRight="60dp">
+
+        <ImageView
+            android:id="@+id/panel_left"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:background="@drawable/bg_circle_primary"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
+            android:src="@drawable/ic_call_white_24dp" />
+
+        <ImageView
+            android:id="@+id/panel_right"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_circle_sub"
+            android:contentDescription="@string/app_name"
+            android:scaleType="center"
+            android:src="@drawable/ic_call_end_white_24dp" />
+    </RelativeLayout>
+</RelativeLayout>

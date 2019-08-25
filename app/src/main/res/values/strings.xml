@@ -1,0 +1,164 @@
+<resources>
+    <string name="app_name">Todos Dialer</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_sign">로그인</string>
+
+    <!-- ************************************************************* -->
+    <string name="term_login">로그인</string>
+    <string name="label_email">이메일</string>
+    <string name="hint_email">이메일을 입력해주세요.</string>
+    <string name="label_password">비밀번호</string>
+    <string name="hint_password">비밀번호를 입력해주세요 (영문, 숫자 혼합 8~20자)</string>
+    <string name="hint_password_in_sign_in">비밀번호를 입력해주세요</string>
+    <string name="term_sign_up">회원가입</string>
+
+    <string name="msg_please_type_email">이메일을 적어주세요</string>
+    <string name="msg_please_type_pw">비밀번호를 적어주세요</string>
+    <string name="msg_please_check_email_format">이메일 형식을 확인해주세요</string>
+    <string name="msg_please_check_pw_format">비밀번호는 영문, 숫자를 혼합하여 8 ~ 20자로 적어주세요</string>
+    <string name="term_finding_pw">비밀번호찾기</string>
+
+    <!-- ************************************************************* -->
+    <string name="label_name">이름</string>
+    <string name="label_birthday">생일</string>
+    <string name="label_pw_again">비밀번호 재입력</string>
+
+    <string name="hint_name">이름을 입력해주세요</string>
+    <string name="hint_birthday">생일 8자리를 입력해주세요(ex. 19800101)</string>
+    <string name="hint_pw_again">비밀번호 한번 더 입력해주세요</string>
+
+    <!-- ************************************************************* -->
+    <string name="term_all_accept">전체동의</string>
+    <string name="term_accept_service">이용약관 동의</string>
+    <string name="term_accept_private">개인정보보호지침 동의</string>
+    <string name="term_show_all_with">전체보기  ></string>
+    <string name="term_next">다음으로 넘어가기</string>
+    <string name="msg_please_check_all">이용약관에 동의해주세요</string>
+    <string name="msg_please_type_name">이름을 적어주세요</string>
+    <string name="msg_please_type_birthday">생일을 적어주세요</string>
+    <string name="msg_please_check_pw">비밀번호가 다릅니다. 확인해주세요.</string>
+    <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="label_phone">휴대폰 번호</string>
+    <string name="hint_phone">휴대폰 번호 11자리를 입력해주세요(ex. 01012341234)</string>
+
+    <!-- ************************************************************* -->
+    <string name="title_activity_finding_pw">비밀번호 찾기</string>
+    <string name="msg_finding_pw_guide">회원가입시 입력해주신 이메일을 적어주세요.\n해당 이메일로 비밀번호를 보내드립니다.</string>
+    <string name="term_finding">찾기</string>
+    <string name="msg_success_to_sending_email">해당 이메일로 비밀번호를 보냈습니다.</string>
+    <string name="term_check_email">중복체크</string>
+    <string name="msg_available_phone">사용가능한 폰입니다.</string>
+    <string name="msg_available_email">사용가능한 이메일입니다.</string>
+    <string name="msg_please_check_email">이메일 중복체크를 해주세요</string>
+    <string name="msg_please_check_phone">휴대폰 번호 중복체크를 해주세요</string>
+    <string name="term_send_auth_num">인증번호</string>
+    <string name="term_check_auth_number">인증번호 확인</string>
+
+    <!-- ************************************************************* -->
+    <string name="dial_one">1</string>
+    <string name="dial_two">2</string>
+    <string name="dial_three">3</string>
+    <string name="dial_four">4</string>
+    <string name="dial_five">5</string>
+    <string name="dial_six">6</string>
+    <string name="dial_seven">7</string>
+    <string name="dial_eight">8</string>
+    <string name="dial_nine">9</string>
+    <string name="dial_zero">0</string>
+    <string name="dial_star">*</string>
+    <string name="dial_shop">#</string>
+    <string name="term_all">All</string>
+    <string name="term_missed">Missed</string>
+    <string name="msg_there_are_no_logs">통화 기록이 없습니다.</string>
+    <string name="term_whole">총</string>
+    <string name="msg_there_are_no_message">문자가 없습니다.</string>
+    <string name="term_friend_unit">명</string>
+    <string name="title_activity_new_chat">NewChatActivity</string>
+    <string name="msg_komessage_is_too_long">메시지 길이를 80자 이내로 해주세요</string>
+    <string name="msg_enmessage_is_too_long">메시지 길이를 160자 이내로 해주세요</string>
+    <string name="msg_there_are_no_message_content">메시지 내용이 없습니다.</string>
+    <string name="msg_there_is_no_numbers">휴대폰 번호를 입력해주세요.</string>
+    <string name="msg_there_is_no_members">해당 사용자가 연락처에 없습니다. 확인해 주세요</string>
+    <string name="msg_there_is_no_paired_bluetooth">연결된 블루투스 기기가 없습니다,</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="msg_please_check_account">연결 상태에 문제가 있습니다. 잠시후 다시 시도해주세요.</string>
+    <string name="msg_calling_with">님과 통화중..</string>
+    <string name="term_notification">알림</string>
+    <string name="term_log_out">로그아웃</string>
+    <string name="term_reservation_list">예약조회</string>
+    <string name="term_user_info">회원정보</string>
+    <string name="term_reservation">예약하기</string>
+    <string name="term_infomation">이용안내</string>
+
+    <!-- ******************************************************************* -->
+    <string name="title_activity_user_info">회원정보</string>
+    <string name="title_activity_reservation">예약하기</string>
+    <string name="title_activity_reservation_info">예약조회</string>
+    <string name="label_todos_expired_date">Todos 사용 남은 기한</string>
+    <string name="msg_there_is_no_reservation">예약내역이 없습니다.</string>
+
+    <!-- ******************************************************************* -->
+
+    <string name="label_order_no">주문번호</string>
+    <string name="label_order_day_count">남은날짜</string>
+    <string name="label_order_total_price">가격</string>
+    <string name="label_basic_nation_code_name">출발국가</string>
+    <string name="label_basic_telecom_code_name">통신사</string>
+    <string name="label_out_nation_code_name">방문국가</string>
+    <string name="label_out_date">출국날짜</string>
+    <string name="label_out_time">출국시간</string>
+    <string name="label_out_air_port_code_name">출국공항</string>
+    <string name="label_in_date">입국날짜</string>
+    <string name="label_in_time">입국시간</string>
+    <string name="label_in_air_port_code_name">입국공항</string>
+    <string name="label_order_state">예약상태</string>
+    <string name="notification_channel_message_description">Notification Channel for Message from Todos Dialer</string>
+    <string name="notification_channel_comment_description">Notification Channel for Call from Todos Dialer</string>
+    <string name="term_close">닫기</string>
+    <string name="msg_invalid_session">사용 신청을 하지 않았습니다.\n사용 신청 후 이용해주세요</string>
+    <string name="term_fail">실패</string>
+    <string name="msg_call_from">부재중 전화</string>
+
+    <!-- ******************************************************************* -->
+
+    <string name="hint_basic_nation_code_name">출발국가를 선택해주세요.</string>
+    <string name="hint_basic_telecom_code_name">통신사를 선택해주세요.</string>
+    <string name="hint_out_nation_code_name">방문국가를 선택해주세요.</string>
+    <string name="hint_out_date">출국날짜를 선택해주세요.</string>
+    <string name="hint_out_time">출국시간을 선택해주세요.</string>
+    <string name="hint_out_air_port_code_name">출국공항을 선택해주세요.</string>
+    <string name="hint_in_date">입국날짜를 선택해주세요.</string>
+    <string name="hint_in_time">입국시간을 선택해주세요.</string>
+    <string name="hint_in_air_port_code_name">입국공항을 선택해주세요.</string>
+    <string name="term_day_unit">일</string>
+    <string name="term_currency_unit">원</string>
+    <string name="term_available_day">사용가능기한</string>
+    <string name="title_activity_order_result">주문결과</string>
+    <string name="term_confirm_reservation">예약정보 확인</string>
+    <string name="term_payment_way">결제방법</string>
+    <string name="payment_credit_card">신용카드</string>
+    <string name="payment_mobile">휴대폰</string>
+    <string name="payment_ars">ARS</string>
+    <string name="term_payment_info">결제정보</string>
+    <string name="msg_fail_to_register_sip">통화 계정을 등록할 수가 없습니다. 관리자에게 문의해주세요</string>
+    <string name="msg_procession_to_register_sip">통화 계정을 등록 중입니다. 잠시만 기다려주세요</string>
+    <string name="title_activity_search_friend">검색</string>
+    <string name="title_activity_log">LogActivity</string>
+    <string name="msg_please_wait">잠시만 기다려주세요</string>
+    <string name="term_sending_auth_number">인증번호 받기</string>
+    <string name="hint_auth_number">인증번호를 입력해주세요</string>
+    <string name="msg_different_auth_number">인증번호가 다릅니다. 다시 확인해주세요.</string>
+    <string name="msg_auth_number_is">아래 인증번호를 입력해주세요.</string>
+    <string name="web_url">www.todosdialer.com</string>
+    <string name="msg_there_is_no_available_app">사용가능한 앱이 없습니다.</string>
+    <string name="term_usim_phone">USIM 개통번호</string>
+    <string name="term_usim_method">USIM 전달방법</string>
+    <string name="term_phone_number">핸드폰 번호</string>
+    <string name="msg_not_available">사용 신청을 하지 않았습니다.</string>
+    <string name="no_more_then_en">160자 이상 입력할 수 없습니다.</string>
+    <string name="no_more_then_ko">80자 이상 입력할 수 없습니다.</string>
+    <string name="toast_text_clipboard_adress">클립보드에 복사했습니다.</string>
+    <string name="version">version : 2.1.02</string>
+    <string name="todos">TODO</string>
+</resources>
+

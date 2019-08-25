@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_white"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.todosdialer.todosdialer.ReservationInfoActivity"
+    tools:showIn="@layout/activity_reservation_info">
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/reservation_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:id="@+id/empty_reservation_info_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="@string/msg_there_is_no_reservation"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</FrameLayout>

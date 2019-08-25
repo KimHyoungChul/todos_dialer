@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.todosdialer.todosdialer.SearchFriendActivity$SignInActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/term_login"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp" />
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_white"
+        android:scrollbarStyle="outsideOverlay"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/label_email"
+                android:textColor="@color/text_label"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input_primary"
+                android:hint="@string/hint_email"
+                android:inputType="textEmailAddress"
+                android:maxLength="40"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/label_password"
+                android:textColor="@color/text_label"
+                android:textSize="15sp" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/edit_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_input_primary"
+                android:hint="@string/hint_password_in_sign_in"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="42dp"
+                android:background="@color/color_blue_gray"
+                android:text="@string/term_login"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_white"
+                android:text="@string/term_sign_up"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_service_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/btn_white"
+                android:text="@string/term_infomation"
+                android:textColor="@color/colorPrimary"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/btn_finding_pw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:paddingBottom="16dp"
+                android:paddingTop="16dp"
+                android:text="@string/term_finding_pw"
+                android:textColor="@color/text_label_light"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

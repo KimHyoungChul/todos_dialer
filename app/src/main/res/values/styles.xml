@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowIsFloating">false</item>
+
+        <item name="android:buttonStyle">@style/FontButtonStyle</item>
+        <item name="android:editTextStyle">@style/FontEditTextStyle</item>
+        <item name="android:radioButtonStyle">@style/FontRadioButtonStyle</item>
+        <item name="android:checkboxStyle">@style/FontCheckboxStyle</item>
+        <item name="android:textViewStyle">@style/FontTextViewStyle</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowIsFloating">false</item>
+
+        <item name="android:buttonStyle">@style/FontButtonStyle</item>
+        <item name="android:editTextStyle">@style/FontEditTextStyle</item>
+        <item name="android:radioButtonStyle">@style/FontRadioButtonStyle</item>
+        <item name="android:checkboxStyle">@style/FontCheckboxStyle</item>
+        <item name="android:textViewStyle">@style/FontTextViewStyle</item>
+    </style>
+
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="FontTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+    </style>
+
+    <style name="FontButtonStyle" parent="Widget.AppCompat.Button">
+        <item name="android:fontFamily">@font/malgun</item>
+    </style>
+
+    <style name="FontEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:fontFamily">@font/malgun</item>
+    </style>
+
+    <style name="FontRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/malgun</item>
+    </style>
+
+    <style name="FontCheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:fontFamily">@font/malgun</item>
+    </style>
+
+</resources>

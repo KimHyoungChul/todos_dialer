@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_dark"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingBottom="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="5dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.todosdialer.todosdialer.UserInfoActivity"
+    tools:showIn="@layout/activity_user_info">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_contents_white"
+        android:orientation="vertical"
+        android:paddingBottom="16dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_email"
+            android:textColor="@color/text_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_user_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@string/label_birthday"
+            android:textColor="@color/text_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_user_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@string/term_usim_phone"
+            android:textColor="@color/text_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_user_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:text="@string/label_todos_expired_date"
+            android:textColor="@color/text_label"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/text_user_expired_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:textSize="15sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/text_url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:gravity="center"
+            android:paddingTop="12dp"
+            android:text="@string/web_url"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</FrameLayout>
