@@ -20,6 +20,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.todosdialer.todosdialer.ChatActivity;
+import com.todosdialer.todosdialer.NewChatActivity;
 import com.todosdialer.todosdialer.OutgoingCallActivity;
 import com.todosdialer.todosdialer.R;
 import com.todosdialer.todosdialer.SearchFriendActivity;
@@ -69,6 +71,7 @@ public class MainPadFragment extends Fragment {
     private static final String DIAL_SHOP = "#";
 
     private ImageView mImgAdd;
+    private ImageView mImgSms;
     private ImageView mImgSearch;
     private ImageView mImgBackspace;
     private AppCompatEditText mEditNumber;
@@ -129,6 +132,10 @@ public class MainPadFragment extends Fragment {
         mContactView = rootView.findViewById(R.id.contact_search);
         mImgBtnMore = rootView.findViewById(R.id.btn_see_more);
         mContactView.setButtonVisible(false);
+        mImgSms = rootView.findViewById(R.id.btn_sms);
+
+        mImgBackspace.setEnabled(false);
+        mImgSms.setEnabled(false);
 
         makeInitSoundsMap();
 
@@ -331,6 +338,14 @@ public class MainPadFragment extends Fragment {
             }
         });
 
+        mImgSms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = mEditNumber.getText().toString();
+                sendMessage(number);
+            }
+        });
+
         mImgBtnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -373,14 +388,17 @@ public class MainPadFragment extends Fragment {
         mImgBtnMore.setVisibility(View.INVISIBLE);
 
         if (TextUtils.isEmpty(numberText)) {
-            mImgBackspace.setVisibility(View.INVISIBLE);
+//            mImgBackspace.setVisibility(View.INVISIBLE);
+            mImgBackspace.setEnabled(false);
             mImgAdd.setVisibility(View.INVISIBLE);
             mImgSearch.setVisibility(View.VISIBLE);
-
+            mImgSms.setEnabled(false);
         } else {
-            mImgBackspace.setVisibility(View.VISIBLE);
+//            mImgBackspace.setVisibility(View.VISIBLE);
+            mImgBackspace.setEnabled(true);
             mImgAdd.setVisibility(View.VISIBLE);
-            mImgSearch.setVisibility(View.INVISIBLE);
+//            mImgSearch.setVisibility(View.INVISIBLE);
+            mImgSms.setEnabled(true);
         }
 
         if (mFriends != null) {
@@ -598,4 +616,19 @@ public class MainPadFragment extends Fragment {
             generateTone(dial);
         }
     }
+
+    private void sendMessage(String number) {
+        Realm mRealm = Realm.getDefaultInstance();
+        if (RealmManager.newInstance().hasChatRoom(mRealm, number)) {
+            Intent intent = new Intent(getActivity(), ChatActivity.class);
+            intent.putExtra(ChatActivity.EXTRA_KEY_NUMBER, number);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getActivity(), NewChatActivity.class);
+            intent.putExtra(NewChatActivity.EXTRA_KEY_NUMBER, number);
+            startActivity(intent);
+        }
+        mRealm.close();
+    }
+
 }

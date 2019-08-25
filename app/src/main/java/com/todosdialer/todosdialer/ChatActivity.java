@@ -17,6 +17,9 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -237,14 +240,14 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
-        findViewById(R.id.btn_remove).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mRealmManager.deleteChatRoomWithMessage(mRealm, mChatRoom.getPhoneNumber());
-
-                finish();
-            }
-        });
+//        findViewById(R.id.btn_remove).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//
+//                finish();
+//            }
+//        });
     }
 
     private void initListeners() {
@@ -427,5 +430,25 @@ public class ChatActivity extends AppCompatActivity {
         mFriend = null;
         mRealm.removeChangeListener(mRealmListener);
         mRealm.close();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.chat_menu,menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.btn_chat_delete:
+                mRealmManager.deleteChatRoomWithMessage(mRealm, mChatRoom.getPhoneNumber());
+                Toast.makeText(this, getString(R.string.msg_chat_deleted), Toast.LENGTH_SHORT).show();
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

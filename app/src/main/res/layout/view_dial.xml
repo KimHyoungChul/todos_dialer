@@ -12,6 +12,7 @@
         android:layout_centerInParent="true"
         android:fontFamily="@font/notosans_regular"
         android:gravity="center"
+        android:includeFontPadding="false"
         android:text="@string/dial_zero"
         android:textColor="@color/text_label"
         android:textSize="26sp" />
@@ -20,8 +21,8 @@
         android:id="@+id/text_init_sounds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/text_number"
         android:layout_marginLeft="4dp"
+        android:layout_centerVertical="true"
         android:layout_marginRight="4dp"
         android:layout_toEndOf="@+id/text_number"
         android:fontFamily="@font/notosans_regular"

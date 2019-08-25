@@ -22,6 +22,7 @@
     <color name="bg_alpha_grey">#77CFCFCF</color>
     <color name="text_label_light">#616161</color>
     <color name="text_label">#313131</color>
+    <color name="text_sign_label">#62a9f1</color>
 
     <color name="black_overlay">#66000000</color>
     <color name="bg_profile">#0088CC</color>
@@ -30,4 +31,65 @@
     <color name="color_blue_light">#0077BB</color>
     //original colorPrimary
     <color name="color_blue_gray">#0088CC</color>
+
+    //acitivity_sign.xml
+    <color name="color_activity_sign_bg">#62a9f1</color>
+
+    //actionbar
+    <color name="color_actionbar_bg">#63A9F1</color>
+
+    //main back color
+    <color name="color_main_back_color">#F5F5F5</color>
+    <color name="color_contact_search_back_color">#E1E1E1</color>
+
+    //navigation drawer
+    <color name="color_drawer_logo_back">#63A9F1</color>
+    <color name="color_drawer_text">#4E4E4E</color>
+
+    //dial pad
+    <color name="color_call_icon_back">#63a9f1</color>
+    <color name="color_call_log_search_back">#E1E1E1</color>
+
+    //contact
+    <color name="color_contact_list_divider">#AEAEAE</color>
+    <color name="color_contact_name_text">#4E4E4E</color>
+    <color name="color_contact_phone_number_text">#C5C5C5</color>
+    <color name="color_contact_total_count_text">#727272</color>
+    <color name="color_contact_under_line">#AEAEAE</color>
+    <color name="color_expandable_back">#c7d3df</color>
+    <color name="color_tab_under_line">#AFAFAF</color>
+
+    //log in
+    <color name="color_sign_in_back">#62a9f1</color>
+
+    //call log
+    <color name="color_call_log_time">#999999</color>
+
+    //reservation
+    <color name="color_reservation">#62B0FF</color>
+    <color name="color_my_reservation_label">#85a7c8</color>
+    <color name="color_my_reservation_underline">#CFDBE5</color>
+    <color name="color_reservation_number">#FFFA6E</color>
+
+    //chatroom
+    <color name="color_chatroom_back">#EDEDED</color>
+    <color name="color_chat_left_back">#D8EAF8</color>
+    <color name="color_chat_right_back">#F8EDD7</color>
+    <color name="color_chat_edit_back">#E3E7E8</color>
+    <color name="color_chat_send_btn">#798FA6</color>
+
+    //휴대폰 인증
+    <color name="color_acceptance_content_text">#555555</color>
+    <color name="color_acceptance_check_duplicate_btn_back">#7298BD</color>
+    <color name="color_acceptance_sub_text">#848484</color>
+    <color name="color_acceptance_title_text">#789EC3</color>
+    <color name="color_acceptance_et_under_line">#94ACC5</color>
+    <color name="color_acceptance_btn_common">#68ACF1</color>
+
+    //dial pad
+    <color name="color_bg_dial_pad_back">#C6C6C6</color>
+
+    //calling
+    <color name="color_calling_bg">#4F4F4F</color>
+
 </resources>

@@ -63,7 +63,7 @@ public class OrderInfoAdapter extends RecyclerView.Adapter<OrderInfoAdapter.View
 
         private TextView mTextDayCount; // 사용 기간중 남의 기간의 일자
         private TextView mTextPrice; // 가격
-        private Button mBtnOrderStateName; //예약자 이름
+        private TextView mBtnOrderStateName; //예약자 이름
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -96,9 +96,7 @@ public class OrderInfoAdapter extends RecyclerView.Adapter<OrderInfoAdapter.View
             mTextUsimMethod.setText(orderInfo.usimMethodName);
 
             NumberFormat format = NumberFormat.getInstance();
-            String dayCountText = mTextDayCount.getContext().getString(R.string.term_available_day) + " " +
-                    format.format(orderInfo.orderDayCount) + " " +
-                    mTextDayCount.getContext().getString(R.string.term_day_unit);
+            String dayCountText = format.format(orderInfo.orderDayCount) + mTextDayCount.getContext().getString(R.string.term_day_unit);
             mTextDayCount.setText(dayCountText);
 
             String priceText = format.format(orderInfo.orderTotalPrice) + mTextPrice.getContext().getString(R.string.term_currency_unit);

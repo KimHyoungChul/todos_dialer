@@ -12,8 +12,8 @@
         android:layout_marginBottom="10dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingTop="16dp">
+        android:paddingTop="16dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:id="@+id/sms_header_tv"
@@ -35,8 +35,8 @@
         android:id="@+id/left"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:background="#00000000"
         android:orientation="horizontal"
         android:paddingLeft="10dp">
@@ -44,32 +44,51 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_msg_left"
-            android:orientation="vertical"
-            android:paddingBottom="4dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="4dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/rec_body_tv"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="260dp"
-                android:textColor="@color/text_label"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/rec_body_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_msg_left"
+                    android:includeFontPadding="true"
+                    android:maxWidth="260dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="3sfsdfsdfsdfsd"
+                    android:textColor="@color/text_label"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/rec_check_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:text="오전 10:23"
+                    android:textColor="@color/text_label_light"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/sms_chat_arrow_left" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/rec_check_time"
-            android:layout_width="wrap_content"
-            android:layout_height="45dp"
-            android:layout_gravity="bottom"
-            android:gravity="center_vertical"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:textColor="@color/text_label_light"
-            android:textSize="12sp" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -77,8 +96,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
-        android:layout_marginBottom="12dp"
         android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
         android:background="@color/color_white"
         android:gravity="end"
         android:orientation="horizontal"
@@ -94,14 +113,6 @@
             android:gravity="bottom"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/send_check_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:textColor="@color/text_label_light"
-                android:textSize="12sp"
-                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -109,21 +120,47 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:background="@drawable/bg_msg_right"
             android:gravity="center"
-            android:orientation="horizontal"
-            android:paddingBottom="4dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="4dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/send_body_tv"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:maxWidth="260dp"
-                android:textColor="@color/text_label"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/send_check_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:layout_gravity="bottom"
+                    android:text="오후 10:22"
+                    android:textColor="@color/text_label_light"
+                    android:textSize="12sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/send_body_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_msg_right"
+                    android:maxWidth="260dp"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="10dp"
+                    android:paddingRight="15dp"
+                    android:paddingBottom="10dp"
+                    android:text="3sfsdfsdfsdfsd"
+                    android:textColor="@color/text_label"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/sms_chat_arrow_right" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

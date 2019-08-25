@@ -120,6 +120,13 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustNothing"/>
 
+        <activity
+            android:name=".WebViewActivity"
+            android:label="@string/term_infomation"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"/>
+
         <service android:name="org.eclipse.paho.android.service.MqttService" />
 
         <receiver

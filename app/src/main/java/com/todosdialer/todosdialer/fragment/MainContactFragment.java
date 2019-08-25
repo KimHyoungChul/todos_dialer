@@ -56,6 +56,9 @@ public class MainContactFragment extends Fragment {
     private User mUser;
     private Realm mRealm;
     private ImageView mImgSearch;
+    TextView textTotalSize;
+
+    public MainContactFragment() {}
 
     public static MainContactFragment newInstance(List<Friend> friends) {
         Bundle args = new Bundle();
@@ -83,34 +86,28 @@ public class MainContactFragment extends Fragment {
 
         mImgSearch = rootView.findViewById(R.id.mbtn_UserSearch);
         mEditKeyword = rootView.findViewById(R.id.edit_keyword);
-        TextView textTotalSize = rootView.findViewById(R.id.text_total_size);
+        textTotalSize = rootView.findViewById(R.id.text_total_size);
         String sizeText = getString(R.string.term_whole) + " " + mFriends.size() + getString(R.string.term_friend_unit);
         textTotalSize.setText(sizeText);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.friend_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter = new FriendListAdapter(true);
-        mAdapter.setOnFriendClickListener(new FriendListAdapter.OnFriendClickListener() {
-            @Override
-            public void onCellTouched(String number) {
-                hideKeyboard();
-            }
-
-            @Override
-            public void onCellClicked(String number) {
-            }
-
+        mAdapter = new FriendListAdapter(getActivity().getApplicationContext());
+        mAdapter.setOnItemClickListener(new FriendListAdapter.OnItemClickListener() {
             @Override
             public void onMessageClicked(String number) {
-                hideKeyboard();
                 sendMessage(number);
             }
 
             @Override
             public void onCallClicked(String number) {
-                hideKeyboard();
                 call(number);
+            }
+
+            @Override
+            public void onDeleteClicked(long id) {
+                delete(id);
             }
         });
         recyclerView.setAdapter(mAdapter);
@@ -175,6 +172,12 @@ public class MainContactFragment extends Fragment {
         mRealm.close();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
     private void sendMessage(String number) {
         if (RealmManager.newInstance().hasChatRoom(mRealm, number)) {
             Intent intent = new Intent(getActivity(), ChatActivity.class);
@@ -209,6 +212,19 @@ public class MainContactFragment extends Fragment {
                         Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    private void delete(long id){
+        Realm realm = Realm.getDefaultInstance();
+        final CallLog calllog = realm.where(CallLog.class).equalTo("id",id).findFirst();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                if (calllog != null) {
+                    calllog.deleteFromRealm();
+                }
+            }
+        });
     }
 
     private void showOutgoingCallActivity(SipSessionInfo result, String phoneNumber) {
@@ -247,6 +263,12 @@ public class MainContactFragment extends Fragment {
             }
         }
         mAdapter.setFriendList(refreshList);
+
+        if(mEditKeyword.getText().toString().equals("")) {
+            textTotalSize.setText("총 " + refreshList.size() + "명");
+        } else {
+            textTotalSize.setText("검색결과 " + refreshList.size() + "명");
+        }
     }
 
     private void hideKeyboard() {

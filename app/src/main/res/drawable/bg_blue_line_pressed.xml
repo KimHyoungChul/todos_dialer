@@ -1,0 +1,7 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/color_acceptance_btn_common" />
+
+    <stroke
+        android:width="2dp"
+        android:color="@color/color_acceptance_btn_common" />
+</shape>

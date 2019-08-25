@@ -6,11 +6,12 @@
     <!-- ************************************************************* -->
     <string name="term_login">로그인</string>
     <string name="label_email">이메일</string>
-    <string name="hint_email">이메일을 입력해주세요.</string>
+    <string name="hint_email">이메일을 입력해주세요</string>
     <string name="label_password">비밀번호</string>
     <string name="hint_password">비밀번호를 입력해주세요 (영문, 숫자 혼합 8~20자)</string>
     <string name="hint_password_in_sign_in">비밀번호를 입력해주세요</string>
     <string name="term_sign_up">회원가입</string>
+    <string name="msg_sign_in">회원가입 후 로그인 해주시기 바랍니다.</string>
 
     <string name="msg_please_type_email">이메일을 적어주세요</string>
     <string name="msg_please_type_pw">비밀번호를 적어주세요</string>
@@ -40,6 +41,7 @@
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="label_phone">휴대폰 번호</string>
     <string name="hint_phone">휴대폰 번호 11자리를 입력해주세요(ex. 01012341234)</string>
+    <string name="term_btn_next">다음</string>
 
     <!-- ************************************************************* -->
     <string name="title_activity_finding_pw">비밀번호 찾기</string>
@@ -160,5 +162,14 @@
     <string name="toast_text_clipboard_adress">클립보드에 복사했습니다.</string>
     <string name="version">version : 2.1.02</string>
     <string name="todos">TODO</string>
+
+    <string name="menu_chat_delete">삭제</string>
+    <string name="msg_chat_deleted">채팅방이 삭제되었습니다.</string>
+    <string name="menu_call_spaker">스피커</string>
+    <string name="menu_call_bt">블루투스</string>
+    <string name="menu_call_keypad">키패드</string>
+
+    <string name="title_my_reservation">내 예약정보</string>
+    <string name="label_remain_days">사용가능 기간</string>
 </resources>
 

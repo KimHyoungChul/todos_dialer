@@ -95,7 +95,7 @@ public class SearchFriendActivity extends AppCompatActivity {
 
         //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
         if (savedInstanceState != null) {
-            Log.d("SearchFriendAcivity","savedInstanceState finish ");
+            Log.d("SearchFriendAcivity", "savedInstanceState finish ");
             finish();
             return;
         }
@@ -122,9 +122,9 @@ public class SearchFriendActivity extends AppCompatActivity {
             Friend checking = mFriends.get(i);
 
             for (int j = 0; j < mSearchKeywords.size(); j++) {
-                Log.d("TAG","SearchFriendActivity:mSearchKeyword : " + mSearchKeywords.get(j));
+                Log.d("TAG", "SearchFriendActivity:mSearchKeyword : " + mSearchKeywords.get(j));
                 if (TextUtils.isDigitsOnly(mSearchKeywords.get(j))) {
-                    if (checking.getNumber().replace("-","").contains(mSearchKeywords.get(j))) {
+                    if (checking.getNumber().replace("-", "").contains(mSearchKeywords.get(j))) {
                         refreshList.add(checking);
                     }
                 } else {
@@ -178,14 +178,14 @@ public class SearchFriendActivity extends AppCompatActivity {
             hasPermissions(Utils.checkPermissions(getApplicationContext()));
 
             //login 설정값 불러오기
-            appData = getSharedPreferences("appData",MODE_PRIVATE);
+            appData = getSharedPreferences("appData", MODE_PRIVATE);
             load();
 
             mEditEmail = findViewById(R.id.edit_email);
             mEditPassword = findViewById(R.id.edit_password);
 
             //이전에 저장된 loging 설정값 불러오기
-            if(saveLoginData){
+            if (saveLoginData) {
                 mEditEmail.setText(id);
             }
             findViewById(R.id.btn_sign_in).setOnClickListener(new View.OnClickListener() {
@@ -215,7 +215,11 @@ public class SearchFriendActivity extends AppCompatActivity {
             findViewById(R.id.btn_service_info).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
+//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
+                    Intent i = new Intent(SignInActivity.this, WebViewActivity.class);
+                    i.putExtra("title", getString(R.string.term_infomation));
+                    i.putExtra("url", "http://brand.todosdialer.com/?c=106");
+                    startActivity(i);
                 }
             });
 
@@ -225,17 +229,18 @@ public class SearchFriendActivity extends AppCompatActivity {
                 return;
             }
         }
+
         //login 저장에 사용되는 함수
-        private void save(){
+        private void save() {
             SharedPreferences.Editor editor = appData.edit();
-            editor.putBoolean("SAVE_LOGIN_DATA",true);
+            editor.putBoolean("SAVE_LOGIN_DATA", true);
             editor.putString("ID", mEditEmail.getText().toString().trim());
             editor.apply();
         }
 
-        private void load(){
-            saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA",false);
-            id = appData.getString("ID","");
+        private void load() {
+            saveLoginData = appData.getBoolean("SAVE_LOGIN_DATA", false);
+            id = appData.getString("ID", "");
         }
 
         private void hasPermissions(String[] permissionArray) {

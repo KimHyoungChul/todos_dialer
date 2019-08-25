@@ -2,7 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color_dark"
+    android:background="@color/color_chatroom_back"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -10,15 +10,18 @@
         android:id="@+id/chat_room_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_contents_white"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:padding="5dp" />
 
-    <android.support.design.widget.FloatingActionButton
+    <ImageButton
         android:id="@+id/btn_new_message"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/ic_send_white_24dp" />
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_send_floating" />
 </FrameLayout>

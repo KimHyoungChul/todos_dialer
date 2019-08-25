@@ -1,49 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.todosdialer.todosdialer.FindingPwActivity">
+    android:background="@color/color_white"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.todosdialer.todosdialer.FindingPwActivity"
+    tools:showIn="@layout/activity_finding_pw">
 
-    <android.support.design.widget.AppBarLayout
+    <include layout="@layout/common_actionbar_title" />
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:padding="30dp"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/label_email"
+            android:textColor="@color/text_sign_label"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/edit_email"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress"
+            android:maxLength="40"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="8dp"
+            android:textSize="13sp" />
 
-            <FrameLayout
-                android:id="@+id/btn_back"
-                android:layout_width="50dp"
-                android:layout_height="match_parent">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_gravity="bottom"
+            android:background="@color/color_acceptance_et_under_line" />
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@color/color_blue_light"
-                    android:contentDescription="@string/term_finding_pw"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/arrow_left" />
-            </FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="10dp"
+            android:lineSpacingMultiplier="1.3"
+            android:text="@string/msg_finding_pw_guide"
+            android:textColor="@color/text_label_light"
+            android:textSize="13sp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/term_sign_up"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp" />
-        </android.support.v7.widget.Toolbar>
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_finding"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="130dp"
+            android:background="@drawable/bg_blue_line_selector"
+            android:text="@string/term_finding"
+            android:textStyle="bold"
+            android:textColor="@color/acceptance_text_color_selector"
+            android:textSize="20sp" />
+    </LinearLayout>
 
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_finding_pw" />
-
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
