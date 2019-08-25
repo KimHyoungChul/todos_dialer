@@ -115,6 +115,38 @@ public class SearchFriendActivity extends AppCompatActivity {
         });
     }
 
+    private void setActionbar(String title) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        try {
+            // Get the ActionBar here to configure the way it behaves.
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+            actionBar.setHomeButtonEnabled(true);
+
+            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarTitle.setText(title);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //for toolbar back button
+                onBackPressed();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     private void refreshList() {
         ArrayList<Friend> refreshList = new ArrayList<>();
