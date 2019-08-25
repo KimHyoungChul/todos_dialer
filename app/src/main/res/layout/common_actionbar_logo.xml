@@ -17,14 +17,16 @@
             android:background="@color/color_actionbar_bg"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
-            <RelativeLayout
+            <FrameLayout
                 android:id="@+id/btn_menu"
                 android:layout_width="match_parent"
+                android:visibility="visible"
                 android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/toolbar_icon"
                     android:layout_width="24dp"
+                    android:visibility="gone"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@string/term_finding_pw"
@@ -32,11 +34,14 @@
 
                 <ImageView
                     android:id="@+id/toolbar_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="108dp"
                     android:layout_height="20dp"
-                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="-30dp"
+                    android:layout_gravity="center"
                     android:src="@drawable/logo_todos_actionbar" />
-            </RelativeLayout>
+            </FrameLayout>
+
+
 
 
         </android.support.v7.widget.Toolbar>
