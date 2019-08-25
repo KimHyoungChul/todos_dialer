@@ -215,11 +215,16 @@ public class SearchFriendActivity extends AppCompatActivity {
             findViewById(R.id.btn_service_info).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
-                    Intent i = new Intent(SignInActivity.this, WebViewActivity.class);
-                    i.putExtra("title", getString(R.string.term_infomation));
-                    i.putExtra("url", "http://brand.todosdialer.com/?c=106");
-                    startActivity(i);
+                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
+
+                    try {
+                        Intent i = new Intent(SignInActivity.this, WebViewActivity.class);
+                        i.putExtra("title", getString(R.string.term_infomation));
+                        i.putExtra("url", "http://brand.todosdialer.com/?c=106");
+                        startActivity(i);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
             });
 
