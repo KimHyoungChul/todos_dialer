@@ -56,7 +56,8 @@ public class SearchFriendActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initActionBar();
+//        initActionBar();
+        setActionbar(getString(R.string.title_activity_search_friend));
 
         mRealm = Realm.getDefaultInstance();
         mFriends = RealmManager.newInstance().loadFriends(mRealm);
