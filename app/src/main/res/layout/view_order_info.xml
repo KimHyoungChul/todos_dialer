@@ -55,10 +55,11 @@
         </LinearLayout>
 
 
-        <ImageView
+        <View
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
-            android:src="@drawable/drawable_dash_line" />
+            android:background="@drawable/drawable_dash_line"
+            android:layerType="software"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -41,8 +41,8 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:layout_width="13dp"
-            android:layout_height="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:visibility="visible">
 
             <ImageView
@@ -50,8 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_call_made_white_24dp"
-                android:tint="@color/colorPrimary" />
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_call_made_white_24dp" />
 
             <ImageView
                 android:id="@+id/img_state_missed"
@@ -79,8 +79,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_person_photo"
-            android:layout_width="15dp"
-            android:layout_height="38dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
@@ -107,15 +107,14 @@
                 android:gravity="bottom"
                 android:includeFontPadding="false"
                 android:singleLine="true"
-                android:textColor="@color/color_contact_name_text"
-                android:textSize="20sp"
+                android:textColor="@color/text_label"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/text_person_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
                 android:duplicateParentState="true"
                 android:gravity="bottom"
                 android:singleLine="true"

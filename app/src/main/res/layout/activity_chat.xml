@@ -41,6 +41,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:singleLine="true"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="가나다라마바사아자차카타파하가나다라마바"
                 android:textColor="@color/color_white"
                 android:textSize="18sp" />
 

@@ -16,7 +16,7 @@ import com.todosdialer.todosdialer.util.Utils;
 import java.util.ArrayList;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
-    private static final String FORMAT_HEADER_DATE = "yyyy. MM. dd.";
+    private static final String FORMAT_HEADER_DATE = "yyyy. MM. dd";
     private static final String FORMAT_DATE = "aa hh:mm";
 
     private ArrayList<Message> mMessageList = new ArrayList<>();

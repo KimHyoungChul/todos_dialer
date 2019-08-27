@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clickable="false"
+            android:includeFontPadding="false"
             android:gravity="center"
             android:textColor="@color/text_label_light"
             android:textSize="12sp" />
@@ -27,7 +28,7 @@
         <View
             android:layout_width="100dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
+            android:visibility="gone"
             android:background="@color/colorPrimary" />
     </LinearLayout>
 
@@ -74,6 +75,7 @@
                     android:layout_marginLeft="5dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="5dp"
+                    android:includeFontPadding="false"
                     android:paddingRight="5dp"
                     android:text="오전 10:23"
                     android:textColor="@color/text_label_light"
@@ -135,6 +137,7 @@
                     android:layout_marginRight="5dp"
                     android:layout_gravity="bottom"
                     android:text="오후 10:22"
+                    android:includeFontPadding="false"
                     android:textColor="@color/text_label_light"
                     android:textSize="12sp"
                     android:visibility="visible" />

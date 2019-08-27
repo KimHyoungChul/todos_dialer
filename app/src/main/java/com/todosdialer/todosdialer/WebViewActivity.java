@@ -1,5 +1,7 @@
 package com.todosdialer.todosdialer;
 
+import android.app.ProgressDialog;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -7,9 +9,11 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,10 +22,14 @@ public class WebViewActivity extends AppCompatActivity {
     String url = null;
     String title = null;
 
+    ProgressBar mProgressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
+
+        mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         if(getIntent().getStringExtra("url").length() != 0) {
             url = getIntent().getStringExtra("url");
@@ -59,7 +67,23 @@ public class WebViewActivity extends AppCompatActivity {
             view.loadUrl(url);
             return true;
         }
+
+        @Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon){
+            mProgressBar.setVisibility(View.VISIBLE);
+        }
+
+        //웹페이지 로딩 종료시 호출
+        @Override
+        public void onPageFinished(WebView view, String url){
+            mProgressBar.setVisibility(View.GONE);
+        }
+
+
     }
+
+
+
 
     private void setActionbar(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
