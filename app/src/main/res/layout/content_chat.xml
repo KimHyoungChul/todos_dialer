@@ -35,6 +35,8 @@
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_message"
             android:layout_width="0dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_height="34dp"
             android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"

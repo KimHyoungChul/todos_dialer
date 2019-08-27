@@ -2,10 +2,12 @@ package com.todosdialer.todosdialer.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.todosdialer.todosdialer.ChatActivity;
+import com.todosdialer.todosdialer.MainActivity;
 import com.todosdialer.todosdialer.NewChatActivity;
 import com.todosdialer.todosdialer.OutgoingCallActivity;
 import com.todosdialer.todosdialer.R;
@@ -48,6 +51,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainCallLogFragment extends Fragment {
     private static final int POSITION_ALL = 0;
@@ -55,6 +59,8 @@ public class MainCallLogFragment extends Fragment {
 
     private TextView mBtnAll;
     private TextView mBtnMissed;
+    private View mAllUnderLine;
+    private View mMissedUnderLine;
 
     private RecyclerView mCallLogRecyclerView;
     private TextView mCallEmptyView;
@@ -114,6 +120,10 @@ public class MainCallLogFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main_call_log, container, false);
         mBtnAll = rootView.findViewById(R.id.btn_all);
         mBtnMissed = rootView.findViewById(R.id.btn_missed);
+
+        mAllUnderLine = rootView.findViewById(R.id.call_log_menu_underline_all);
+        mMissedUnderLine = rootView.findViewById(R.id.call_log_menu_underline_missed);
+
         mCallLogRecyclerView = rootView.findViewById(R.id.call_log_list);
         mCallEmptyView = rootView.findViewById(R.id.call_empty_view);
 
@@ -125,7 +135,7 @@ public class MainCallLogFragment extends Fragment {
 
         mCallLogRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter = new CallLogAdapter();
+        mAdapter = new CallLogAdapter(getActivity().getApplicationContext());
         mAdapter.setOnItemClickListener(new CallLogAdapter.OnItemClickListener() {
             @Override
             public void onMessageClicked(String number) {
@@ -138,7 +148,9 @@ public class MainCallLogFragment extends Fragment {
             }
 
             @Override
-            public void onDeleteClicked(long id) { delete(id); }
+            public void onDeleteClicked(long id) {
+                delete(id);
+            }
         });
 
         mCallLogRecyclerView.setAdapter(mAdapter);
@@ -201,6 +213,7 @@ public class MainCallLogFragment extends Fragment {
         return rootView;
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -228,13 +241,24 @@ public class MainCallLogFragment extends Fragment {
 
     private void changeIndicator() {
         if (mBtnAll != null && mBtnMissed != null) {
-            mBtnAll.setBackgroundResource(R.drawable.bg_radius_half_l_gray);
-            mBtnMissed.setBackgroundResource(R.drawable.bg_radius_half_r_gray);
+//            mBtnAll.setBackgroundResource(R.drawable.bg_radius_half_l_gray);
+//            mBtnMissed.setBackgroundResource(R.drawable.bg_radius_half_r_gray);
+            mBtnAll.setSelected(false);
+            mBtnMissed.setSelected(false);
+            mAllUnderLine.setVisibility(View.INVISIBLE);
+            mMissedUnderLine.setVisibility(View.INVISIBLE);
+
+            mBtnAll.setTypeface(null, Typeface.NORMAL);
+            mBtnMissed.setTypeface(null, Typeface.NORMAL);
 
             if (mCurrentPosition == POSITION_ALL) {
-                mBtnAll.setBackgroundResource(R.drawable.bg_radius_half_l_primary);
+                mBtnAll.setSelected(true);
+                mAllUnderLine.setVisibility(View.VISIBLE);
+                mBtnAll.setTypeface(null, Typeface.BOLD);
             } else {
-                mBtnMissed.setBackgroundResource(R.drawable.bg_radius_half_r_primary);
+                mBtnMissed.setSelected(true);
+                mMissedUnderLine.setVisibility(View.VISIBLE);
+                mBtnMissed.setTypeface(null, Typeface.BOLD);
             }
         }
     }
@@ -242,23 +266,23 @@ public class MainCallLogFragment extends Fragment {
     private void refreshLogList() {
         if (mCallLogRecyclerView != null && mCallEmptyView != null && mAdapter != null) {
             List<CallLog> list;
-            if(mCurrentPosition == POSITION_ALL){
+            if (mCurrentPosition == POSITION_ALL) {
                 list = mCallLogList;
-            }else{
+            } else {
                 list = mMissedCallLogList;
             }
             //List<CallLog> list = mCurrentPosition == POSITION_ALL ? mCallLogList : mMissedCallLogList;
             if (list.size() == 0) {
                 mCallEmptyView.setVisibility(View.VISIBLE);
                 mCallLogRecyclerView.setVisibility(View.GONE);
-            } else if(mSelectdSearch.getText().toString().length() !=  0) {
+            } else if (mSelectdSearch.getText().toString().length() != 0) {
                 mSelectedKeyword = mSelectdSearch.getText().toString().trim();
-                mSelectedKeyword.replace("-","");
+                mSelectedKeyword.replace("-", "");
                 ArrayList<CallLog> SelectedList = new ArrayList<>();
                 for (int i = 0; i < list.size(); i++) {
                     CallLog checking = list.get(i);
                     if (TextUtils.isDigitsOnly(mSelectedKeyword)) {
-                        if (checking.getNumber().replace("-","").contains(mSelectedKeyword.replace("-",""))) {
+                        if (checking.getNumber().replace("-", "").contains(mSelectedKeyword.replace("-", ""))) {
                             SelectedList.add(checking);
                         }
                     } else {
@@ -314,9 +338,9 @@ public class MainCallLogFragment extends Fragment {
                 });
     }
 
-    private void delete(long id){
+    private void delete(long id) {
         Realm realm = Realm.getDefaultInstance();
-        final CallLog calllog = realm.where(CallLog.class).equalTo("id",id).findFirst();
+        final CallLog calllog = realm.where(CallLog.class).equalTo("id", id).findFirst();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -352,5 +376,27 @@ public class MainCallLogFragment extends Fragment {
         if (mImm != null) {
             mImm.hideSoftInputFromWindow(mSelectdSearch.getWindowToken(), 0);
         }
+    }
+
+    private void refresh() {
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.detach(this).attach(this).commit();
+    }
+
+    public void onResume() {
+        super.onResume();
+        RealmManager mRealmManager;
+        Realm mRealm;
+        RealmResults<CallLog> mCallLogResults;
+        RealmResults<CallLog> mMissedCallLogResults;
+
+        mRealm = Realm.getDefaultInstance();
+        mRealmManager = RealmManager.newInstance();
+        mCallLogResults = mRealmManager.loadCallLogs(mRealm);
+        mMissedCallLogResults = mRealmManager.loadMissedCallLogs(mRealm);
+
+        mCallLogResults = mRealmManager.loadCallLogs(mRealm);
+
+        new MainActivity().refreshMainCallLogFragment();
     }
 }

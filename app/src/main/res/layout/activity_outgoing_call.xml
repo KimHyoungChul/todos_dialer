@@ -5,55 +5,65 @@
     android:id="@+id/pad_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_white"
+    android:background="@color/color_calling_bg"
     android:gravity="center_horizontal"
     tools:context="com.todosdialer.todosdialer.OutgoingCallActivity">
 
-    <TextView
-        android:id="@+id/text_f_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:minHeight="50dp"
-        android:textColor="@color/color_white"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+    <include
+        android:id="@+id/actionbar"
+        layout="@layout/common_actionbar_logo" />
 
-
-    <TextView
-        android:id="@+id/text_f_phone_number"
-        android:layout_width="114dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_f_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="72dp"
-        android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="15sp" />
-
-    <com.wang.avi.AVLoadingIndicatorView
-        android:id="@+id/indicator"
-        style="@style/AVLoadingIndicatorView"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:layout_below="@+id/text_f_name"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="32dp"
-        app:indicatorColor="@color/color_blue_gray"
-        app:indicatorName="BallPulseIndicator" />
-
-    <TextView
-        android:id="@+id/text_call_timer"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_f_phone_number"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:gravity="center"
-        android:text="00:00:00"
-        android:textColor="@color/color_blue_light"
-        android:textSize="15sp" />
+        android:layout_below="@+id/actionbar"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_f_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:minHeight="50dp"
+            android:text="김민국"
+            android:textColor="@color/color_white"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/text_f_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:maxWidth="300dp"
+            android:text="000-0000-0000"
+            android:textColor="@color/text_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:id="@+id/text_call_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:includeFontPadding="false"
+            android:text="00:00:00"
+            android:textColor="@color/text_primary"
+            android:textSize="15sp" />
+
+        <com.wang.avi.AVLoadingIndicatorView
+            android:id="@+id/indicator"
+            style="@style/AVLoadingIndicatorView"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="0dp"
+            app:indicatorColor="@color/color_white"
+            app:indicatorName="BallPulseIndicator" />
+    </LinearLayout>
+
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_f_photo"
@@ -66,57 +76,106 @@
         android:src="@drawable/ic_account_circle_48dp" />
 
     <LinearLayout
+        android:id="@+id/container_btn_calling"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
+        android:layout_above="@+id/btn_end_call"
+        android:background="@color/color_white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="30dp">
 
         <LinearLayout
-            android:id="@+id/container_btn_calling"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="42dp"
+            android:layout_marginBottom="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/btn_speaker"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="26dp"
-                android:background="@drawable/bg_circle_primary"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_volume_up_white_24dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:gravity="center"
+                android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/btn_pad"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:background="@drawable/bg_circle_primary"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_dialpad_white_24dp" />
+                <ImageButton
+                    android:id="@+id/btn_speaker"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_call_speaker" />
 
-            <ImageButton
-                android:id="@+id/btn_blue_tooth"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginLeft="26dp"
-                android:background="@drawable/bg_circle_primary"
-                android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_bluetooth_white_24dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="true"
+                    android:text="@string/menu_call_spaker" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="60dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_pad"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_call_dialpad" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="true"
+                    android:text="@string/menu_call_keypad" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/btn_blue_tooth"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_call_bt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:includeFontPadding="true"
+                    android:text="@string/menu_call_bt" />
+
+            </LinearLayout>
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btn_end_call"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/btn_sub"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_call_end_white_24dp" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_end_call"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_calling_end"
+        android:contentDescription="@string/app_name"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_call_end_white_24dp" />
 </RelativeLayout>

@@ -19,6 +19,7 @@
             android:id="@+id/call_log_days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:text="2019. 7. 24 수요일" />
 
         <View
@@ -42,20 +43,20 @@
         <FrameLayout
             android:layout_width="13dp"
             android:layout_height="20dp"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/img_state_out"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_call_made_white_24dp"
                 android:tint="@color/colorPrimary" />
 
             <ImageView
                 android:id="@+id/img_state_missed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_call_missed_white_24dp"
                 android:tint="@color/colorSub"
@@ -63,8 +64,8 @@
 
             <ImageView
                 android:id="@+id/img_state_in"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_call_received_white_24dp"
                 android:tint="@color/colorPrimary"
@@ -74,7 +75,7 @@
         <View
             android:layout_width="8dp"
             android:layout_height="1dp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_person_photo"
@@ -84,10 +85,10 @@
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_account_circle_white_24dp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <LinearLayout
-            android:layout_width="130dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="10dp"
@@ -104,7 +105,8 @@
                 android:layout_height="wrap_content"
                 android:duplicateParentState="true"
                 android:gravity="bottom"
-                android:text="서울부동산"
+                android:includeFontPadding="false"
+                android:singleLine="true"
                 android:textColor="@color/color_contact_name_text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -116,7 +118,8 @@
                 android:layout_marginTop="3dp"
                 android:duplicateParentState="true"
                 android:gravity="bottom"
-                android:text="010-0000-0000"
+                android:singleLine="true"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_contact_phone_number_text"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -124,7 +127,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:minWidth="40dp"
             android:gravity="center_vertical|right"
             android:orientation="vertical">
 
@@ -132,7 +135,7 @@
                 android:id="@+id/text_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="15:16"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_call_log_time"
                 android:textSize="12sp" />
 
@@ -140,9 +143,10 @@
                 android:id="@+id/text_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_call_log_time"
                 android:textSize="12sp"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
         </LinearLayout>
 

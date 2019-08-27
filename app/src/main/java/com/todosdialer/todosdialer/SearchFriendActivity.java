@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +16,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.todosdialer.todosdialer.adapter.FriendListAdapter;
@@ -29,11 +32,13 @@ import com.todosdialer.todosdialer.manager.BusManager;
 import com.todosdialer.todosdialer.manager.RealmManager;
 import com.todosdialer.todosdialer.manager.RetrofitManager;
 import com.todosdialer.todosdialer.model.Friend;
+import com.todosdialer.todosdialer.model.SipSessionInfo;
 import com.todosdialer.todosdialer.model.User;
 import com.todosdialer.todosdialer.service.TodosService;
 import com.todosdialer.todosdialer.sip.SipInstance;
 import com.todosdialer.todosdialer.util.KoreanTextMatcher;
 import com.todosdialer.todosdialer.util.Utils;
+import com.todosdialer.todosdialer.view.MessageDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,57 +53,63 @@ public class SearchFriendActivity extends AppCompatActivity {
     private ArrayList<String> mSearchKeywords;
     private FriendListAdapter mAdapter;
     private Realm mRealm;
+    private User mUser;
+    TextView textTotalSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_friend);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-//        initActionBar();
-        setActionbar(getString(R.string.title_activity_search_friend));
+        try {
+            setContentView(R.layout.activity_search_friend);
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
 
-        mRealm = Realm.getDefaultInstance();
-        mFriends = RealmManager.newInstance().loadFriends(mRealm);
+            initActionBar();
+//        setActionbar(getString(R.string.title_activity_search_friend));
 
-        mSearchKeywords = getIntent().getStringArrayListExtra(EXTRA_KEY_KEYWORDS);
-        if (mSearchKeywords == null) {
-            mSearchKeywords = new ArrayList<>();
-        }
+            mRealm = Realm.getDefaultInstance();
+            mFriends = RealmManager.newInstance().loadFriends(mRealm);
+            mUser = RealmManager.newInstance().loadUser(mRealm);
 
-        RecyclerView recyclerView = findViewById(R.id.friend_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        mAdapter = new FriendListAdapter(false);
-        mAdapter.setOnFriendClickListener(new FriendListAdapter.OnFriendClickListener() {
-            @Override
-            public void onCellTouched(String number) {
-
+            mSearchKeywords = getIntent().getStringArrayListExtra(EXTRA_KEY_KEYWORDS);
+            if (mSearchKeywords == null) {
+                mSearchKeywords = new ArrayList<>();
             }
 
-            @Override
-            public void onCellClicked(String number) {
-                finishWithResult(number);
+            RecyclerView recyclerView = findViewById(R.id.friend_list);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            mAdapter = new FriendListAdapter(getApplicationContext());
+            mAdapter.setOnItemClickListener(new FriendListAdapter.OnItemClickListener() {
+
+                @Override
+                public void onMessageClicked(String number) {
+                    sendMessage(number);
+                }
+
+                @Override
+                public void onCallClicked(String number) {
+                    call(number);
+                }
+
+                @Override
+                public void onDeleteClicked(long id) {
+
+                }
+            });
+            recyclerView.setAdapter(mAdapter);
+
+            refreshList();
+
+            //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
+            if (savedInstanceState != null) {
+                Log.d("SearchFriendAcivity", "savedInstanceState finish ");
+                finish();
+                return;
             }
-
-            @Override
-            public void onMessageClicked(String number) {
-            }
-
-            @Override
-            public void onCallClicked(String number) {
-            }
-        });
-        recyclerView.setAdapter(mAdapter);
-
-        refreshList();
-
-        //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
-        if (savedInstanceState != null) {
-            Log.d("SearchFriendAcivity", "savedInstanceState finish ");
-            finish();
-            return;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -116,36 +127,36 @@ public class SearchFriendActivity extends AppCompatActivity {
         });
     }
 
-    private void setActionbar(String title) {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        try {
-            // Get the ActionBar here to configure the way it behaves.
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
-            actionBar.setHomeButtonEnabled(true);
-
-            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            toolbarTitle.setText(title);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //for toolbar back button
-                onBackPressed();
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    private void setActionbar(String title) {
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        try {
+//            // Get the ActionBar here to configure the way it behaves.
+//            ActionBar actionBar = getSupportActionBar();
+//            actionBar.setDisplayShowCustomEnabled(true);
+//            actionBar.setDisplayShowTitleEnabled(false);
+//            actionBar.setDisplayHomeAsUpEnabled(true);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
+//
+//            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+//            toolbarTitle.setText(title);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()){
+//            case android.R.id.home:{ //for toolbar back button
+//                onBackPressed();
+//                return true;
+//            }
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
 
@@ -155,9 +166,9 @@ public class SearchFriendActivity extends AppCompatActivity {
             Friend checking = mFriends.get(i);
 
             for (int j = 0; j < mSearchKeywords.size(); j++) {
-                Log.d("TAG", "SearchFriendActivity:mSearchKeyword : " + mSearchKeywords.get(j));
+                Log.d("TAG","SearchFriendActivity:mSearchKeyword : " + mSearchKeywords.get(j));
                 if (TextUtils.isDigitsOnly(mSearchKeywords.get(j))) {
-                    if (checking.getNumber().replace("-", "").contains(mSearchKeywords.get(j))) {
+                    if (checking.getNumber().replace("-","").contains(mSearchKeywords.get(j))) {
                         refreshList.add(checking);
                     }
                 } else {
@@ -185,6 +196,63 @@ public class SearchFriendActivity extends AppCompatActivity {
 
         mRealm.close();
     }
+
+    private void sendMessage(String number) {
+        if (RealmManager.newInstance().hasChatRoom(mRealm, number)) {
+            Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
+            intent.putExtra(ChatActivity.EXTRA_KEY_NUMBER, number);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(getApplicationContext(), NewChatActivity.class);
+            intent.putExtra(NewChatActivity.EXTRA_KEY_NUMBER, number);
+            startActivity(intent);
+        }
+    }
+
+    private void call(String phoneNumber) {
+        checkSession(phoneNumber);
+    }
+
+    private void checkSession(final String phoneNumber) {
+        RetrofitManager.retrofit(getApplicationContext()).create(Client.Api.class)
+                .checkSessionInfo(new CheckSessionBody(getApplicationContext(), mUser.getId()))
+                .enqueue(new ApiCallback<SipSessionInfoResponse>() {
+                    @Override
+                    public void onSuccess(SipSessionInfoResponse response) {
+                        if (response.isSuccess()) {
+                            showOutgoingCallActivity(response.result, phoneNumber);
+                        } else {
+                            showInvalidSessionDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int error, String msg) {
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void showOutgoingCallActivity(SipSessionInfo result, String phoneNumber) {
+        SipInstance sipInstance = SipInstance.getInstance(getApplicationContext());
+        if (sipInstance.isAccountAvailable()) {
+            Intent intent = new Intent(getApplicationContext(), OutgoingCallActivity.class);
+            intent.putExtra(OutgoingCallActivity.EXTRA_KEY_PHONE_NUMBER, phoneNumber);
+            startActivity(intent);
+        } else {
+            Toast.makeText(getApplicationContext(), R.string.msg_please_check_account, Toast.LENGTH_SHORT).show();
+            BusManager.getInstance().post(new TodosService.Request("Contact", TodosService.Request.REQUEST_REGISTER_SIP, result));
+        }
+    }
+
+    private void showInvalidSessionDialog() {
+        if (getApplicationContext() != null) {
+            MessageDialog dialog = new MessageDialog(getApplicationContext());
+            dialog.setMessage(getString(R.string.msg_invalid_session));
+            dialog.show();
+        }
+    }
+
 
     public static class SignInActivity extends AppCompatActivity {
         private static final int REQUEST_PERMISSION = 21;
@@ -231,12 +299,16 @@ public class SearchFriendActivity extends AppCompatActivity {
                 }
             });
 
-            findViewById(R.id.btn_sign_up).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivityForResult(new Intent(SignInActivity.this, SignUpActivity.class), REQUEST_SIGN_UP);
-                }
-            });
+            try {
+                findViewById(R.id.btn_sign_up).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        startActivityForResult(new Intent(SignInActivity.this, SignUpActivity.class), REQUEST_SIGN_UP);
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
             findViewById(R.id.btn_finding_pw).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -258,6 +330,7 @@ public class SearchFriendActivity extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                 }
             });
 
@@ -393,5 +466,8 @@ public class SearchFriendActivity extends AppCompatActivity {
                 goToMain();
             }
         }
+
+
+
     }
 }

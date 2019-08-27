@@ -419,7 +419,7 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                 mAudioManager.stopBluetoothSco();
                 mAudioManager.setBluetoothScoOn(false);
 
-                mBtnSpeaker.setImageResource(R.drawable.ic_volume_up_white_24dp);
+                mBtnSpeaker.setImageResource(R.drawable.ic_call_speaker);
             } else {
                 mAudioManager.setSpeakerphoneOn(true);
                 mBtnSpeaker.setImageResource(R.drawable.ic_volume_up_24dp);
@@ -452,7 +452,7 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 
             mBtnSpeaker.setImageResource(mAudioManager.isSpeakerphoneOn() ?
                     R.drawable.ic_volume_up_24dp :
-                    R.drawable.ic_volume_up_white_24dp);
+                    R.drawable.ic_call_speaker);
         }
     }
 

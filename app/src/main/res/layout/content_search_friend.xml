@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_color_dark"
+    android:background="@color/color_white"
     android:orientation="vertical"
     android:padding="5dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -15,6 +15,5 @@
         android:id="@+id/friend_list"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_contents_white"
         android:layout_weight="1" />
 </LinearLayout>

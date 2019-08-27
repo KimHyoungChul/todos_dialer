@@ -29,10 +29,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_email"
+            android:includeFontPadding="false"
             android:textColor="@color/text_label"
             android:textSize="16sp" />
 
         <TextView
+            android:includeFontPadding="false"
             android:id="@+id/text_user_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:text="@string/label_birthday"
+            android:includeFontPadding="false"
             android:textColor="@color/text_label"
             android:textSize="16sp" />
 
@@ -56,6 +59,7 @@
             android:layout_marginTop="8dp"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
+            android:includeFontPadding="false"
             android:textSize="15sp" />
 
         <TextView
@@ -63,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:text="@string/term_usim_phone"
+            android:includeFontPadding="false"
             android:textColor="@color/text_label"
             android:textSize="16sp" />
 
@@ -71,6 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:includeFontPadding="false"
             android:paddingBottom="12dp"
             android:paddingTop="12dp"
             android:textSize="15sp" />
@@ -80,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
             android:text="@string/label_todos_expired_date"
+            android:includeFontPadding="false"
             android:textColor="@color/text_label"
             android:textSize="16sp" />
 
@@ -89,6 +96,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:paddingBottom="12dp"
+            android:includeFontPadding="false"
             android:paddingTop="12dp"
             android:textSize="15sp" />
 
@@ -100,6 +108,7 @@
         <TextView
             android:id="@+id/text_url"
             android:layout_width="match_parent"
+            android:includeFontPadding="false"
             android:layout_height="wrap_content"
             android:autoLink="web"
             android:gravity="center"

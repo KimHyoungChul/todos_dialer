@@ -37,6 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textStyle="bold"
+                android:singleLine="true"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_white"
                 android:textSize="20sp" />
         </android.support.v7.widget.Toolbar>

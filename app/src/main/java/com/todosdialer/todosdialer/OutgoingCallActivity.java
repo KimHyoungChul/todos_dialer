@@ -23,9 +23,13 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -122,10 +126,13 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        try {
         super.onCreate(savedInstanceState);
         TodosApplication.onCalling(true);
         initWindowFlag();
-        setContentView(R.layout.activity_outgoing_call);
+
+            setContentView(R.layout.activity_outgoing_call);
+
         mRealm = Realm.getDefaultInstance();
         String phoneNumber = getIntent().getStringExtra(EXTRA_KEY_PHONE_NUMBER);
 
@@ -135,6 +142,8 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             finish();
             return;
         }
+
+        setLogoActionbar();
 
         mIndicator = findViewById(R.id.indicator);
         mTextName = findViewById(R.id.text_f_name);
@@ -183,6 +192,10 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             Log.d("OutgoingCallActivity","savedInstanceState is not null");
             finish();
             return;
+        }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -296,7 +309,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
                     .apply(RequestOptions.centerCropTransform())
                     .into(mImgPhoto);
         } else {
-            mImgPhoto.setImageResource(R.drawable.ic_account_circle_white_24dp);
+            mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
         }
     }
 
@@ -402,7 +415,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
                 mAudioManager.stopBluetoothSco();
                 mAudioManager.setBluetoothScoOn(false);
 
-                mBtnSpeaker.setImageResource(R.drawable.ic_volume_up_white_24dp);
+                mBtnSpeaker.setImageResource(R.drawable.ic_call_speaker);
             } else {
                 mAudioManager.setSpeakerphoneOn(true);
                 mBtnSpeaker.setImageResource(R.drawable.ic_volume_up_24dp);
@@ -435,7 +448,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
             mBtnSpeaker.setImageResource(mAudioManager.isSpeakerphoneOn() ?
                     R.drawable.ic_volume_up_24dp :
-                    R.drawable.ic_volume_up_white_24dp);
+                    R.drawable.ic_call_speaker);
         }
     }
 
@@ -664,5 +677,37 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             mAudioManager.setMode(AudioManager.MODE_NORMAL);
             mAudioManager = null;
         }
+    }
+
+    private void setLogoActionbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거
+        setSupportActionBar(toolbar);
+
+        try {
+            // Get the ActionBar here to configure the way it behaves.
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+            actionBar.setHomeButtonEnabled(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{ //for toolbar back button
+                endCall();
+
+                finish();
+                return true;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

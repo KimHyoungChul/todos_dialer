@@ -9,6 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         android:background="@color/color_call_log_search_back"
         android:orientation="horizontal"
         android:padding="20dp">

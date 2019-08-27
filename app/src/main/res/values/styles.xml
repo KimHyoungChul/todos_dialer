@@ -35,24 +35,24 @@
 
 
     <style name="FontTextViewStyle" parent="android:Widget.TextView">
-        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
         <item name="android:lineSpacingMultiplier">1.2</item>
     </style>
 
     <style name="FontButtonStyle" parent="Widget.AppCompat.Button">
-        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
 
     <style name="FontEditTextStyle" parent="Widget.AppCompat.EditText">
-        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
 
     <style name="FontRadioButtonStyle" parent="Widget.AppCompat.CompoundButton.RadioButton">
-        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
 
     <style name="FontCheckboxStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">
-        <item name="android:fontFamily">@font/malgun</item>
+        <item name="android:fontFamily">@font/notosans_regular</item>
     </style>
 
     <style name="SignInLabelStyle" parent="Widget.AppCompat.CompoundButton.CheckBox">

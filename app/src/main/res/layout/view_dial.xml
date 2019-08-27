@@ -27,7 +27,7 @@
         android:layout_toEndOf="@+id/text_number"
         android:fontFamily="@font/notosans_regular"
         android:text="@string/dial_zero"
-        android:textColor="@color/text_label"
+        android:textColor="@color/color_dial_pad_alphabet"
         android:textSize="14sp" />
 
 </RelativeLayout>

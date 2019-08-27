@@ -5,10 +5,10 @@
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingBottom="10dp"
     android:paddingLeft="10dp"
+    android:paddingTop="10dp"
     android:paddingRight="10dp"
-    android:paddingTop="10dp">
+    android:paddingBottom="10dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_person_photo"
@@ -33,16 +33,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom"
+            android:includeFontPadding="false"
+            android:singleLine="true"
             android:textColor="@color/text_label"
-            android:textSize="13sp"
+            android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/text_person_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:gravity="bottom"
+            android:includeFontPadding="false"
+            android:singleLine="true"
             android:textColor="@color/text_label"
             android:textSize="14sp" />
     </LinearLayout>

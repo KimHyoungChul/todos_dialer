@@ -19,29 +19,31 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_alignParentBottom="true"
+        android:background="@color/color_chat_edit_back"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical"
         android:minHeight="40dp"
-        android:background="@color/color_chat_edit_back"
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_message"
             android:layout_width="0dp"
             android:layout_height="34dp"
-            android:layout_marginBottom="6dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="12dp"
             android:layout_marginTop="6dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="6dp"
             android:layout_weight="1"
             android:background="@drawable/bg_radius_white"
             android:gravity="top"
             android:inputType="textMultiLine"
             android:maxLength="160"
             android:maxLines="10"
-            android:paddingBottom="8dp"
             android:paddingLeft="12dp"
-            android:paddingRight="12dp"
             android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
             android:textColor="@color/text_label"
             android:textSize="14sp" />
 
@@ -49,10 +51,10 @@
             android:id="@+id/btn_send"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:layout_marginRight="20dp"
             android:background="@android:color/transparent"
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside"
-            android:layout_marginRight="20dp"
             android:src="@drawable/ic_chat_room_send" />
     </LinearLayout>
 </RelativeLayout>

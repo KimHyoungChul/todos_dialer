@@ -43,7 +43,12 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_chat_room, parent, false));
+        try {
+            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_chat_room, parent, false));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,12 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawer;
 
-//    private ImageButton mBtnPad;
-//    private ImageButton mBtnLog;
-//    private TextView mTextUncheckedMissedCall;
-//    private TextView mTextUnreadMessage;
-//    private ImageButton mBtnContact;
-//    private ImageButton mBtnMessage;
+    private ImageButton mBtnPad;
+    private ImageButton mBtnLog;
+    private TextView mTextUncheckedMissedCall;
+    private TextView mTextUnreadMessage;
+    private ImageButton mBtnContact;
+    private ImageButton mBtnMessage;
     private RealmResults<Friend> mFriends;
 
     private RealmManager mRealmManager;
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RealmResults<CallLog> mCallLogResults;
     private RealmResults<CallLog> mMissedCallLogResults;
 
-    TabLayout tabLayout;
+//    TabLayout tabLayout;
 
     ViewPager mViewPager;
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             refreshMainCallLogFragment();
 
-//            setUncheckedSizeText();
+            setUncheckedSizeText();
         }
     };
 
@@ -104,12 +105,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mDrawer = findViewById(R.id.drawer_layout);
 
-//        mBtnPad = findViewById(R.id.btn_pad);
-//        mBtnLog = findViewById(R.id.btn_call_log);
-//        mTextUncheckedMissedCall = findViewById(R.id.text_unchecked_missed_call);
-//        mTextUnreadMessage = findViewById(R.id.text_unread_message);
-//        mBtnContact = findViewById(R.id.btn_contact);
-//        mBtnMessage = findViewById(R.id.btn_message);
+        mBtnPad = findViewById(R.id.btn_pad);
+        mBtnLog = findViewById(R.id.btn_call_log);
+        mTextUncheckedMissedCall = findViewById(R.id.text_unchecked_missed_call);
+        mTextUnreadMessage = findViewById(R.id.text_unread_message);
+        mBtnContact = findViewById(R.id.btn_contact);
+        mBtnMessage = findViewById(R.id.btn_message);
 
         mRealm = Realm.getDefaultInstance();
         mRealmManager = RealmManager.newInstance();
@@ -120,67 +121,89 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initListeners();
 
         setLogoActionbar();
-//        setUncheckedSizeText();
+        setUncheckedSizeText();
 
         mRealm.addChangeListener(mRealmListener);
 
         PushManager.clearAll(getApplicationContext());
 
 
-
-//        mBtnPad.setTag(TAB_DIAL_PAD);
-//        mBtnContact.setTag(TAB_CONTACT);
-//        mBtnLog.setTag(TAB_CALL_LOG);
-//        mBtnMessage.setTag(TAB_SMS);
+        mBtnPad.setTag(TAB_DIAL_PAD);
+        mBtnContact.setTag(TAB_CONTACT);
+        mBtnLog.setTag(TAB_CALL_LOG);
+        mBtnMessage.setTag(TAB_SMS);
 
 
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
-//        mViewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
-//        mViewPager.setCurrentItem(TAB_DIAL_PAD);
-
-//        switchView(getIntent().getIntExtra(EXTRA_KEY_TAB, 0));
-
-        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_dial_pad_selector));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_contact_selector));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_call_log_selector));
-        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_sms_selector));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
-
-        for(int i=0; i < tabLayout.getTabCount(); i++) {
-            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
-            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
-            p.setMargins(0, 0, 50, 0);
-            tab.requestLayout();
-        }
-
-        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        final PagerAdapter adapter = new pagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mViewPager.setAdapter(new pagerAdapter(getSupportFragmentManager()));
+        mViewPager.setCurrentItem(TAB_DIAL_PAD);
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-                tabLayout.getTabAt(tab.getPosition()).select();
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
             }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        mBtnPad.setSelected(true);
+                        mBtnContact.setSelected(false);
+                        mBtnLog.setSelected(false);
+                        mBtnMessage.setSelected(false);
+                        break;
+                    case 1:
+                        mBtnPad.setSelected(false);
+                        mBtnContact.setSelected(true);
+                        mBtnLog.setSelected(false);
+                        mBtnMessage.setSelected(false);
+                        break;
+                    case 2:
+                        mBtnPad.setSelected(false);
+                        mBtnContact.setSelected(false);
+                        mBtnLog.setSelected(true);
+                        mBtnMessage.setSelected(false);
+                        break;
+                    case 3:
+                        mBtnPad.setSelected(false);
+                        mBtnContact.setSelected(false);
+                        mBtnLog.setSelected(false);
+                        mBtnMessage.setSelected(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
 
             }
         });
 
+        switchView(getIntent().getIntExtra(EXTRA_KEY_TAB, 0));
 
+//        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_dial_pad_selector));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_contact_selector));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_call_log_selector));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_sms_selector));
+//        tabLayout.setTabGravity(TabLayout.GRAVITY_CENTER);
+//
+//        for(int i=0; i < tabLayout.getTabCount(); i++) {
+//            View tab = ((ViewGroup) tabLayout.getChildAt(0)).getChildAt(i);
+//            ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) tab.getLayoutParams();
+//            p.setMargins(0, 0, 50, 0);
+//            tab.requestLayout();
+//        }
+
+//        final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+//        final PagerAdapter adapter = new pagerAdapter(getSupportFragmentManager());
+//        viewPager.setAdapter(adapter);
+//
+//        mBtnPad.setSelected(true);
 
         //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
         if (savedInstanceState != null) {
-            Log.d("MainActivity","savedInstanceState is not null");
+            Log.d("MainActivity", "savedInstanceState is not null");
             finish();
             return;
         }
@@ -231,10 +254,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-//        mBtnPad.setOnClickListener(this);
-//        mBtnLog.setOnClickListener(this);
-//        mBtnContact.setOnClickListener(this);
-//        mBtnMessage.setOnClickListener(this);
+        mBtnPad.setOnClickListener(this);
+        mBtnLog.setOnClickListener(this);
+        mBtnContact.setOnClickListener(this);
+        mBtnMessage.setOnClickListener(this);
 
         findViewById(R.id.btn_user_info).setOnClickListener(this);
 
@@ -258,22 +281,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mDrawer.closeDrawer(GravityCompat.START);
 
         switch (view.getId()) {
-//            case R.id.btn_pad:
-////                switchView(TAB_DIAL_PAD);
-//                mViewPager.setCurrentItem(TAB_DIAL_PAD);
-//                break;
-//            case R.id.btn_call_log:
-////                switchView(TAB_CALL_LOG);
-//                mViewPager.setCurrentItem(TAB_CALL_LOG);
-//                break;
-//            case R.id.btn_contact:
-////                switchView(TAB_CONTACT);
-//                mViewPager.setCurrentItem(TAB_CONTACT);
-//                break;
-//            case R.id.btn_message:
-////                switchView(TAB_SMS);
-//                mViewPager.setCurrentItem(TAB_SMS);
-//                break;
+            case R.id.btn_pad:
+                switchView(TAB_DIAL_PAD);
+                mViewPager.setCurrentItem(TAB_DIAL_PAD);
+                break;
+            case R.id.btn_call_log:
+                switchView(TAB_CALL_LOG);
+                mViewPager.setCurrentItem(TAB_CALL_LOG);
+                break;
+            case R.id.btn_contact:
+                switchView(TAB_CONTACT);
+                mViewPager.setCurrentItem(TAB_CONTACT);
+                break;
+            case R.id.btn_message:
+                switchView(TAB_SMS);
+                mViewPager.setCurrentItem(TAB_SMS);
+                break;
 
             case R.id.btn_user_info:
                 startActivity(new Intent(this, UserInfoActivity.class));
@@ -291,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_log:
                 startActivity(new Intent(this, LogActivity.class));
                 break;
-                /*10.16 정보안내 버튼 추가 */
+            /*10.16 정보안내 버튼 추가 */
             case R.id.btn_infomation:
                 startInfo();
                 break;
@@ -329,33 +352,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-//    private void switchView(int tab) {
-//        switch (tab) {
-//            case TAB_DIAL_PAD:
-//                changeTabIndicator(TAB_DIAL_PAD);
-//                replaceFragment(MainPadFragment.newInstance(mFriends, mCallLogResults.size() > 0 ? mCallLogResults.first() : null));
-//                break;
-//            case TAB_CALL_LOG:
-//                changeTabIndicator(TAB_CALL_LOG);
-//                replaceFragment(makeMainCallLogFragment());
-//                break;
-//            case TAB_CONTACT:
-//                changeTabIndicator(TAB_CONTACT);
-//                replaceFragment(MainContactFragment.newInstance(mFriends));
-//                break;
-//            case TAB_SMS:
-//                changeTabIndicator(TAB_SMS);
-//                replaceFragment(MainChatRoomFragment.newInstance());
-//                break;
-//
-//            default:
-//                changeTabIndicator(TAB_DIAL_PAD);
-//                replaceFragment(MainPadFragment.newInstance(mFriends, mCallLogResults.size() > 0 ? mCallLogResults.first() : null));
-//                break;
-//        }
-//    }
+    private void switchView(int tab) {
+        switch (tab) {
+            case TAB_DIAL_PAD:
+                changeTabIndicator(TAB_DIAL_PAD);
+                replaceFragment(MainPadFragment.newInstance(mFriends, mCallLogResults.size() > 0 ? mCallLogResults.first() : null));
+                break;
+            case TAB_CALL_LOG:
+                changeTabIndicator(TAB_CALL_LOG);
+                replaceFragment(makeMainCallLogFragment());
+                break;
+            case TAB_CONTACT:
+                changeTabIndicator(TAB_CONTACT);
+                replaceFragment(MainContactFragment.newInstance(mFriends));
+                break;
+            case TAB_SMS:
+                changeTabIndicator(TAB_SMS);
+                replaceFragment(MainChatRoomFragment.newInstance());
+                break;
 
-    private void refreshMainCallLogFragment() {
+            default:
+                changeTabIndicator(TAB_DIAL_PAD);
+                replaceFragment(MainPadFragment.newInstance(mFriends, mCallLogResults.size() > 0 ? mCallLogResults.first() : null));
+                break;
+        }
+    }
+
+    public void refreshMainCallLogFragment() {
         if (mCallLogResults == null || mMissedCallLogResults == null) {
             return;
         }
@@ -395,60 +418,68 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return MainCallLogFragment.newInstance(callLogs, missedLogs);
     }
 
-//    private void setUncheckedSizeText() {
-//        if (mTextUncheckedMissedCall != null) {
-//            int uncheckedSize = mRealmManager.countUncheckedCallLogs(mMissedCallLogResults);
-//            if (uncheckedSize == 0) {
-//                mTextUncheckedMissedCall.setVisibility(View.GONE);
-//            } else if (uncheckedSize > 99) {
-//                mTextUncheckedMissedCall.setVisibility(View.VISIBLE);
-//                String sizeText = "99+";
-//                mTextUncheckedMissedCall.setText(sizeText);
-//            } else {
-//                mTextUncheckedMissedCall.setVisibility(View.VISIBLE);
-//                mTextUncheckedMissedCall.setText(String.valueOf(uncheckedSize));
-//            }
-//        }
-//
-//        if (mTextUnreadMessage != null) {
-//            long unreadCount = mRealmManager.countAllUnreadMessageCount(mRealm);
-//            if (unreadCount == 0) {
-//                mTextUnreadMessage.setVisibility(View.GONE);
-//            } else if (unreadCount > 99) {
-//                mTextUnreadMessage.setVisibility(View.VISIBLE);
-//                String sizeText = "99+";
-//                mTextUnreadMessage.setText(sizeText);
-//            } else {
-//                mTextUnreadMessage.setVisibility(View.VISIBLE);
-//                mTextUnreadMessage.setText(String.valueOf(unreadCount));
-//            }
-//        }
-//    }
+    private void setUncheckedSizeText() {
+        if (mTextUncheckedMissedCall != null) {
+            int uncheckedSize = mRealmManager.countUncheckedCallLogs(mMissedCallLogResults);
+            if (uncheckedSize == 0) {
+                mTextUncheckedMissedCall.setVisibility(View.GONE);
+            } else if (uncheckedSize > 99) {
+                mTextUncheckedMissedCall.setVisibility(View.VISIBLE);
+                String sizeText = "99+";
+                mTextUncheckedMissedCall.setText(sizeText);
+            } else {
+                mTextUncheckedMissedCall.setVisibility(View.VISIBLE);
+                mTextUncheckedMissedCall.setText(String.valueOf(uncheckedSize));
+            }
+        }
 
-//    private void changeTabIndicator(int position) {
+        if (mTextUnreadMessage != null) {
+            long unreadCount = mRealmManager.countAllUnreadMessageCount(mRealm);
+            if (unreadCount == 0) {
+                mTextUnreadMessage.setVisibility(View.GONE);
+            } else if (unreadCount > 99) {
+                mTextUnreadMessage.setVisibility(View.VISIBLE);
+                String sizeText = "99+";
+                mTextUnreadMessage.setText(sizeText);
+            } else {
+                mTextUnreadMessage.setVisibility(View.VISIBLE);
+                mTextUnreadMessage.setText(String.valueOf(unreadCount));
+            }
+        }
+    }
+
+    private void changeTabIndicator(int position) {
 //        mBtnPad.setImageResource(R.drawable.ic_dialpad_white_24dp);
 //        mBtnLog.setImageResource(R.drawable.ic_query_builder_white_24dp);
 //        mBtnContact.setImageResource(R.drawable.ic_contact_phone_white_24dp);
 //        mBtnMessage.setImageResource(R.drawable.ic_textsms_white_24dp);
-//
-//        switch (position) {
-//            case TAB_DIAL_PAD:
+        mBtnPad.setSelected(false);
+        mBtnLog.setSelected(false);
+        mBtnContact.setSelected(false);
+        mBtnMessage.setSelected(false);
+
+        switch (position) {
+            case TAB_DIAL_PAD:
 //                mBtnPad.setImageResource(R.drawable.ic_dialpad_white_24dp_pressed);
-//                break;
-//
-//            case TAB_CALL_LOG:
+                mBtnPad.setSelected(true);
+                break;
+
+            case TAB_CALL_LOG:
 //                mBtnLog.setImageResource(R.drawable.ic_query_builder_white_24dp_pressed);
-//                break;
-//
-//            case TAB_CONTACT:
+                mBtnLog.setSelected(true);
+                break;
+
+            case TAB_CONTACT:
 //                mBtnContact.setImageResource(R.drawable.ic_contact_phone_white_24dp_pressed);
-//                break;
-//
-//            case TAB_SMS:
+                mBtnContact.setSelected(true);
+                break;
+
+            case TAB_SMS:
 //                mBtnMessage.setImageResource(R.drawable.ic_textsms_white_24dp_pressed);
-//                break;
-//        }
-//    }
+                mBtnMessage.setSelected(true);
+                break;
+        }
+    }
 
     private void logOutWithRestartApp() {
         mRealmManager.deleteUser(mRealm);
@@ -506,8 +537,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //for toolbar back button
+        switch (item.getItemId()) {
+            case android.R.id.home: { //for toolbar back button
                 mDrawer.openDrawer(GravityCompat.START);
                 return true;
             }

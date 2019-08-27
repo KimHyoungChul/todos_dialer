@@ -53,7 +53,7 @@
     //contact
     <color name="color_contact_list_divider">#AEAEAE</color>
     <color name="color_contact_name_text">#4E4E4E</color>
-    <color name="color_contact_phone_number_text">#C5C5C5</color>
+    <color name="color_contact_phone_number_text">#909090</color>
     <color name="color_contact_total_count_text">#727272</color>
     <color name="color_contact_under_line">#AEAEAE</color>
     <color name="color_expandable_back">#c7d3df</color>
@@ -91,5 +91,11 @@
 
     //calling
     <color name="color_calling_bg">#4F4F4F</color>
+    <color name="color_calling_end">#F44E4E</color>
+
+    <color name="color_call_log_menu_normal">#A0A0A0</color>
+    <color name="color_call_log_menu_selected">#7287AB</color>
+    <color name="color_call_log_menu_under_line">#FEA201</color>
+    <color name="color_dial_pad_alphabet">#929292</color>
 
 </resources>

@@ -160,7 +160,7 @@
     <string name="no_more_then_en">160자 이상 입력할 수 없습니다.</string>
     <string name="no_more_then_ko">80자 이상 입력할 수 없습니다.</string>
     <string name="toast_text_clipboard_adress">클립보드에 복사했습니다.</string>
-    <string name="version">version : 2.1.02</string>
+    <string name="version">version : 2.2.01</string>
     <string name="todos">TODO</string>
 
     <string name="menu_chat_delete">삭제</string>

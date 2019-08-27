@@ -6,7 +6,7 @@ android {
         config {
             keyAlias 'bcnm'
             keyPassword '#1Todosdialer'
-            storeFile file('../bcnm.jks')
+            storeFile file('D:/V2.1.01/TodosDialer/bcnm.jks')
             storePassword '#1Todosdialer'
         }
     }
@@ -16,8 +16,8 @@ android {
         applicationId "com.todosdialer.todosdialer"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 14
-        versionName "2.1.04"
+        versionCode 15
+        versionName "2.2.01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
