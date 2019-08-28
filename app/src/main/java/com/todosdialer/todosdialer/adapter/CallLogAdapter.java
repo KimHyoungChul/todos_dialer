@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.text.TextUtils;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -30,11 +31,12 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ItemView
 
     //    private static final String FORMAT_TIME = "yyyy/MM/dd a hh:mm";
     private static final String FORMAT_TIME = "yyyy.MM.dd E요일";
+    private static final String FORMAT_CALL_DATE = "yyyy.MM.dd";
     private static final String FORMAT_CALL_TIME = "hh:mm";
     private List<CallLog> mCallLogList = new ArrayList<>();
     private CallLogAdapter.OnItemClickListener mListener;
 
-    private String curDay;
+//    private String curDay;
 
     Context mContext;
 
@@ -73,8 +75,13 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ItemView
         // LayoutInflater를 이용하여 전 단계에서 만들었던 item.xml을 inflate 시킵니다.
         // return 인자는 ViewHolder 입니다.
         context = parent.getContext();
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_call_log, parent, false);
-        return new ItemViewHolder(view);
+        try {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_call_log, parent, false);
+            return new ItemViewHolder(view);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
@@ -299,29 +306,30 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ItemView
                 mImgPhoto.setImageResource(R.drawable.ic_account_circle_white_24dp);
             }
 
-            curDay = Utils.convertToLocal(callLog.getCreatedAt(), FORMAT_TIME);
+//            curDay = Utils.convertToLocal(callLog.getCreatedAt(), FORMAT_TIME);
 
-            SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
+//            SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(mContext);
 
-            String prevDay = mPref.getString("prevDay", null);
+//            String prevDay = mPref.getString("prevDay", null);
 
+//                if ((prevDay == null) || !(prevDay.equals(curDay))) {
+//                    layout_day.setVisibility(View.VISIBLE);
+//                    callLogDays.setText(curDay);
+//
+//                    SharedPreferences.Editor editor = mPref.edit();
+//                    editor.putString("prevDay", curDay);
+//                    editor.commit();
+//                } else {
+//                    layout_day.setVisibility(View.GONE);
+//                }
             try {
-                if ((prevDay == null) || !(prevDay.equals(curDay))) {
-                    layout_day.setVisibility(View.VISIBLE);
-                    callLogDays.setText(curDay);
-
-                    SharedPreferences.Editor editor = mPref.edit();
-                    editor.putString("prevDay", curDay);
-                    editor.commit();
-                } else {
-                    layout_day.setVisibility(View.GONE);
-                }
-
-                mTextTime.setText(Utils.convertToLocal(callLog.getCreatedAt(), FORMAT_CALL_TIME));
-//                setDuration(callLog.getDuration());
+                String date = Utils.convertToLocal(callLog.getCreatedAt(), FORMAT_CALL_DATE);
+                String time = Utils.convertToLocal(callLog.getCreatedAt(),FORMAT_CALL_TIME);
+                mTextTime.setText((Html.fromHtml(date + "<br />" + time)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
+//                setDuration(callLog.getDuration());
 
             mImgMessage.setOnClickListener(new View.OnClickListener() {
                 @Override

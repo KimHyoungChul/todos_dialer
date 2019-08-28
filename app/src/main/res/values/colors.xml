@@ -4,7 +4,7 @@
         // 활성버튼 색(등록/수정 등)
     <color name="colorPrimaryDark">#081025</color>
 
-    <color name="colorSub">#E36159</color>
+    <color name="colorSub">#ffa200</color>
     // 비활성버튼 색(취소/삭제 등)
     <color name="colorSubDark">#C35149</color>
     <color name="colorSubLight">#f9ebc6</color>
