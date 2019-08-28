@@ -40,10 +40,10 @@ public class ReservationInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reservation_info);
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        initActionBar();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        initActionBar();
 
         setActionbar(getString(R.string.term_reservation_list));
 
@@ -137,9 +137,9 @@ public class ReservationInfoActivity extends AppCompatActivity {
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
-            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
 
             TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
             toolbarTitle.setText(title);

@@ -13,7 +13,7 @@
         android:fontFamily="@font/notosans_regular"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:text="@string/dial_zero"
+        android:text="1"
         android:textColor="@color/text_label"
         android:textSize="26sp" />
 
@@ -26,7 +26,7 @@
         android:layout_marginRight="4dp"
         android:layout_toEndOf="@+id/text_number"
         android:fontFamily="@font/notosans_regular"
-        android:text="@string/dial_zero"
+        android:text="ㄱㄴ"
         android:textColor="@color/color_dial_pad_alphabet"
         android:textSize="14sp" />
 

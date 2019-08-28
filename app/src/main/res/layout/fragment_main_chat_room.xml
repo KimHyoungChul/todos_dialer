@@ -12,17 +12,17 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="56dp"
         android:layout_marginRight="10dp"
         android:padding="5dp" />
 
     <ImageButton
         android:id="@+id/btn_new_message"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:scaleType="fitXY"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_send_floating" />
+        android:src="@drawable/ic_send_floating_selector" />
 </FrameLayout>

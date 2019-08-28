@@ -19,16 +19,18 @@
 
             <FrameLayout
                 android:id="@+id/btn_back"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/toolbar_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
                     android:contentDescription="@string/term_finding_pw"
-                    android:scaleType="fitXY" />
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_left" />
             </FrameLayout>
 
             <TextView
@@ -36,11 +38,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textStyle="bold"
-                android:singleLine="true"
                 android:includeFontPadding="false"
+                android:singleLine="true"
                 android:textColor="@color/color_white"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>

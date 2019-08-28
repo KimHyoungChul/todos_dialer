@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
@@ -85,6 +86,7 @@ public class NewChatActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
 
         mProgressBar = findViewById(R.id.progress_bar);
         mProgressBar.setVisibility(View.GONE);
@@ -438,6 +440,26 @@ public class NewChatActivity extends AppCompatActivity {
                     return filterResults;
                 }
             };
+        }
+    }
+
+    private void setActionbar(String title) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        try {
+            // Get the ActionBar here to configure the way it behaves.
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
+
+            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarTitle.setText(title);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

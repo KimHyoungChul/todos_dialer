@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        mDrawer.closeDrawer(GravityCompat.START);
+//        mDrawer.closeDrawer(GravityCompat.START);
 
         switch (view.getId()) {
             case R.id.btn_pad:
@@ -526,9 +526,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+//            actionBar.setHomeButtonEnabled(true);
+
 
         } catch (Exception e) {
             e.printStackTrace();

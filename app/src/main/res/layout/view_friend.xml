@@ -47,7 +47,6 @@
                 android:gravity="bottom"
                 android:includeFontPadding="false"
                 android:singleLine="true"
-                android:text="가나다라마바사아자차카타파하가나다라마"
                 android:textColor="@color/text_label"
                 android:textSize="16sp"
                 android:textStyle="bold" />

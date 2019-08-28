@@ -33,7 +33,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/color_activity_sign_bg"
+        android:background="@drawable/bg_login_gradation"
         android:scrollbarStyle="outsideOverlay"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -159,7 +159,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:text="@string/term_infomation"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />
@@ -171,7 +171,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:padding="10dp"
+                    android:padding="5dp"
                     android:text="@string/term_finding_pw"
                     android:textColor="@color/text_primary"
                     android:textSize="15sp" />

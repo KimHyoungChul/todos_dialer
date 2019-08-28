@@ -25,13 +25,12 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="0dp"
                     android:contentDescription="@string/term_finding_pw"
                     android:scaleType="fitXY"
-
                     android:src="@drawable/arrow_left" />
             </FrameLayout>
 

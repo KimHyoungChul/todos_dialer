@@ -65,11 +65,11 @@
             android:layout_marginTop="80dp"
             android:background="@drawable/bg_blue_line_selector"
             android:text="@string/term_finding"
+            android:textSize="20dp"
             android:includeFontPadding="false"
             android:stateListAnimator="@null"
             android:textStyle="bold"
-            android:textColor="@color/acceptance_text_color_selector"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:textColor="@color/acceptance_btn_common_selector" />
+        </LinearLayout>
 
 </LinearLayout>

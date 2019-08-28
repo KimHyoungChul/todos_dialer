@@ -11,7 +11,7 @@
     <include layout="@layout/activity_main_body" />
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:clickable="true"
@@ -22,17 +22,35 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@color/color_drawer_logo_back">
+            android:layout_height="90dp"
+            android:background="@color/color_drawer_logo_back"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
+            <!--            <ImageView-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="50dp"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:contentDescription="@string/app_name"-->
+            <!--                android:scaleType="centerInside"-->
+            <!--                android:src="@drawable/logo_side_title" />-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:text="Todos Dialer"
+                android:textColor="@color/color_white"
+                android:textSize="23dp"
+                android:textStyle="bold" />
 
-                android:src="@drawable/logo_side_title" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                android:layout_marginTop="-8dp"
+                android:text="Anywhere One Number"
+                android:textColor="@color/color_white"
+                android:textSize="15dp" />
         </LinearLayout>
 
 
@@ -40,11 +58,11 @@
             android:id="@+id/btn_user_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="30dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -60,6 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:includeFontPadding="false"
                 android:text="@string/term_user_info"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
@@ -72,8 +91,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -90,6 +109,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/term_reservation"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -101,8 +121,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -119,6 +139,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/term_reservation_list"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -130,8 +151,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -148,6 +169,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/term_log_out"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -174,8 +196,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -192,6 +214,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/version"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -203,8 +226,8 @@
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp">
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
             <ImageView
                 android:layout_width="24dp"
@@ -221,6 +244,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/term_infomation"
+                android:includeFontPadding="false"
                 android:textColor="@color/color_drawer_text"
                 android:textSize="16sp" />
         </LinearLayout>
