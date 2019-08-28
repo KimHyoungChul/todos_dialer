@@ -143,7 +143,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             return;
         }
 
-        setLogoActionbar();
+        setActionbar(getString(R.string.app_name));
 
         mIndicator = findViewById(R.id.indicator);
         mTextName = findViewById(R.id.text_f_name);
@@ -679,7 +679,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         }
     }
 
-    private void setLogoActionbar() {
+    private void setActionbar(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거
         setSupportActionBar(toolbar);
@@ -689,9 +689,22 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayShowCustomEnabled(true);
             actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
-            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
+
+            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarTitle.setText(title);
+
+
+            findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    endCall();
+
+                    onBackPressed();
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

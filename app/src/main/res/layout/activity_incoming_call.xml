@@ -10,7 +10,7 @@
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/common_actionbar_logo" />
+        layout="@layout/common_actionbar_title" />
 
     <TextView
         android:id="@+id/text_f_name"

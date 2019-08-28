@@ -25,7 +25,9 @@ import android.os.PowerManager;
 import android.os.Vibrator;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -151,6 +153,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
             finish();
             return;
         }
+
+        setActionbar(getString(R.string.app_name));
 
         mTextName = findViewById(R.id.text_f_name);
         mTextNumber = findViewById(R.id.text_f_phone_number);
@@ -810,4 +814,36 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
             e.printStackTrace();
         }
     }
+    private void setActionbar(String title) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거
+        setSupportActionBar(toolbar);
+
+        try {
+            // Get the ActionBar here to configure the way it behaves.
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
+
+            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarTitle.setText(title);
+
+
+            findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    endCall();
+
+                    onBackPressed();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

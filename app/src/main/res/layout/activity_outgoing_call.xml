@@ -11,7 +11,7 @@
 
     <include
         android:id="@+id/actionbar"
-        layout="@layout/common_actionbar_logo" />
+        layout="@layout/common_actionbar_title" />
 
     <LinearLayout
         android:layout_width="wrap_content"

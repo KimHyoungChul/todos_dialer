@@ -3,9 +3,12 @@ package com.todosdialer.todosdialer;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import com.todosdialer.todosdialer.fragment.AcceptanceFragment;
 import com.todosdialer.todosdialer.fragment.SignUpFragment;
@@ -29,6 +32,8 @@ public class SignUpActivity extends AppCompatActivity implements AcceptanceFragm
                 onBackPressed();
             }
         });
+
+        setActionbar(getString(R.string.term_sign_up));
 
         AcceptanceFragment fragment = AcceptanceFragment.newInstance();
         fragment.setOnClickListener(this);
@@ -67,6 +72,37 @@ public class SignUpActivity extends AppCompatActivity implements AcceptanceFragm
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();
+    }
+
+    private void setActionbar(String title) {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거
+        setSupportActionBar(toolbar);
+
+        try {
+            // Get the ActionBar here to configure the way it behaves.
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setDisplayShowCustomEnabled(true);
+            actionBar.setDisplayShowTitleEnabled(false);
+            actionBar.setDisplayHomeAsUpEnabled(false);
+//            actionBar.setHomeAsUpIndicator(R.drawable.arrow_left);
+//            actionBar.setHomeButtonEnabled(true);
+
+            TextView toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarTitle.setText(title);
+
+
+            findViewById(R.id.btn_back).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    onBackPressed();
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
