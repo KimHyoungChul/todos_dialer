@@ -346,6 +346,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ItemView
                     if (mListener != null) {
                         mListener.onCallClicked(callLog.getNumber());
 
+                        selectedItems.delete(position);
                         notifyDataSetChanged();
                     }
                 }

@@ -378,25 +378,5 @@ public class MainCallLogFragment extends Fragment {
         }
     }
 
-    private void refresh() {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.detach(this).attach(this).commit();
-    }
 
-    public void onResume() {
-        super.onResume();
-        RealmManager mRealmManager;
-        Realm mRealm;
-        RealmResults<CallLog> mCallLogResults;
-        RealmResults<CallLog> mMissedCallLogResults;
-
-        mRealm = Realm.getDefaultInstance();
-        mRealmManager = RealmManager.newInstance();
-        mCallLogResults = mRealmManager.loadCallLogs(mRealm);
-        mMissedCallLogResults = mRealmManager.loadMissedCallLogs(mRealm);
-
-        mCallLogResults = mRealmManager.loadCallLogs(mRealm);
-
-        new MainActivity().refreshMainCallLogFragment();
-    }
 }

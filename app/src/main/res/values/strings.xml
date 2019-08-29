@@ -171,5 +171,7 @@
 
     <string name="title_my_reservation">내 예약정보</string>
     <string name="label_remain_days">사용가능 기간</string>
+
+    <string name="title_user_info">내 정보 조회</string>
 </resources>
 

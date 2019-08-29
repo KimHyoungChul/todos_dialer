@@ -5,12 +5,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <!--<com.todosdialer.todosdialer.view.ContactView-->
-    <!--android:id="@+id/friend_view"-->
-    <!--android:layout_marginLeft="30dp"-->
-    <!--android:layout_marginRight="30dp"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content" />-->
+<!--    <com.todosdialer.todosdialer.view.ContactView-->
+<!--    android:id="@+id/friend_view"-->
+<!--    android:layout_marginLeft="30dp"-->
+<!--    android:layout_marginRight="30dp"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content" />-->
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,12 +27,12 @@
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_account_circle_white_24dp"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="4dp"
             android:layout_marginBottom="10dp"

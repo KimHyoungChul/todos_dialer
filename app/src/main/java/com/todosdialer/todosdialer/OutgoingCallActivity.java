@@ -474,6 +474,8 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
             stopTimer();
             mIsEnded = true;
+
+            insertCallLog();
         }
     }
 
@@ -530,7 +532,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
         clearNotification();
 
-        insertCallLog();
+
 
         mRealm.close();
 

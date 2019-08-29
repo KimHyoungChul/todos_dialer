@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,132 +7,237 @@
     android:background="@color/color_white"
     android:clickable="true"
     android:focusable="true"
-    android:paddingLeft="5dp"
-    android:paddingTop="5dp"
-    android:paddingRight="5dp"
-    android:paddingBottom="5dp"
+    android:orientation="vertical"
+    android:padding="30dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.todosdialer.todosdialer.UserInfoActivity"
     tools:showIn="@layout/activity_user_info">
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="30dp">
+        android:layout_below="@+id/under"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/title_my_reservation"
-            android:textColor="@color/color_my_reservation_label"
-            android:textSize="20dp"
-            android:includeFontPadding="false"
-            android:layout_marginBottom="20dp"
-            android:textStyle="bold" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginBottom="40dp"
-            android:background="@color/color_my_reservation_underline" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="20dp"
-            android:drawableLeft="@drawable/ic_user_email"
-            android:includeFontPadding="false"
-            android:text="@string/label_email"
-            android:textColor="@color/text_label"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/text_user_email"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="44dp"
-            android:textColor="@color/color_contact_phone_number_text"
-            android:includeFontPadding="false"
-            android:textSize="13sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:includeFontPadding="false"
-            android:text="@string/label_birthday"
-            android:drawablePadding="20dp"
-            android:drawableLeft="@drawable/ic_user_birth"
-            android:textColor="@color/text_label"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_user_birthday"
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="30dp">
+
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_user_email" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/label_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:gravity="left"
+                    android:includeFontPadding="false"
+                    android:padding="-5dp"
+                    android:text="@string/label_email"
+                    android:textColor="@color/text_label"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_user_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/color_contact_phone_number_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="44dp"
-            android:textColor="@color/color_contact_phone_number_text"
-            android:includeFontPadding="false"
-            android:textSize="13sp" />
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:includeFontPadding="false"
-            android:text="@string/term_usim_phone"
-            android:drawableLeft="@drawable/ic_user_usim"
-            android:drawablePadding="20dp"
-            android:textColor="@color/text_label"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_user_phone"
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="30dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_user_birth" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_birthday"
+                    android:textColor="@color/text_label"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_user_birthday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/color_contact_phone_number_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="44dp"
-            android:textColor="@color/color_contact_phone_number_text"
-            android:includeFontPadding="false"
-            android:textSize="13sp" />
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:includeFontPadding="false"
-            android:drawablePadding="20dp"
-            android:drawableLeft="@drawable/ic_user_remains"
-            android:text="@string/label_todos_expired_date"
-            android:textColor="@color/text_label"
-            android:textSize="18sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/text_user_expired_date"
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="30dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_user_usim" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/term_usim_phone"
+                    android:textColor="@color/text_label"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_user_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/color_contact_phone_number_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/color_contact_phone_number_text"
-            android:includeFontPadding="false"
-            android:layout_marginLeft="44dp"
-            android:textSize="13sp" />
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-        <com.todosdialer.todosdialer.util.AutoLinkNoUnderline
-            android:id="@+id/text_url"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autoLink="web"
-            android:gravity="center"
-            android:includeFontPadding="false"
-            android:paddingTop="12dp"
-            android:text="@string/web_url"
-            android:textColor="@color/color_contact_phone_number_text"
-            android:textColorLink="@color/color_contact_phone_number_text"
-            android:textSize="15sp" />
+                <LinearLayout
+                    android:layout_width="30dp"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="30dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_user_remains" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_todos_expired_date"
+                    android:textColor="@color/text_label"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text_user_expired_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:includeFontPadding="false"
+                android:textColor="@color/color_contact_phone_number_text"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+
     </LinearLayout>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:includeFontPadding="false"
+        android:text="@string/title_user_info"
+        android:textColor="@color/color_my_reservation_label"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/under"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/title"
+        android:layout_marginBottom="30dp"
+        android:background="@color/color_my_reservation_underline" />
+
+    <com.todosdialer.todosdialer.util.AutoLinkNoUnderline
+        android:id="@+id/text_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:autoLink="web"
+        android:includeFontPadding="false"
+        android:paddingTop="12dp"
+        android:text="@string/web_url"
+        android:textColor="@color/color_contact_phone_number_text"
+        android:textColorLink="@color/color_contact_phone_number_text"
+        android:textSize="15sp" />
+
+</RelativeLayout>

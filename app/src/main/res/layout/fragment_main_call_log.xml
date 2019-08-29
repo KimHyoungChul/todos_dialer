@@ -111,7 +111,7 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/call_log_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/call_empty_view"

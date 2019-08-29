@@ -496,6 +496,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 
             stopTimer();
             mIsEnded = true;
+
+            insertCallLog();
         }
     }
 

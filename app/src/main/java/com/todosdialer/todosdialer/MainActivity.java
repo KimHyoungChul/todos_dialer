@@ -163,6 +163,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mBtnContact.setSelected(false);
                         mBtnLog.setSelected(true);
                         mBtnMessage.setSelected(false);
+
+                        mViewPager.getAdapter().notifyDataSetChanged();
                         break;
                     case 3:
                         mBtnPad.setSelected(false);
@@ -179,7 +181,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        switchView(getIntent().getIntExtra(EXTRA_KEY_TAB, 0));
+        switchView(getIntent().getIntExtra(EXTRA_KEY_TAB,  0));
 
 //        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 //        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_dial_pad_selector));
@@ -241,6 +243,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public int getCount() {
             return 4;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            if(object instanceof MainCallLogFragment) {
+                return POSITION_NONE;
+            } else {
+                return super.getItemPosition(object);
+            }
         }
     }
 
@@ -545,5 +556,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mViewPager.getAdapter().notifyDataSetChanged();
     }
 }
