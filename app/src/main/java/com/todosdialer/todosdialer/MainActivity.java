@@ -1,27 +1,20 @@
 package com.todosdialer.todosdialer;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -70,6 +63,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private RealmResults<CallLog> mCallLogResults;
     private RealmResults<CallLog> mMissedCallLogResults;
 
+    private View tabUnderLine01;
+    private View tabUnderLine02;
+    private View tabUnderLine03;
+    private View tabUnderLine04;
+
 //    TabLayout tabLayout;
 
     ViewPager mViewPager;
@@ -115,6 +113,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mBtnContact = findViewById(R.id.btn_contact);
         mBtnMessage = findViewById(R.id.btn_message);
 
+        tabUnderLine01 = findViewById(R.id.tab_under_dot_01);
+        tabUnderLine02 = findViewById(R.id.tab_under_dot_02);
+        tabUnderLine03 = findViewById(R.id.tab_under_dot_03);
+        tabUnderLine04 = findViewById(R.id.tab_under_dot_04);
+
         mRealm = Realm.getDefaultInstance();
         mRealmManager = RealmManager.newInstance();
         mFriends = mRealmManager.loadFriends(mRealm);
@@ -150,18 +153,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
+                        tabUnderLine01.setVisibility(View.VISIBLE);
+                        tabUnderLine02.setVisibility(View.INVISIBLE);
+                        tabUnderLine03.setVisibility(View.INVISIBLE);
+                        tabUnderLine04.setVisibility(View.INVISIBLE);
+
                         mBtnPad.setSelected(true);
                         mBtnContact.setSelected(false);
                         mBtnLog.setSelected(false);
                         mBtnMessage.setSelected(false);
                         break;
                     case 1:
+                        tabUnderLine01.setVisibility(View.INVISIBLE);
+                        tabUnderLine02.setVisibility(View.VISIBLE);
+                        tabUnderLine03.setVisibility(View.INVISIBLE);
+                        tabUnderLine04.setVisibility(View.INVISIBLE);
+
                         mBtnPad.setSelected(false);
                         mBtnContact.setSelected(true);
                         mBtnLog.setSelected(false);
                         mBtnMessage.setSelected(false);
                         break;
                     case 2:
+                        tabUnderLine01.setVisibility(View.INVISIBLE);
+                        tabUnderLine02.setVisibility(View.INVISIBLE);
+                        tabUnderLine03.setVisibility(View.VISIBLE);
+                        tabUnderLine04.setVisibility(View.INVISIBLE);
+
                         mBtnPad.setSelected(false);
                         mBtnContact.setSelected(false);
                         mBtnLog.setSelected(true);
@@ -170,6 +188,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         mViewPager.getAdapter().notifyDataSetChanged();
                         break;
                     case 3:
+                        tabUnderLine01.setVisibility(View.INVISIBLE);
+                        tabUnderLine02.setVisibility(View.INVISIBLE);
+                        tabUnderLine03.setVisibility(View.INVISIBLE);
+                        tabUnderLine04.setVisibility(View.VISIBLE);
+
                         mBtnPad.setSelected(false);
                         mBtnContact.setSelected(false);
                         mBtnLog.setSelected(false);
@@ -185,6 +208,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         switchView(getIntent().getIntExtra(EXTRA_KEY_TAB,  0));
+
+
 
 //        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 //        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_dial_pad_selector));
