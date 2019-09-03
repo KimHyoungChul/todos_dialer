@@ -14,6 +14,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.media.AudioManager;
+import android.media.ToneGenerator;
 import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -47,7 +48,10 @@ import com.todosdialer.todosdialer.model.CallLog;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.sip.SipInstance;
 import com.todosdialer.todosdialer.sip.TodosSip;
+import com.todosdialer.todosdialer.worker.ToneWorker;
 import com.wang.avi.AVLoadingIndicatorView;
+
+import org.pjsip.pjsua2.OnDtmfDigitParam;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -55,6 +59,12 @@ import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import io.realm.Realm;
+
+import static android.media.AudioManager.STREAM_DTMF;
+import static android.media.AudioManager.STREAM_NOTIFICATION;
+import static android.media.AudioManager.STREAM_SYSTEM;
+import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.support.v4.app.NotificationCompat.STREAM_DEFAULT;
 
 public class OutgoingCallActivity extends AppCompatActivity implements SensorEventListener, DialFragment.OnClickListener {
     public static final String EXTRA_KEY_PHONE_NUMBER = "OutgoingCallActivity.key_phone_number";
@@ -86,6 +96,9 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
     private long mCreatedAt;
     private long mStartTime;
+
+    private ToneWorker mToneWorker;
+
     private Handler mHandler = new Handler();
     private Runnable mTimerRunnable = new Runnable() {
         @Override
@@ -127,72 +140,75 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
-        super.onCreate(savedInstanceState);
-        TodosApplication.onCalling(true);
-        initWindowFlag();
+            super.onCreate(savedInstanceState);
+            TodosApplication.onCalling(true);
+            initWindowFlag();
 
             setContentView(R.layout.activity_outgoing_call);
 
-        mRealm = Realm.getDefaultInstance();
-        String phoneNumber = getIntent().getStringExtra(EXTRA_KEY_PHONE_NUMBER);
+            mRealm = Realm.getDefaultInstance();
+            String phoneNumber = getIntent().getStringExtra(EXTRA_KEY_PHONE_NUMBER);
 
-        if (TextUtils.isEmpty(phoneNumber)) {
-            String errorMsg = "[OutgoingCallActivity] Phone number is not valid! Can not calling.";
-            RealmManager.newInstance().writeLog(errorMsg);
-            finish();
-            return;
-        }
+            if (TextUtils.isEmpty(phoneNumber)) {
+                String errorMsg = "[OutgoingCallActivity] Phone number is not valid! Can not calling.";
+                RealmManager.newInstance().writeLog(errorMsg);
+                finish();
+                return;
+            }
 
-        setActionbar(getString(R.string.app_name));
+            setActionbar(getString(R.string.app_name));
 
-        mIndicator = findViewById(R.id.indicator);
-        mTextName = findViewById(R.id.text_f_name);
-        mTextNumber = findViewById(R.id.text_f_phone_number);
-        mImgPhoto = findViewById(R.id.img_f_photo);
-        mTextTimer = findViewById(R.id.text_call_timer);
-        mTextTimer.setVisibility(View.GONE);
+            mIndicator = findViewById(R.id.indicator);
+            mTextName = findViewById(R.id.text_f_name);
+            mTextNumber = findViewById(R.id.text_f_phone_number);
+            mImgPhoto = findViewById(R.id.img_f_photo);
+            mTextTimer = findViewById(R.id.text_call_timer);
+            mTextTimer.setVisibility(View.GONE);
 
-        mContainerBtnCalling = findViewById(R.id.container_btn_calling);
-        mBtnSpeaker = findViewById(R.id.btn_speaker);
-        mBtnPad = findViewById(R.id.btn_pad);
-        mBtnBluetooth = findViewById(R.id.btn_blue_tooth);
-        mBtnEndCall = findViewById(R.id.btn_end_call);
+            mContainerBtnCalling = findViewById(R.id.container_btn_calling);
+            mBtnSpeaker = findViewById(R.id.btn_speaker);
+            mBtnPad = findViewById(R.id.btn_pad);
+            mBtnBluetooth = findViewById(R.id.btn_blue_tooth);
+            mBtnEndCall = findViewById(R.id.btn_end_call);
 
-        mIndicator.show();
-        mContainerBtnCalling.setVisibility(View.INVISIBLE);
+            mIndicator.show();
+            mContainerBtnCalling.setVisibility(View.INVISIBLE);
 
-        mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
-        if (mFriend == null) {
-            mFriend = new Friend();
-            mFriend.setName(phoneNumber);
-            mFriend.setNumber(phoneNumber);
-        }
+            mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
+            if (mFriend == null) {
+                mFriend = new Friend();
+                mFriend.setName(phoneNumber);
+                mFriend.setNumber(phoneNumber);
+            }
 
-        //wifi 상태 확인
-        registerReceiver(rssiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+            //wifi 상태 확인
+            registerReceiver(rssiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
 
-        initViewByFriend();
+            initViewByFriend();
 
-        initWakeLock();
+            initWakeLock();
 
-        initAudioManager();
+            initAudioManager();
 
-        initProximitySensor();
+            initProximitySensor();
 
-        initListener();
+            initListener();
 
-        mCreatedAt = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault()).getTimeInMillis();
+            mCreatedAt = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault()).getTimeInMillis();
 
-        registerReceiver();
+            registerReceiver();
 
-        sendCall();
+            sendCall();
 
-        //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
-        if (savedInstanceState != null) {
-            Log.d("OutgoingCallActivity","savedInstanceState is not null");
-            finish();
-            return;
-        }
+            mToneWorker = new ToneWorker(getApplicationContext());
+            mToneWorker.start();
+
+            //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
+            if (savedInstanceState != null) {
+                Log.d("OutgoingCallActivity", "savedInstanceState is not null");
+                finish();
+                return;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -239,66 +255,66 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         String state = "";
         String serial = "";
 
-        if(Pattern.matches("^[0-9]+$", mFriend.getName())){
+        if (Pattern.matches("^[0-9]+$", mFriend.getName())) {
             tmpName = mFriend.getName();
             //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
-            if(tmpName.length() == 9){
-                area = tmpName.substring(0,2);
-                state = tmpName.substring(2,5);
-                serial = tmpName.substring(5,9);
+            if (tmpName.length() == 9) {
+                area = tmpName.substring(0, 2);
+                state = tmpName.substring(2, 5);
+                serial = tmpName.substring(5, 9);
                 tmpName = area + "-" + state + "-" + serial;
-            }else if(tmpName.length() == 10){
-                if(tmpName.startsWith("02")){
-                    area = tmpName.substring(0,2);
-                    state = tmpName.substring(2,6);
-                    serial = tmpName.substring(6,10);
+            } else if (tmpName.length() == 10) {
+                if (tmpName.startsWith("02")) {
+                    area = tmpName.substring(0, 2);
+                    state = tmpName.substring(2, 6);
+                    serial = tmpName.substring(6, 10);
                     tmpName = area + "-" + state + "-" + serial;
-                }else{
-                    area = tmpName.substring(0,3);
-                    state = tmpName.substring(3,6);
-                    serial = tmpName.substring(6,10);
+                } else {
+                    area = tmpName.substring(0, 3);
+                    state = tmpName.substring(3, 6);
+                    serial = tmpName.substring(6, 10);
                     tmpName = area + "-" + state + "-" + serial;
                 }
             } else if (tmpName.length() == 11) {
-                area = tmpName.substring(0,3);
-                state = tmpName.substring(3,7);
-                serial = tmpName.substring(7,11);
+                area = tmpName.substring(0, 3);
+                state = tmpName.substring(3, 7);
+                serial = tmpName.substring(7, 11);
                 tmpName = area + "-" + state + "-" + serial;
             }
             mTextName.setText(tmpName);
-        }else {
+        } else {
             mTextName.setText(mFriend.getName());
         }
 
         if (tmpNumber.length() == 8) {
-            if(tmpNumber.startsWith("1")){
+            if (tmpNumber.startsWith("1")) {
                 state = tmpNumber.substring(0, 4);
                 serial = tmpNumber.substring(4, 8);
                 tmpNumber = state + "-" + serial;
             }
-        }else if(tmpNumber.length() == 9){
-            if(tmpNumber.startsWith("02")) {
+        } else if (tmpNumber.length() == 9) {
+            if (tmpNumber.startsWith("02")) {
                 area = tmpNumber.substring(0, 2);
                 state = tmpNumber.substring(2, 5);
                 serial = tmpNumber.substring(5, 9);
                 tmpNumber = area + "-" + state + "-" + serial;
             }
-        }else if(tmpNumber.length() == 10){
-            if(tmpNumber.startsWith("02")){
-                area = tmpNumber.substring(0,2);
-                state = tmpNumber.substring(2,6);
-                serial = tmpNumber.substring(6,10);
+        } else if (tmpNumber.length() == 10) {
+            if (tmpNumber.startsWith("02")) {
+                area = tmpNumber.substring(0, 2);
+                state = tmpNumber.substring(2, 6);
+                serial = tmpNumber.substring(6, 10);
                 tmpNumber = area + "-" + state + "-" + serial;
-            }else{
-                area = tmpNumber.substring(0,3);
-                state = tmpNumber.substring(3,6);
-                serial = tmpNumber.substring(6,10);
+            } else {
+                area = tmpNumber.substring(0, 3);
+                state = tmpNumber.substring(3, 6);
+                serial = tmpNumber.substring(6, 10);
                 tmpNumber = area + "-" + state + "-" + serial;
             }
         } else if (tmpNumber.length() == 11) {
-            area = tmpNumber.substring(0,3);
-            state = tmpNumber.substring(3,7);
-            serial = tmpNumber.substring(7,11);
+            area = tmpNumber.substring(0, 3);
+            state = tmpNumber.substring(3, 7);
+            serial = tmpNumber.substring(7, 11);
             tmpNumber = area + "-" + state + "-" + serial;
         }
         mTextNumber.setText(tmpNumber);
@@ -520,6 +536,12 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         RealmManager.newInstance().insertCallLog(mRealm, mFriend, callDuration, CallLog.STATE_OUTGOING, mCreatedAt);
     }
 
+    private void generateTone(String dial) {
+        if (mToneWorker != null) {
+            mToneWorker.addDialer(dial);
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -552,11 +574,12 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         //wifi 감시 해제
         unregisterReceiver(rssiReceiver);
         //통화 종료 후 wifi 상태가 3G/LTE 라면 wifi로 상태 변경
-        if(wifiStat == false) {
+        if (wifiStat == false) {
             @SuppressLint("WifiManagerLeak") WifiManager wman = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             wman.setWifiEnabled(true);
             wifiStat = true;
         }
+
     }
 
     @Override
@@ -649,11 +672,59 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     public void onDialClicked(String dial) {
         Log.i(getClass().getSimpleName(), "Send dial: " + dial);
         try {
-            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+//            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+            generateTone(dial);
+            SipInstance.getInstance(getApplicationContext()).getSipCall().dialDtmf(dial);
+            SipInstance.getInstance(getApplicationContext()).sendDtmf(SipInstance.getInstance(getApplicationContext()).getSipCall().getId(), );
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+//    private void playToneGenerator(String dial) {
+//        int duration = 1000;
+//        ToneGenerator dtmfGenerator = new ToneGenerator(STREAM_DTMF, ToneGenerator.MAX_VOLUME);
+//
+//        if (dial.equals("0")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0, duration);
+//        } else if (dial.equals("1")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1, duration);
+//        } else if (dial.equals("2")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2, duration);
+//        } else if (dial.equals("3")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3, duration);
+//        } else if (dial.equals("4")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4, duration);
+//        } else if (dial.equals("5")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5, duration);
+//        } else if (dial.equals("6")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6, duration);
+//        } else if (dial.equals("7")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7, duration);
+//        } else if (dial.equals("8")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8, duration);
+//        } else if (dial.equals("9")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9, duration);
+//        } else if (dial.equals("*")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S, duration); //TONE_DTMF_S for key *
+//        } else if (dial.equals("#")) {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P, duration); //TONE_DTMF_P for key #
+//        } else {
+////            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
+//        }
+//
+//        try {
+//            Thread.sleep(500);
+//            dtmfGenerator.stopTone();
+//
+//            if (mToneWorker != null) {
+//                mToneWorker.release();
+//            }
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
     @Override
     public void onFinishClicked() {
@@ -715,8 +786,8 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case android.R.id.home:{ //for toolbar back button
+        switch (item.getItemId()) {
+            case android.R.id.home: { //for toolbar back button
                 endCall();
 
                 finish();
@@ -725,4 +796,5 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

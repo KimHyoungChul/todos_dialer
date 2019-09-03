@@ -14,11 +14,13 @@
         layout="@layout/common_actionbar_title" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/actionbar"
         android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="50dp"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <TextView
@@ -41,7 +43,7 @@
             android:maxWidth="300dp"
             android:text="000-0000-0000"
             android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
 
 
@@ -49,11 +51,10 @@
             android:id="@+id/text_call_timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:includeFontPadding="false"
             android:text="00:00:00"
             android:textColor="@color/text_primary"
-            android:textSize="15sp" />
+            android:textSize="20sp" />
 
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/indicator"
@@ -79,31 +80,31 @@
     <LinearLayout
         android:id="@+id/container_btn_calling"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="145dp"
         android:layout_above="@+id/btn_end_call"
         android:background="@color/color_white"
         android:gravity="center"
-        android:orientation="vertical"
-        android:paddingTop="30dp">
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:gravity="center"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/btn_speaker"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
@@ -113,22 +114,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:includeFontPadding="true"
+                    android:includeFontPadding="false"
                     android:text="@string/menu_call_spaker" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/btn_pad"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
@@ -138,31 +139,32 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:includeFontPadding="true"
+                    android:includeFontPadding="false"
                     android:text="@string/menu_call_keypad" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/btn_blue_tooth"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_call_bt" />
+                    android:src="@drawable/ic_bluetooth_white_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:includeFontPadding="true"
+                    android:includeFontPadding="false"
                     android:text="@string/menu_call_bt" />
 
             </LinearLayout>

@@ -44,6 +44,7 @@
             android:paddingTop="8dp"
             android:paddingRight="12dp"
             android:paddingBottom="8dp"
+            android:hint="@string/hint_message_text"
             android:textColor="@color/text_label"
             android:textSize="14sp" />
 

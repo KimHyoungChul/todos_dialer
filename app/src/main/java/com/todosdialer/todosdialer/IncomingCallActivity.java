@@ -222,83 +222,163 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
     }
 
-    private void initViewByFriend() {
-        String tmpNumber = "";
-        String tmpName = "";
-        String area = "";
-        String state = "";
-        String serial = "";
+//    private void initViewByFriend() {
+//        String tmpNumber = "";
+//        String tmpName = "";
+//        String area = "";
+//        String state = "";
+//        String serial = "";
+//
+//        if(Pattern.matches("^[0-9]+$", mFriend.getName())){
+//            tmpName = mFriend.getName();
+//            if(tmpName.length() == 9){
+//                area = tmpName.substring(0,2);
+//                state = tmpName.substring(2,5);
+//                serial = tmpName.substring(5,9);
+//                tmpName = area + "-" + state + "-" + serial;
+//            }else if(tmpName.length() == 10){
+//                if(tmpName.startsWith("02")){
+//                    area = tmpName.substring(0,2);
+//                    state = tmpName.substring(2,6);
+//                    serial = tmpName.substring(6,10);
+//                    tmpName = area + "-" + state + "-" + serial;
+//                }else{
+//                    area = tmpName.substring(0,3);
+//                    state = tmpName.substring(3,6);
+//                    serial = tmpName.substring(6,10);
+//                    tmpName = area + "-" + state + "-" + serial;
+//                }
+//            } else if (tmpName.length() == 11) {
+//                area = tmpName.substring(0,3);
+//                state = tmpName.substring(3,7);
+//                serial = tmpName.substring(7,11);
+//                tmpName = area + "-" + state + "-" + serial;
+//            }
+//            mTextName.setText(tmpName);
+//        }else {
+//            mTextName.setText(mFriend.getName());
+//        }
+//
+//        if(Pattern.matches("^[0-9]+$", mFriend.getName())) {
+//            tmpNumber = mFriend.getNumber();
+//            if (tmpNumber.length() == 9) {
+//                area = tmpNumber.substring(0, 2);
+//                state = tmpNumber.substring(2, 5);
+//                serial = tmpNumber.substring(5, 9);
+//                tmpNumber = area + "-" + state + "-" + serial;
+//            } else if (tmpNumber.length() == 10) {
+//                if (tmpNumber.startsWith("02")) {
+//                    area = tmpNumber.substring(0, 2);
+//                    state = tmpNumber.substring(2, 6);
+//                    serial = tmpNumber.substring(6, 10);
+//                    tmpNumber = area + "-" + state + "-" + serial;
+//                } else {
+//                    area = tmpNumber.substring(0, 3);
+//                    state = tmpNumber.substring(3, 6);
+//                    serial = tmpNumber.substring(6, 10);
+//                    tmpNumber = area + "-" + state + "-" + serial;
+//                }
+//            } else if (tmpNumber.length() == 11) {
+//                area = tmpNumber.substring(0, 3);
+//                state = tmpNumber.substring(3, 7);
+//                serial = tmpNumber.substring(7, 11);
+//                tmpNumber = area + "-" + state + "-" + serial;
+//            }
+//            mTextNumber.setText(tmpNumber);
+//        }else {
+//            mTextNumber.setText(mFriend.getNumber());
+//        }
+//        mTextNumber.setText(tmpNumber);
+//        //mTextNumber.setText(mFriend.getNumber());
+//        if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
+//            Glide.with(mImgPhoto.getContext())
+//                    .load(Uri.parse(mFriend.getUriPhoto()))
+//                    .apply(RequestOptions.centerCropTransform())
+//                    .into(mImgPhoto);
+//        } else {
+//            mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
+//        }
+//    }
+private void initViewByFriend() {
+    String tmpNumber = "";
+    String tmpName = "";
+    String area = "";
+    String state = "";
+    String serial = "";
 
-        if(Pattern.matches("^[0-9]+$", mFriend.getName())){
-            tmpName = mFriend.getName();
-            if(tmpName.length() == 9){
+    if(Pattern.matches("^[0-9]+$", mFriend.getName())){
+        tmpName = mFriend.getName();
+        //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
+        if(tmpName.length() == 9){
+            area = tmpName.substring(0,2);
+            state = tmpName.substring(2,5);
+            serial = tmpName.substring(5,9);
+            tmpName = area + "-" + state + "-" + serial;
+        }else if(tmpName.length() == 10){
+            if(tmpName.startsWith("02")){
                 area = tmpName.substring(0,2);
-                state = tmpName.substring(2,5);
-                serial = tmpName.substring(5,9);
+                state = tmpName.substring(2,6);
+                serial = tmpName.substring(6,10);
                 tmpName = area + "-" + state + "-" + serial;
-            }else if(tmpName.length() == 10){
-                if(tmpName.startsWith("02")){
-                    area = tmpName.substring(0,2);
-                    state = tmpName.substring(2,6);
-                    serial = tmpName.substring(6,10);
-                    tmpName = area + "-" + state + "-" + serial;
-                }else{
-                    area = tmpName.substring(0,3);
-                    state = tmpName.substring(3,6);
-                    serial = tmpName.substring(6,10);
-                    tmpName = area + "-" + state + "-" + serial;
-                }
-            } else if (tmpName.length() == 11) {
+            }else{
                 area = tmpName.substring(0,3);
-                state = tmpName.substring(3,7);
-                serial = tmpName.substring(7,11);
+                state = tmpName.substring(3,6);
+                serial = tmpName.substring(6,10);
                 tmpName = area + "-" + state + "-" + serial;
             }
-            mTextName.setText(tmpName);
-        }else {
-            mTextName.setText(mFriend.getName());
+        } else if (tmpName.length() == 11) {
+            area = tmpName.substring(0,3);
+            state = tmpName.substring(3,7);
+            serial = tmpName.substring(7,11);
+            tmpName = area + "-" + state + "-" + serial;
         }
-
-        if(Pattern.matches("^[0-9]+$", mFriend.getName())) {
-            tmpNumber = mFriend.getNumber();
-            if (tmpNumber.length() == 9) {
-                area = tmpNumber.substring(0, 2);
-                state = tmpNumber.substring(2, 5);
-                serial = tmpNumber.substring(5, 9);
-                tmpNumber = area + "-" + state + "-" + serial;
-            } else if (tmpNumber.length() == 10) {
-                if (tmpNumber.startsWith("02")) {
-                    area = tmpNumber.substring(0, 2);
-                    state = tmpNumber.substring(2, 6);
-                    serial = tmpNumber.substring(6, 10);
-                    tmpNumber = area + "-" + state + "-" + serial;
-                } else {
-                    area = tmpNumber.substring(0, 3);
-                    state = tmpNumber.substring(3, 6);
-                    serial = tmpNumber.substring(6, 10);
-                    tmpNumber = area + "-" + state + "-" + serial;
-                }
-            } else if (tmpNumber.length() == 11) {
-                area = tmpNumber.substring(0, 3);
-                state = tmpNumber.substring(3, 7);
-                serial = tmpNumber.substring(7, 11);
-                tmpNumber = area + "-" + state + "-" + serial;
-            }
-            mTextNumber.setText(tmpNumber);
-        }else {
-            mTextNumber.setText(mFriend.getNumber());
-        }
-        mTextNumber.setText(tmpNumber);
-        //mTextNumber.setText(mFriend.getNumber());
-        if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
-            Glide.with(mImgPhoto.getContext())
-                    .load(Uri.parse(mFriend.getUriPhoto()))
-                    .apply(RequestOptions.centerCropTransform())
-                    .into(mImgPhoto);
-        } else {
-            mImgPhoto.setImageResource(R.drawable.ic_account_circle_white_24dp);
-        }
+        mTextName.setText(tmpName);
+    }else {
+        mTextName.setText(mFriend.getName());
     }
+
+    if (tmpNumber.length() == 8) {
+        if(tmpNumber.startsWith("1")){
+            state = tmpNumber.substring(0, 4);
+            serial = tmpNumber.substring(4, 8);
+            tmpNumber = state + "-" + serial;
+        }
+    }else if(tmpNumber.length() == 9){
+        if(tmpNumber.startsWith("02")) {
+            area = tmpNumber.substring(0, 2);
+            state = tmpNumber.substring(2, 5);
+            serial = tmpNumber.substring(5, 9);
+            tmpNumber = area + "-" + state + "-" + serial;
+        }
+    }else if(tmpNumber.length() == 10){
+        if(tmpNumber.startsWith("02")){
+            area = tmpNumber.substring(0,2);
+            state = tmpNumber.substring(2,6);
+            serial = tmpNumber.substring(6,10);
+            tmpNumber = area + "-" + state + "-" + serial;
+        }else{
+            area = tmpNumber.substring(0,3);
+            state = tmpNumber.substring(3,6);
+            serial = tmpNumber.substring(6,10);
+            tmpNumber = area + "-" + state + "-" + serial;
+        }
+    } else if (tmpNumber.length() == 11) {
+        area = tmpNumber.substring(0,3);
+        state = tmpNumber.substring(3,7);
+        serial = tmpNumber.substring(7,11);
+        tmpNumber = area + "-" + state + "-" + serial;
+    }
+    mTextNumber.setText(tmpNumber);
+    //mTextNumber.setText(mFriend.getNumber());
+    if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
+        Glide.with(mImgPhoto.getContext())
+                .load(Uri.parse(mFriend.getUriPhoto()))
+                .apply(RequestOptions.centerCropTransform())
+                .into(mImgPhoto);
+    } else {
+        mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
+    }
+}
 
     private void initAudioManager() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();

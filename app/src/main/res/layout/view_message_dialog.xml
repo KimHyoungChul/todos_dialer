@@ -19,6 +19,7 @@
             android:layout_margin="20dp"
             android:layout_weight="1"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:textColor="@color/text_label"
             android:textSize="14sp" />
 
@@ -29,6 +30,7 @@
             android:background="@color/color_blue_gray"
             android:contentDescription="@string/app_name"
             android:gravity="center"
+            android:includeFontPadding="false"
             android:text="@string/term_close"
             android:textColor="@color/color_white"
             android:textSize="17sp" />

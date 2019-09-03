@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,12 +55,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawer;
 
-    private ImageButton mBtnPad;
-    private ImageButton mBtnLog;
+//    private ImageButton mBtnPad;
+//    private ImageButton mBtnLog;
+    private RelativeLayout mBtnPad;
+    private RelativeLayout mBtnLog;
     private TextView mTextUncheckedMissedCall;
     private TextView mTextUnreadMessage;
-    private ImageButton mBtnContact;
-    private ImageButton mBtnMessage;
+    private RelativeLayout mBtnContact;
+    private RelativeLayout mBtnMessage;
     private RealmResults<Friend> mFriends;
 
     private RealmManager mRealmManager;

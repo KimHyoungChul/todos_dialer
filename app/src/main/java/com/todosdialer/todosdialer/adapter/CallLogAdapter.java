@@ -32,7 +32,7 @@ public class CallLogAdapter extends RecyclerView.Adapter<CallLogAdapter.ItemView
     //    private static final String FORMAT_TIME = "yyyy/MM/dd a hh:mm";
     private static final String FORMAT_TIME = "yyyy.MM.dd E요일";
     private static final String FORMAT_CALL_DATE = "yyyy.MM.dd";
-    private static final String FORMAT_CALL_TIME = "hh:mm";
+    private static final String FORMAT_CALL_TIME = "a hh:mm";
     private List<CallLog> mCallLogList = new ArrayList<>();
     private CallLogAdapter.OnItemClickListener mListener;
 

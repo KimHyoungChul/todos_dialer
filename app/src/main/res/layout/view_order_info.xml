@@ -21,7 +21,6 @@
         android:layout_marginBottom="30dp"
         android:background="@color/color_my_reservation_underline" />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -54,12 +53,11 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-
         <View
             android:layout_width="match_parent"
             android:layout_height="1.5dp"
             android:background="@drawable/drawable_dash_line"
-            android:layerType="software"/>
+            android:layerType="software" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,15 +77,6 @@
                 android:tint="@color/color_blue_gray"
                 android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/text_basic_nation_telecom"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:includeFontPadding="false"
-                android:textColor="@color/color_white"
-                android:textSize="15sp" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -96,6 +85,15 @@
                 android:src="@drawable/ic_language_white_24dp"
                 android:tint="@color/color_blue_gray"
                 android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/text_basic_nation_telecom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:includeFontPadding="false"
+                android:textColor="@color/color_white"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/text_out_nation"
@@ -138,7 +136,6 @@
                     android:id="@+id/text_out_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
                     android:includeFontPadding="false"
                     android:textColor="@color/color_white"
@@ -149,7 +146,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_vertical"
+                android:gravity="center_vertical|right"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -167,6 +164,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/color_white"
                     android:textSize="15sp" />
@@ -202,6 +200,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
@@ -229,6 +228,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
@@ -256,6 +256,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
@@ -284,33 +285,50 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
             </LinearLayout>
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="20dp">
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:text="@string/label_price"
+                    android:textColor="@color/text_label"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/text_price"
-                    android:layout_width="200dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="30dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
                     android:includeFontPadding="false"
                     android:textColor="@color/text_label"
                     android:textSize="14sp" />
 
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
+
+
     </LinearLayout>
+
+
 
 
 </LinearLayout>

@@ -1,7 +1,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/light_gray" />
+    <solid android:color="@color/color_bg_dial_pad_back" />
 
     <stroke
         android:width="1dp"
-        android:color="@color/light_gray" />
+        android:color="@color/color_bg_dial_pad_back" />
 </shape>

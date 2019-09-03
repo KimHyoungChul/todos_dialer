@@ -52,6 +52,7 @@
             android:paddingRight="12dp"
             android:paddingTop="8dp"
             android:textColor="@color/text_label"
+            android:hint="@string/hint_message_text"
             android:textSize="14sp" />
 
         <ImageButton

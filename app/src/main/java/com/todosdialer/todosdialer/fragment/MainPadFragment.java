@@ -71,8 +71,8 @@ public class MainPadFragment extends Fragment {
     private static final String DIAL_SHOP = "#";
 
     private ImageView mImgAdd;
-    private ImageView mImgSms;
-    private ImageView mImgSearch;
+//    private ImageView mImgSms;
+//    private ImageView mImgSearch;
     private ImageView mImgBackspace;
     private AppCompatEditText mEditNumber;
     private ContactView mContactView;
@@ -127,15 +127,15 @@ public class MainPadFragment extends Fragment {
         mEditNumber.setInputType(InputType.TYPE_NULL);
 
         mImgAdd = rootView.findViewById(R.id.btn_add_contact);
-        mImgSearch = rootView.findViewById(R.id.btn_search);
+//        mImgSearch = rootView.findViewById(R.id.btn_search);
         mImgBackspace = rootView.findViewById(R.id.btn_backspace);
         mContactView = rootView.findViewById(R.id.contact_search);
         mImgBtnMore = rootView.findViewById(R.id.btn_see_more);
         mContactView.setButtonVisible(false);
-        mImgSms = rootView.findViewById(R.id.btn_sms);
+//        mImgSms = rootView.findViewById(R.id.btn_sms);
 
-        mImgBackspace.setEnabled(false);
-        mImgSms.setEnabled(false);
+//        mImgBackspace.setEnabled(false);
+//        mImgSms.setEnabled(false);
 
         makeInitSoundsMap();
 
@@ -338,13 +338,13 @@ public class MainPadFragment extends Fragment {
             }
         });
 
-        mImgSms.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String number = mEditNumber.getText().toString();
-                sendMessage(number);
-            }
-        });
+//        mImgSms.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String number = mEditNumber.getText().toString();
+//                sendMessage(number);
+//            }
+//        });
 
         mImgBtnMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -388,17 +388,15 @@ public class MainPadFragment extends Fragment {
         mImgBtnMore.setVisibility(View.INVISIBLE);
 
         if (TextUtils.isEmpty(numberText)) {
-//            mImgBackspace.setVisibility(View.INVISIBLE);
-            mImgBackspace.setEnabled(false);
+            mImgBackspace.setVisibility(View.INVISIBLE);
             mImgAdd.setVisibility(View.INVISIBLE);
-            mImgSearch.setVisibility(View.VISIBLE);
-            mImgSms.setEnabled(false);
+//            mImgSearch.setVisibility(View.VISIBLE);
+//            mImgSms.setEnabled(false);
         } else {
-//            mImgBackspace.setVisibility(View.VISIBLE);
-            mImgBackspace.setEnabled(true);
+            mImgBackspace.setVisibility(View.VISIBLE);
             mImgAdd.setVisibility(View.VISIBLE);
 //            mImgSearch.setVisibility(View.INVISIBLE);
-            mImgSms.setEnabled(true);
+//            mImgSms.setEnabled(true);
         }
 
         if (mFriends != null) {

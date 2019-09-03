@@ -45,11 +45,13 @@
                 android:completionThreshold="2"
                 android:gravity="center_vertical"
                 android:inputType="text"
+                android:hint="@string/hint_destination"
                 android:maxLength="30"
                 android:maxLines="1"
                 android:paddingLeft="16dp"
                 android:paddingTop="4dp"
                 android:paddingRight="16dp"
+                android:textColorHint="@color/color_text_hint"
                 android:paddingBottom="4dp"
                 android:textColor="@color/text_label"
                 android:textSize="13sp" />

@@ -173,5 +173,9 @@
     <string name="label_remain_days">사용가능 기간</string>
 
     <string name="title_user_info">내 정보 조회</string>
+
+    <string name="label_price">요금제</string>
+    <string name="hint_destination">받는 사람</string>
+    <string name="hint_message_text">메시지를 적어주세요.</string>
 </resources>
 

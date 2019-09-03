@@ -98,4 +98,5 @@
     <color name="color_call_log_menu_under_line">#FEA201</color>
     <color name="color_dial_pad_alphabet">#929292</color>
 
+    <color name="color_text_hint">#80000000</color>
 </resources>
