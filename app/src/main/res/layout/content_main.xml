@@ -41,13 +41,13 @@
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_dial_pad_selector" />
 
             <ImageView
                 android:id="@+id/tab_under_dot_01"
                 android:layout_width="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
@@ -69,13 +69,13 @@
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_contact_selector" />
 
             <ImageView
                 android:id="@+id/tab_under_dot_02"
                 android:layout_width="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="4dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"
@@ -99,7 +99,7 @@
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_call_log_selector" />
 
             <TextView
@@ -130,7 +130,7 @@
             <ImageView
                 android:id="@+id/tab_under_dot_03"
                 android:layout_width="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="4dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"
@@ -156,7 +156,7 @@
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="centerInside"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_sms_selector" />
 
             <TextView
@@ -187,7 +187,7 @@
             <ImageView
                 android:id="@+id/tab_under_dot_04"
                 android:layout_width="4dp"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="5dp"
                 android:layout_height="4dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"

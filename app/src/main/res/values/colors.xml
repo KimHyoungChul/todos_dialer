@@ -56,7 +56,8 @@
     <color name="color_contact_phone_number_text">#909090</color>
     <color name="color_contact_total_count_text">#727272</color>
     <color name="color_contact_under_line">#AEAEAE</color>
-    <color name="color_expandable_back">#c7d3df</color>
+<!--    <color name="color_expandable_back">#c7d3df</color>-->
+    <color name="color_expandable_back">#b2bfcd</color>
     <color name="color_tab_under_line">#AFAFAF</color>
 
     //log in

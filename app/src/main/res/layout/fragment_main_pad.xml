@@ -87,12 +87,14 @@
         android:layout_height="wrap_content"
         android:background="@color/color_white"
         android:gravity="center_horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="15dp"
         android:orientation="vertical">
 
         <TableLayout
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-15dp"
             android:gravity="center_horizontal">
 
             <TableRow
@@ -106,6 +108,7 @@
                     android:layout_height="60dp"
                     android:layout_weight="1"
                     android:text="@string/dial_two"
+                    android:background="#C6C6C6"
                     android:textColor="@android:color/black"
                     android:textSize="28sp" />
 
@@ -201,7 +204,7 @@
                 android:layout_height="60dp"
                 android:orientation="horizontal">
 
-                <com.todosdialer.todosdialer.view.DialView
+                <com.todosdialer.todosdialer.view.DialViewStar
                     android:id="@+id/btn_dial_star"
                     android:layout_width="0dp"
                     android:layout_height="60dp"
@@ -244,8 +247,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
             android:weightSum="3">
 
             <LinearLayout
@@ -272,8 +275,8 @@
 
                 <ImageButton
                     android:id="@+id/btn_call_to_someone"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitXY"
