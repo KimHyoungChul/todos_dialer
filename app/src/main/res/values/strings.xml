@@ -177,5 +177,7 @@
     <string name="label_price">요금제</string>
     <string name="hint_destination">받는 사람</string>
     <string name="hint_message_text">메시지를 적어주세요.</string>
+
+    <string name="msg_contact_sync_complete">주소록 동기화 완료</string>
 </resources>
 

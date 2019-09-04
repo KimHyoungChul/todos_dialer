@@ -2,7 +2,11 @@ package com.todosdialer.todosdialer.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,12 +16,14 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,10 +49,15 @@ import com.todosdialer.todosdialer.sip.SipInstance;
 import com.todosdialer.todosdialer.util.KoreanTextMatcher;
 import com.todosdialer.todosdialer.view.MessageDialog;
 
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import io.realm.Realm;
+import me.everything.providers.android.contacts.Contact;
+import me.everything.providers.android.contacts.ContactsProvider;
 
 public class MainContactFragment extends Fragment {
     private AppCompatEditText mEditKeyword;
@@ -56,9 +67,12 @@ public class MainContactFragment extends Fragment {
     private User mUser;
     private Realm mRealm;
     private ImageView mImgSearch;
-    TextView textTotalSize;
+    private TextView textTotalSize;
+    private ProgressBar mProgressBar;
 
-    public MainContactFragment() {}
+
+    public MainContactFragment() {
+    }
 
     public static MainContactFragment newInstance(List<Friend> friends) {
         Bundle args = new Bundle();
@@ -86,6 +100,7 @@ public class MainContactFragment extends Fragment {
 
         mImgSearch = rootView.findViewById(R.id.mbtn_UserSearch);
         mEditKeyword = rootView.findViewById(R.id.edit_keyword);
+        mProgressBar = rootView.findViewById(R.id.progress_bar);
         textTotalSize = rootView.findViewById(R.id.text_total_size);
         String sizeText = getString(R.string.term_whole) + " " + mFriends.size() + getString(R.string.term_friend_unit);
         textTotalSize.setText(sizeText);
@@ -147,7 +162,6 @@ public class MainContactFragment extends Fragment {
             }
         });
 
-
         return rootView;
     }
 
@@ -170,12 +184,60 @@ public class MainContactFragment extends Fragment {
         super.onDestroyView();
         hideKeyboard();
         mRealm.close();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
+        mProgressBar.setVisibility(View.VISIBLE);
+        try {
+//            RealmManager.newInstance().deleteAllFriends(mRealm);
+            new DumpContactTask().execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private class DumpContactTask extends AsyncTask<Void, Void, Integer> {
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            ContactsProvider contactsProvider = new ContactsProvider(getActivity().getApplicationContext());
+            List<Contact> contacts = contactsProvider.getContacts().getList();
+
+            HashMap<String, String> phoneMap = new HashMap<>();
+            ArrayList<Friend> people = new ArrayList<>();
+            for (int i = 0; i < contacts.size(); i++) {
+                if (TextUtils.isEmpty(phoneMap.get(contacts.get(i).phone))) {
+                    people.add(new Friend(contacts.get(i).id,
+                            contacts.get(i).displayName,
+                            contacts.get(i).phone,
+                            contacts.get(i).normilizedPhone,
+                            contacts.get(i).uriPhoto));
+                }
+                phoneMap.put(contacts.get(i).phone, contacts.get(i).displayName);
+            }
+
+            Realm realm = Realm.getDefaultInstance();
+            RealmManager.newInstance().insertFriends(realm, people);
+            realm.close();
+            return people.size();
+        }
+
+        @Override
+        protected void onPostExecute(Integer data) {
+            Log.i(getClass().getSimpleName(), "Load all contacts. size is: " + data);
+
+            mFriends = RealmManager.newInstance().loadFriends(mRealm);
+            mAdapter.setFriendList(mFriends);
+
+            textTotalSize.setText("총 " + mFriends.size() + "명");
+
+            mProgressBar.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void sendMessage(String number) {
@@ -214,9 +276,9 @@ public class MainContactFragment extends Fragment {
                 });
     }
 
-    private void delete(long id){
+    private void delete(long id) {
         Realm realm = Realm.getDefaultInstance();
-        final CallLog calllog = realm.where(CallLog.class).equalTo("id",id).findFirst();
+        final CallLog calllog = realm.where(CallLog.class).equalTo("id", id).findFirst();
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
@@ -264,7 +326,7 @@ public class MainContactFragment extends Fragment {
         }
         mAdapter.setFriendList(refreshList);
 
-        if(mEditKeyword.getText().toString().equals("")) {
+        if (mEditKeyword.getText().toString().equals("")) {
             textTotalSize.setText("총 " + refreshList.size() + "명");
         } else {
             textTotalSize.setText("검색결과 " + refreshList.size() + "명");
