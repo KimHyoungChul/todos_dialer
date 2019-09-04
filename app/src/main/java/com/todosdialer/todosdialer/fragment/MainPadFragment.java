@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.todosdialer.todosdialer.ChatActivity;
@@ -42,6 +43,7 @@ import com.todosdialer.todosdialer.sip.SipInstance;
 import com.todosdialer.todosdialer.util.KoreanTextMatcher;
 import com.todosdialer.todosdialer.view.ContactView;
 import com.todosdialer.todosdialer.view.DialView;
+import com.todosdialer.todosdialer.view.DialViewStar;
 import com.todosdialer.todosdialer.view.MessageDialog;
 import com.todosdialer.todosdialer.worker.ToneWorker;
 
@@ -144,13 +146,13 @@ public class MainPadFragment extends Fragment {
         initDial((DialView) rootView.findViewById(R.id.btn_dial_one), DIAL_1, new String[]{"ㄱ", "ㅋ"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_two), DIAL_2, new String[]{"ㄴ"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_three), DIAL_3, new String[]{"ㄷ", "ㅌ"});
-        initDial((DialView) rootView.findViewById(R.id.btn_dial_four), DIAL_4, new String[]{"ㄹ"});
+        initDial((DialView) rootView.findViewById(R.id.btn_dial_four), DIAL_4, new String[]{"ㄹ", "　"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_five), DIAL_5, new String[]{"ㅁ"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_six), DIAL_6, new String[]{"ㅂ", "ㅍ"});
-        initDial((DialView) rootView.findViewById(R.id.btn_dial_seven), DIAL_7, new String[]{"ㅅ"});
+        initDial((DialView) rootView.findViewById(R.id.btn_dial_seven), DIAL_7, new String[]{"ㅅ", "　"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_eight), DIAL_8, new String[]{"ㅇ"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_nine), DIAL_9, new String[]{"ㅈ", "ㅊ"});
-        initDial((DialView) rootView.findViewById(R.id.btn_dial_star), DIAL_STAR, new String[]{});
+        initDialStar((DialViewStar) rootView.findViewById(R.id.btn_dial_star), DIAL_STAR, new String[]{});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_zero), DIAL_0, new String[]{"ㅎ"});
         initDial((DialView) rootView.findViewById(R.id.btn_dial_shop), DIAL_SHOP, new String[]{});
 
@@ -221,6 +223,16 @@ public class MainPadFragment extends Fragment {
         dialView.setNumberWithInitSound(dial, initSound.toString());
         dialView.setOnClickListener(new DialListener(dial));
     }
+
+    private void initDialStar(DialViewStar dialViewStar, String dial, String[] initSounds) {
+        StringBuilder initSound = new StringBuilder();
+        for (String sound : initSounds) {
+            initSound.append(sound);
+        }
+        dialViewStar.setNumberWithInitSound(dial, initSound.toString());
+        dialViewStar.setOnClickListener(new DialListener(dial));
+    }
+
 
     private void initBtnListener() {
         mEditNumber.addTextChangedListener(new TextWatcher() {
