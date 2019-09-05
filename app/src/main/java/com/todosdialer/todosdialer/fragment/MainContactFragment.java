@@ -67,6 +67,7 @@ public class MainContactFragment extends Fragment {
     private User mUser;
     private Realm mRealm;
     private ImageView mImgSearch;
+    private ImageView mImgSearchCancel;
     private TextView textTotalSize;
     private ProgressBar mProgressBar;
 
@@ -99,6 +100,7 @@ public class MainContactFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main_contact, container, false);
 
         mImgSearch = rootView.findViewById(R.id.mbtn_UserSearch);
+        mImgSearchCancel = rootView.findViewById(R.id.mbtn_Search_cancel);
         mEditKeyword = rootView.findViewById(R.id.edit_keyword);
         mProgressBar = rootView.findViewById(R.id.progress_bar);
         textTotalSize = rootView.findViewById(R.id.text_total_size);
@@ -132,6 +134,13 @@ public class MainContactFragment extends Fragment {
         mEditKeyword.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
+                if(mEditKeyword.getText().toString().length() > 0) {
+                    mImgSearch.setVisibility(View.GONE);
+                    mImgSearchCancel.setVisibility(View.VISIBLE);
+                } else {
+                    mImgSearch.setVisibility(View.VISIBLE);
+                    mImgSearchCancel.setVisibility(View.GONE);
+                }
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -159,6 +168,16 @@ public class MainContactFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 hideKeyboard();
                 return true;
+            }
+        });
+
+        mImgSearchCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                /*mSearchKeyword = mEditKeyword.getText().toString().trim();
+                refreshList();*/
+                hideKeyboard();
+                mEditKeyword.setText("");
             }
         });
 
@@ -191,13 +210,13 @@ public class MainContactFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        mProgressBar.setVisibility(View.VISIBLE);
-        try {
-//            RealmManager.newInstance().deleteAllFriends(mRealm);
-            new DumpContactTask().execute();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        mProgressBar.setVisibility(View.VISIBLE);
+//        try {
+////            RealmManager.newInstance().deleteAllFriends(mRealm);
+//            new DumpContactTask().execute();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -221,9 +240,9 @@ public class MainContactFragment extends Fragment {
                 phoneMap.put(contacts.get(i).phone, contacts.get(i).displayName);
             }
 
-            Realm realm = Realm.getDefaultInstance();
-            RealmManager.newInstance().insertFriends(realm, people);
-            realm.close();
+//            RealmManager.newInstance().deleteAllFriends(mRealm);
+            RealmManager.newInstance().insertFriends(mRealm, people);
+            mRealm.close();
             return people.size();
         }
 

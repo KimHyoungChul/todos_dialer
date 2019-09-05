@@ -99,6 +99,19 @@
             android:background="#00ff0000"
             android:scaleType="centerInside"
             android:src="@drawable/ic_search_black_24dp" />
+
+        <ImageButton
+            android:id="@+id/mImg_CallSearch_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="end"
+            android:layout_marginRight="30dp"
+            android:background="#00ff0000"
+            android:scaleType="centerInside"
+            android:visibility="gone"
+            android:src="@drawable/ic_search_cancel" />
     </RelativeLayout>
 
     <FrameLayout

@@ -76,6 +76,7 @@ public class MainCallLogFragment extends Fragment {
     private TextView mSelectdSearch;
     private String mSelectedKeyword;
     private ImageView mImgCallSearch;
+    private ImageView mImgCallSearchCancel;
 
     public static MainCallLogFragment newInstance(List<CallLog> allLogs, List<CallLog> missedLogs) {
 
@@ -129,6 +130,7 @@ public class MainCallLogFragment extends Fragment {
 
         mSelectdSearch = rootView.findViewById(R.id.edit_CallSearch);
         mImgCallSearch = rootView.findViewById(R.id.mImg_CallSearch);
+        mImgCallSearchCancel = rootView.findViewById(R.id.mImg_CallSearch_cancel);
 
         mCallLogRecyclerView.setVisibility(View.INVISIBLE);
         mCallEmptyView.setVisibility(View.VISIBLE);
@@ -188,6 +190,14 @@ public class MainCallLogFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
+                if(mSelectdSearch.getText().toString().length() > 0) {
+                    mImgCallSearch.setVisibility(View.GONE);
+                    mImgCallSearchCancel.setVisibility(View.VISIBLE);
+                } else {
+                    mImgCallSearch.setVisibility(View.VISIBLE);
+                    mImgCallSearchCancel.setVisibility(View.GONE);
+                }
+
                 refreshLogList();
             }
         });
@@ -204,6 +214,14 @@ public class MainCallLogFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 hideKeyboard();
                 return true;
+            }
+        });
+
+        mImgCallSearchCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideKeyboard();
+                mSelectdSearch.setText("");
             }
         });
 
