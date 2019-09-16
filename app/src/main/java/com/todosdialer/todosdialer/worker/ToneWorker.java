@@ -53,7 +53,7 @@ public class ToneWorker extends Thread {
                         mAudioManager.getMode() != AudioManager.MODE_IN_CALL ||
                         mAudioManager.getMode() != AudioManager.MODE_IN_COMMUNICATION;
             }
-            ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_DTMF, ToneGenerator.MAX_VOLUME);
+            ToneGenerator toneGenerator = new ToneGenerator(AudioManager.STREAM_DTMF, ToneGenerator.MAX_VOLUME / 2);
             String dial = mDialerQueue.poll();
 
             generateTone(toneGenerator, dial);
