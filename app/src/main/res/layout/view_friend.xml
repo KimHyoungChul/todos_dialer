@@ -3,6 +3,7 @@
     android:id="@+id/linearItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:duplicateParentState="true"
     android:orientation="vertical">
 
 <!--    <com.todosdialer.todosdialer.view.ContactView-->
@@ -17,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
+        android:clickable="false"
         android:layout_marginRight="30dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -24,6 +26,7 @@
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_gravity="center"
+            android:clickable="false"
             android:contentDescription="@string/app_name"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_account_circle_white_24dp"
@@ -35,9 +38,9 @@
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="4dp"
+            android:clickable="false"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:duplicateParentState="true"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -45,7 +48,7 @@
                 android:id="@+id/text_person_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:duplicateParentState="true"
+                android:clickable="false"
                 android:gravity="bottom"
                 android:includeFontPadding="false"
                 android:singleLine="true"
@@ -57,8 +60,8 @@
                 android:id="@+id/text_person_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:duplicateParentState="true"
                 android:gravity="bottom"
+                android:clickable="false"
                 android:includeFontPadding="false"
                 android:singleLine="true"
                 android:textColor="@color/color_contact_phone_number_text"
@@ -102,16 +105,16 @@
 
         <ImageButton
             android:id="@+id/btn_call"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="40dp"
+            android:layout_height="match_parent"
+            android:layout_width="80dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_call_white_24dp_selector" />
 
         <ImageButton
             android:id="@+id/btn_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:padding="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_sms_white_24dp_selector" />
 

@@ -115,6 +115,7 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.It
         private TextView callLogDays;
 
         private LinearLayout layoutUtility;
+        private LinearLayout linearItem;
 
         private int position;
 
@@ -162,11 +163,11 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.It
             callLogDays = itemView.findViewById(R.id.call_log_days);
 
             layoutUtility = itemView.findViewById(R.id.layout_utility);
+            linearItem = itemView.findViewById(R.id.linearItem);
 
             changeVisibility(selectedItems.get(position));
 
-            mTextName.setOnClickListener(this);
-            mTextNumber.setOnClickListener(this);
+            linearItem.setOnClickListener(this);
             layoutUtility.setOnClickListener(this);
         }
 
@@ -175,8 +176,9 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.It
             switch (v.getId()) {
                 case R.id.linearItem:
                 case R.id.layout_utility:
-                case R.id.text_person_name:
-                case R.id.text_person_number:
+//                case R.id.text_person_name:
+//                case R.id.text_person_number:
+//                case R.id.img_person_photo:
                     if (selectedItems.get(position)) {
                         // 펼쳐진 Item을 클릭 시
                         selectedItems.delete(position);

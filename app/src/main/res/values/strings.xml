@@ -6,7 +6,7 @@
     <!-- ************************************************************* -->
     <string name="term_login">로그인</string>
     <string name="label_email">이메일</string>
-    <string name="hint_email">이메일을 입력해주세요</string>
+    <string name="hint_email">이메일을 입력해주세요.</string>
     <string name="label_password">비밀번호</string>
     <string name="hint_password">비밀번호를 입력해주세요 (영문, 숫자 혼합 8~20자)</string>
     <string name="hint_password_in_sign_in">비밀번호를 입력해주세요</string>
@@ -73,6 +73,7 @@
     <string name="term_missed">Missed</string>
     <string name="msg_there_are_no_logs">통화 기록이 없습니다.</string>
     <string name="term_whole">총</string>
+    <string name="term_search_result">검색결과</string>
     <string name="msg_there_are_no_message">문자가 없습니다.</string>
     <string name="term_friend_unit">명</string>
     <string name="title_activity_new_chat">NewChatActivity</string>

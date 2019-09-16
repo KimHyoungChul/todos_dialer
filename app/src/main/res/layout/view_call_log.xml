@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/color_white"
+    android:duplicateParentState="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,18 +14,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:orientation="vertical"
+        android:clickable="false"
         android:visibility="gone">
 
         <TextView
             android:id="@+id/call_log_days"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:includeFontPadding="false"
             android:text="2019. 7. 24 수요일" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
+            android:clickable="false"
             android:background="@color/color_contact_list_divider" />
 
     </LinearLayout>
@@ -35,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="1dp"
+        android:clickable="false"
         android:layout_marginRight="30dp"
         android:layout_marginBottom="1dp"
         android:orientation="horizontal">
@@ -42,16 +47,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
             android:layout_gravity="center_vertical">
 
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:clickable="false"
                 android:visibility="visible">
 
                 <ImageView
                     android:id="@+id/img_state_out"
                     android:layout_width="15dp"
+                    android:clickable="false"
                     android:layout_height="15dp"
                     android:baselineAlignBottom="@id/img_person_photo"
                     android:contentDescription="@string/app_name"
@@ -62,6 +70,7 @@
                     android:id="@+id/img_state_missed"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
+                    android:clickable="false"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_call_missed_white_24dp"
                     android:visibility="gone" />
@@ -69,6 +78,7 @@
                 <ImageView
                     android:id="@+id/img_state_in"
                     android:layout_width="15dp"
+                    android:clickable="false"
                     android:layout_height="15dp"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/ic_call_received_white_24dp"
@@ -78,11 +88,13 @@
             <View
                 android:layout_width="10dp"
                 android:layout_height="1dp"
+                android:clickable="false"
                 android:visibility="visible" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/img_person_photo"
                 android:layout_width="40dp"
+                android:clickable="false"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:contentDescription="@string/app_name"
@@ -94,11 +106,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:clickable="false"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="10dp"
             android:layout_weight="1"
-            android:duplicateParentState="true"
             android:gravity="center_vertical"
             android:orientation="vertical">
 
@@ -106,10 +118,10 @@
                 android:id="@+id/text_person_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:duplicateParentState="true"
                 android:gravity="bottom"
                 android:includeFontPadding="false"
                 android:singleLine="true"
+                android:clickable="false"
                 android:textColor="@color/text_label"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -118,11 +130,11 @@
                 android:id="@+id/text_person_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:duplicateParentState="true"
                 android:gravity="top"
                 android:includeFontPadding="false"
                 android:singleLine="true"
                 android:textColor="@color/color_contact_phone_number_text"
+                android:clickable="false"
                 android:textSize="14sp" />
         </LinearLayout>
 
@@ -132,6 +144,7 @@
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical|right"
             android:minWidth="40dp"
+            android:clickable="false"
             android:orientation="vertical">
 
             <TextView
@@ -139,6 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
+                android:clickable="false"
                 android:gravity="top|right"
                 android:textColor="@color/color_call_log_time"
                 android:textSize="12sp" />
@@ -148,6 +162,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:includeFontPadding="false"
+                android:clickable="false"
                 android:textColor="@color/color_call_log_time"
                 android:textSize="12sp"
                 android:visibility="visible" />

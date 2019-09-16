@@ -313,23 +313,26 @@ public class SearchFriendActivity extends AppCompatActivity {
             findViewById(R.id.btn_finding_pw).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(SignInActivity.this, FindingPwActivity.class));
+//                    startActivity(new Intent(SignInActivity.this, FindingPwActivity.class));
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("https://todosdialer.com:5035/member/search.asp"));
+                    startActivity(intent);
                 }
             });
 
             findViewById(R.id.btn_service_info).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://brand.todosdialer.com/?c=106")));
 
-                    try {
-                        Intent i = new Intent(SignInActivity.this, WebViewActivity.class);
-                        i.putExtra("title", getString(R.string.term_infomation));
-                        i.putExtra("url", "http://brand.todosdialer.com/?c=106");
-                        startActivity(i);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        Intent i = new Intent(SignInActivity.this, WebViewActivity.class);
+//                        i.putExtra("title", getString(R.string.term_infomation));
+//                        i.putExtra("url", "http://brand.todosdialer.com/?c=106");
+//                        startActivity(i);
+//                    } catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
 
                 }
             });

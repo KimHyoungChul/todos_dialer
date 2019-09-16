@@ -346,9 +346,9 @@ public class MainContactFragment extends Fragment {
         mAdapter.setFriendList(refreshList);
 
         if (mEditKeyword.getText().toString().equals("")) {
-            textTotalSize.setText("총 " + refreshList.size() + "명");
+            textTotalSize.setText(getString(R.string.term_whole) + " " + refreshList.size() + getString(R.string.term_friend_unit));
         } else {
-            textTotalSize.setText("검색결과 " + refreshList.size() + "명");
+            textTotalSize.setText(getString(R.string.term_search_result) + " " + refreshList.size() + getString(R.string.term_friend_unit));
         }
     }
 

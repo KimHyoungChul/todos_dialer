@@ -1,6 +1,7 @@
 package com.todosdialer.todosdialer;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private DrawerLayout mDrawer;
 
-//    private ImageButton mBtnPad;
+    //    private ImageButton mBtnPad;
 //    private ImageButton mBtnLog;
     private RelativeLayout mBtnPad;
     private RelativeLayout mBtnLog;
@@ -207,8 +208,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        switchView(getIntent().getIntExtra(EXTRA_KEY_TAB,  0));
-
+        //노티피케이션바 항목 클릭해서 접근하는 경우
+        if(getIntent() != null) {
+            switchView(getIntent().getIntExtra(EXTRA_KEY_TAB, 0));
+            mViewPager.setCurrentItem(getIntent().getIntExtra(EXTRA_KEY_TAB, 0));
+        }
 
 
 //        tabLayout = (TabLayout) findViewById(R.id.tab_layout);
@@ -237,6 +241,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             finish();
             return;
         }
+
     }
 
     View.OnClickListener movePageListener = new View.OnClickListener() {
@@ -275,7 +280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public int getItemPosition(Object object) {
-            if(object instanceof MainCallLogFragment) {
+            if (object instanceof MainCallLogFragment) {
                 return POSITION_NONE;
             } else {
                 return super.getItemPosition(object);
@@ -362,33 +367,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void showReservationPage() {
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(RetrofitManager.PRODUCT_URL));
-        try {
-//            startActivity(intent);
-            Intent i = new Intent(MainActivity.this, WebViewActivity.class);
-            i.putExtra("title", getString(R.string.term_reservation));
-            i.putExtra("url", RetrofitManager.PRODUCT_URL);
-            startActivity(i);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), R.string.msg_there_is_no_available_app, Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(RetrofitManager.PRODUCT_URL));
+        startActivity(intent);
+//        try {
+////            startActivity(intent);
+//            Intent i = new Intent(MainActivity.this, WebViewActivity.class);
+//            i.putExtra("title", getString(R.string.term_reservation));
+//            i.putExtra("url", RetrofitManager.PRODUCT_URL);
+//            startActivity(i);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toast.makeText(getApplicationContext(), R.string.msg_there_is_no_available_app, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void startInfo() {
-//        Intent intent = new Intent(Intent.ACTION_VIEW);
-//        intent.setData(Uri.parse(RetrofitManager.INFOMATION));
-        try {
-//            startActivity(intent);
-            Intent i = new Intent(MainActivity.this, WebViewActivity.class);
-            i.putExtra("title", getString(R.string.term_infomation));
-            i.putExtra("url", RetrofitManager.INFOMATION);
-            startActivity(i);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), R.string.msg_there_is_no_available_app, Toast.LENGTH_SHORT).show();
-        }
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(RetrofitManager.INFOMATION));
+        startActivity(intent);
+//        try {
+//            Intent i = new Intent(MainActivity.this, WebViewActivity.class);
+//            i.putExtra("title", getString(R.string.term_infomation));
+//            i.putExtra("url", RetrofitManager.INFOMATION);
+//            startActivity(i);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            Toast.makeText(getApplicationContext(), R.string.msg_there_is_no_available_app, Toast.LENGTH_SHORT).show();
+//        }
     }
 
     private void switchView(int tab) {

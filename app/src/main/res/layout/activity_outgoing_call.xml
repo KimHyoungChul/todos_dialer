@@ -59,7 +59,7 @@
         <com.wang.avi.AVLoadingIndicatorView
             android:id="@+id/indicator"
             style="@style/AVLoadingIndicatorView"
-            android:layout_width="wrap_content"
+            android:layout_width="27dp"
             android:layout_height="27dp"
             android:layout_marginTop="0dp"
             app:indicatorColor="@color/color_white"
@@ -124,6 +124,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <ImageButton

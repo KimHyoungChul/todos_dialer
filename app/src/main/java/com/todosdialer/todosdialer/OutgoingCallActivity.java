@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 import io.realm.Realm;
 
 import static android.media.AudioManager.STREAM_DTMF;
+import static android.media.AudioManager.STREAM_MUSIC;
 import static android.media.AudioManager.STREAM_NOTIFICATION;
 import static android.media.AudioManager.STREAM_SYSTEM;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
@@ -97,7 +98,8 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     private long mCreatedAt;
     private long mStartTime;
 
-    private ToneWorker mToneWorker;
+    //    private ToneWorker mToneWorker;
+    ToneGenerator dtmfGenerator;
 
     private Handler mHandler = new Handler();
     private Runnable mTimerRunnable = new Runnable() {
@@ -200,8 +202,10 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
             sendCall();
 
-            mToneWorker = new ToneWorker(getApplicationContext());
-            mToneWorker.start();
+//            mToneWorker = new ToneWorker(getApplicationContext());
+//            mToneWorker.start();
+
+            dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME);
 
             //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
             if (savedInstanceState != null) {
@@ -536,11 +540,11 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         RealmManager.newInstance().insertCallLog(mRealm, mFriend, callDuration, CallLog.STATE_OUTGOING, mCreatedAt);
     }
 
-    private void generateTone(String dial) {
-        if (mToneWorker != null) {
-            mToneWorker.addDialer(dial);
-        }
-    }
+//    private void generateTone(String dial) {
+//        if (mToneWorker != null) {
+//            mToneWorker.addDialer(dial);
+//        }
+//    }
 
     @Override
     protected void onDestroy() {
@@ -553,7 +557,6 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         unregisterReceiver();
 
         clearNotification();
-
 
 
         mRealm.close();
@@ -578,6 +581,10 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             @SuppressLint("WifiManagerLeak") WifiManager wman = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             wman.setWifiEnabled(true);
             wifiStat = true;
+        }
+
+        if (dtmfGenerator != null) {
+            dtmfGenerator.release();
         }
 
     }
@@ -672,59 +679,63 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     public void onDialClicked(String dial) {
         Log.i(getClass().getSimpleName(), "Send dial: " + dial);
         try {
-//            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
-            generateTone(dial);
-            SipInstance.getInstance(getApplicationContext()).getSipCall().dialDtmf(dial);
-            SipInstance.getInstance(getApplicationContext()).sendDtmf(SipInstance.getInstance(getApplicationContext()).getSipCall().getId(), );
+            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+//            generateTone(dial);
+//            playToneGenerator(dial);
+//            SipInstance.getInstance().getSipCall().dialDtmf(dial);
+//            SipServiceCommand.sendDTMF(
+//                    OutgoingCallActivity.this,
+//                    SipInstance.getInstance(getApplicationContext()).getSipCall().getInfo().getLocalUri(), //account id
+//                    SipInstance.getInstance().getSipCall().getId(),  //call id
+//                    dial);
         } catch (Exception e) {
+            e.printStackTrace();
             e.printStackTrace();
         }
     }
 
-//    private void playToneGenerator(String dial) {
-//        int duration = 1000;
-//        ToneGenerator dtmfGenerator = new ToneGenerator(STREAM_DTMF, ToneGenerator.MAX_VOLUME);
-//
-//        if (dial.equals("0")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0, duration);
-//        } else if (dial.equals("1")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1, duration);
-//        } else if (dial.equals("2")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2, duration);
-//        } else if (dial.equals("3")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3, duration);
-//        } else if (dial.equals("4")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4, duration);
-//        } else if (dial.equals("5")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5, duration);
-//        } else if (dial.equals("6")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6, duration);
-//        } else if (dial.equals("7")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7, duration);
-//        } else if (dial.equals("8")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8, duration);
-//        } else if (dial.equals("9")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9, duration);
-//        } else if (dial.equals("*")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S, duration); //TONE_DTMF_S for key *
-//        } else if (dial.equals("#")) {
-//            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P, duration); //TONE_DTMF_P for key #
-//        } else {
-////            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
-//        }
-//
-//        try {
-//            Thread.sleep(500);
-//            dtmfGenerator.stopTone();
-//
-//            if (mToneWorker != null) {
-//                mToneWorker.release();
-//            }
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+    private void playToneGenerator(String dial) {
+        int duration = 1000;
+
+
+        if (dial.equals("0")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0, duration);
+        } else if (dial.equals("1")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1, duration);
+        } else if (dial.equals("2")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2, duration);
+        } else if (dial.equals("3")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3, duration);
+        } else if (dial.equals("4")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4, duration);
+        } else if (dial.equals("5")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5, duration);
+        } else if (dial.equals("6")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6, duration);
+        } else if (dial.equals("7")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7, duration);
+        } else if (dial.equals("8")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8, duration);
+        } else if (dial.equals("9")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9, duration);
+        } else if (dial.equals("*")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S, duration); //TONE_DTMF_S for key *
+        } else if (dial.equals("#")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P, duration); //TONE_DTMF_P for key #
+        } else {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
+        }
+
+        try {
+            Thread.sleep(160);
+            dtmfGenerator.stopTone();
+
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     @Override
     public void onFinishClicked() {

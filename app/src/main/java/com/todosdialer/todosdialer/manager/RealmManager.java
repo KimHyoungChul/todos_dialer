@@ -327,4 +327,10 @@ public class RealmManager {
     public static int makeNewId(Class clazz) {
         return Realm.getDefaultInstance().where(clazz).findAll().size() + 1;
     }
+
+    public void deleteAllFriends(Realm realm) {
+        realm.beginTransaction();
+        realm.delete(Friend.class);
+        realm.commitTransaction();
+    }
 }
