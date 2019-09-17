@@ -124,7 +124,7 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:orientation="vertical">
 
                 <ImageButton

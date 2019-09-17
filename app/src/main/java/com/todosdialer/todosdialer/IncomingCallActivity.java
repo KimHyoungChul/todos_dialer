@@ -47,6 +47,7 @@ import com.todosdialer.todosdialer.model.CallLog;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.sip.SipInstance;
 import com.todosdialer.todosdialer.sip.TodosSip;
+import com.todosdialer.todosdialer.worker.ToneWorker;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -54,6 +55,8 @@ import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 import io.realm.Realm;
+
+import static android.media.AudioManager.STREAM_VOICE_CALL;
 
 public class IncomingCallActivity extends AppCompatActivity implements SensorEventListener, DialFragment.OnClickListener {
     public static final String EXTRA_KEY_PHONE_NUMBER = "IncomingCallActivity.key_phone_number";
@@ -94,6 +97,10 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 
     private long mCreatedAt;
     private long mStartTime;
+
+    //    private ToneWorker mToneWorker;
+    ToneGenerator dtmfGenerator;
+
     private Handler mHandler = new Handler();
     private Runnable mTimerRunnable = new Runnable() {
         @Override
@@ -175,7 +182,7 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
         mContainerBtnCalling.setVisibility(View.GONE);
         mContainerWaiting.setVisibility(View.VISIBLE);
 
-        phoneNumber.replace("-","");
+        phoneNumber.replace("-", "");
         Log.d("TAG", "onCreate: " + phoneNumber);
         mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
         if (mFriend == null) {
@@ -201,9 +208,11 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 
         bellPlay();
 
+        dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME / 2);
+
         //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
         if (savedInstanceState != null) {
-            Log.d("IncommingCallActivity","savedInstanceState is not null");
+            Log.d("IncommingCallActivity", "savedInstanceState is not null");
             finish();
             return;
         }
@@ -222,7 +231,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
     }
 
-//    private void initViewByFriend() {
+
+    //    private void initViewByFriend() {
 //        String tmpNumber = "";
 //        String tmpName = "";
 //        String area = "";
@@ -299,86 +309,86 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 //            mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
 //        }
 //    }
-private void initViewByFriend() {
-    String tmpNumber = "";
-    String tmpName = "";
-    String area = "";
-    String state = "";
-    String serial = "";
+    private void initViewByFriend() {
+        String tmpNumber = "";
+        String tmpName = "";
+        String area = "";
+        String state = "";
+        String serial = "";
 
-    if(Pattern.matches("^[0-9]+$", mFriend.getName())){
-        tmpName = mFriend.getName();
-        //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
-        if(tmpName.length() == 9){
-            area = tmpName.substring(0,2);
-            state = tmpName.substring(2,5);
-            serial = tmpName.substring(5,9);
-            tmpName = area + "-" + state + "-" + serial;
-        }else if(tmpName.length() == 10){
-            if(tmpName.startsWith("02")){
-                area = tmpName.substring(0,2);
-                state = tmpName.substring(2,6);
-                serial = tmpName.substring(6,10);
+        if (Pattern.matches("^[0-9]+$", mFriend.getName())) {
+            tmpName = mFriend.getName();
+            //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
+            if (tmpName.length() == 9) {
+                area = tmpName.substring(0, 2);
+                state = tmpName.substring(2, 5);
+                serial = tmpName.substring(5, 9);
                 tmpName = area + "-" + state + "-" + serial;
-            }else{
-                area = tmpName.substring(0,3);
-                state = tmpName.substring(3,6);
-                serial = tmpName.substring(6,10);
+            } else if (tmpName.length() == 10) {
+                if (tmpName.startsWith("02")) {
+                    area = tmpName.substring(0, 2);
+                    state = tmpName.substring(2, 6);
+                    serial = tmpName.substring(6, 10);
+                    tmpName = area + "-" + state + "-" + serial;
+                } else {
+                    area = tmpName.substring(0, 3);
+                    state = tmpName.substring(3, 6);
+                    serial = tmpName.substring(6, 10);
+                    tmpName = area + "-" + state + "-" + serial;
+                }
+            } else if (tmpName.length() == 11) {
+                area = tmpName.substring(0, 3);
+                state = tmpName.substring(3, 7);
+                serial = tmpName.substring(7, 11);
                 tmpName = area + "-" + state + "-" + serial;
             }
-        } else if (tmpName.length() == 11) {
-            area = tmpName.substring(0,3);
-            state = tmpName.substring(3,7);
-            serial = tmpName.substring(7,11);
-            tmpName = area + "-" + state + "-" + serial;
+            mTextName.setText(tmpName);
+        } else {
+            mTextName.setText(mFriend.getName());
         }
-        mTextName.setText(tmpName);
-    }else {
-        mTextName.setText(mFriend.getName());
-    }
 
-    if (tmpNumber.length() == 8) {
-        if(tmpNumber.startsWith("1")){
-            state = tmpNumber.substring(0, 4);
-            serial = tmpNumber.substring(4, 8);
-            tmpNumber = state + "-" + serial;
-        }
-    }else if(tmpNumber.length() == 9){
-        if(tmpNumber.startsWith("02")) {
-            area = tmpNumber.substring(0, 2);
-            state = tmpNumber.substring(2, 5);
-            serial = tmpNumber.substring(5, 9);
+        if (tmpNumber.length() == 8) {
+            if (tmpNumber.startsWith("1")) {
+                state = tmpNumber.substring(0, 4);
+                serial = tmpNumber.substring(4, 8);
+                tmpNumber = state + "-" + serial;
+            }
+        } else if (tmpNumber.length() == 9) {
+            if (tmpNumber.startsWith("02")) {
+                area = tmpNumber.substring(0, 2);
+                state = tmpNumber.substring(2, 5);
+                serial = tmpNumber.substring(5, 9);
+                tmpNumber = area + "-" + state + "-" + serial;
+            }
+        } else if (tmpNumber.length() == 10) {
+            if (tmpNumber.startsWith("02")) {
+                area = tmpNumber.substring(0, 2);
+                state = tmpNumber.substring(2, 6);
+                serial = tmpNumber.substring(6, 10);
+                tmpNumber = area + "-" + state + "-" + serial;
+            } else {
+                area = tmpNumber.substring(0, 3);
+                state = tmpNumber.substring(3, 6);
+                serial = tmpNumber.substring(6, 10);
+                tmpNumber = area + "-" + state + "-" + serial;
+            }
+        } else if (tmpNumber.length() == 11) {
+            area = tmpNumber.substring(0, 3);
+            state = tmpNumber.substring(3, 7);
+            serial = tmpNumber.substring(7, 11);
             tmpNumber = area + "-" + state + "-" + serial;
         }
-    }else if(tmpNumber.length() == 10){
-        if(tmpNumber.startsWith("02")){
-            area = tmpNumber.substring(0,2);
-            state = tmpNumber.substring(2,6);
-            serial = tmpNumber.substring(6,10);
-            tmpNumber = area + "-" + state + "-" + serial;
-        }else{
-            area = tmpNumber.substring(0,3);
-            state = tmpNumber.substring(3,6);
-            serial = tmpNumber.substring(6,10);
-            tmpNumber = area + "-" + state + "-" + serial;
+        mTextNumber.setText(tmpNumber);
+        //mTextNumber.setText(mFriend.getNumber());
+        if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
+            Glide.with(mImgPhoto.getContext())
+                    .load(Uri.parse(mFriend.getUriPhoto()))
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(mImgPhoto);
+        } else {
+            mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
         }
-    } else if (tmpNumber.length() == 11) {
-        area = tmpNumber.substring(0,3);
-        state = tmpNumber.substring(3,7);
-        serial = tmpNumber.substring(7,11);
-        tmpNumber = area + "-" + state + "-" + serial;
     }
-    mTextNumber.setText(tmpNumber);
-    //mTextNumber.setText(mFriend.getNumber());
-    if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
-        Glide.with(mImgPhoto.getContext())
-                .load(Uri.parse(mFriend.getUriPhoto()))
-                .apply(RequestOptions.centerCropTransform())
-                .into(mImgPhoto);
-    } else {
-        mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
-    }
-}
 
     private void initAudioManager() {
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -642,6 +652,10 @@ private void initViewByFriend() {
         }
         mKeyguardLock.reenableKeyguard();
         TodosApplication.onCalling(false);
+
+        if (dtmfGenerator != null) {
+            dtmfGenerator.release();
+        }
     }
 
     @Override
@@ -739,10 +753,63 @@ private void initViewByFriend() {
     public void onDialClicked(String dial) {
         Log.i(getClass().getSimpleName(), "Send dial: " + dial);
         try {
-            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+//            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+            checkRingerMode(dial);
+            SipInstance.getInstance().getSipCall().dialDtmf(dial);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void checkRingerMode(String dial) {
+        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        switch (mAudioManager.getRingerMode()) {
+            case AudioManager.RINGER_MODE_NORMAL: //소리모드
+                playToneGenerator(dial);
+                break;
+
+            case AudioManager.RINGER_MODE_SILENT: //무음모드
+                //nothing
+                break;
+
+            case AudioManager.RINGER_MODE_VIBRATE: //진동모드
+                //nothing
+                break;
+        }
+    }
+
+    private void playToneGenerator(String dial) {
+
+        if (dial.equals("0")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0);
+        } else if (dial.equals("1")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1);
+        } else if (dial.equals("2")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2);
+        } else if (dial.equals("3")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3);
+        } else if (dial.equals("4")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4);
+        } else if (dial.equals("5")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5);
+        } else if (dial.equals("6")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6);
+        } else if (dial.equals("7")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7);
+        } else if (dial.equals("8")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8);
+        } else if (dial.equals("9")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9);
+        } else if (dial.equals("*")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S); //TONE_DTMF_S for key *
+        } else if (dial.equals("#")) {
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P); //TONE_DTMF_P for key #
+        } else {
+//            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
+        }
+
+        dtmfGenerator.stopTone();
+
     }
 
     @Override
@@ -896,6 +963,7 @@ private void initViewByFriend() {
             e.printStackTrace();
         }
     }
+
     private void setActionbar(String title) {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거

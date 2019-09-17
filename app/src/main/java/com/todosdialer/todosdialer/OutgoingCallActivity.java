@@ -205,7 +205,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 //            mToneWorker = new ToneWorker(getApplicationContext());
 //            mToneWorker.start();
 
-            dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME);
+            dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME / 2);
 
             //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
             if (savedInstanceState != null) {
@@ -679,61 +679,64 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     public void onDialClicked(String dial) {
         Log.i(getClass().getSimpleName(), "Send dial: " + dial);
         try {
-            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
-//            generateTone(dial);
-//            playToneGenerator(dial);
-//            SipInstance.getInstance().getSipCall().dialDtmf(dial);
-//            SipServiceCommand.sendDTMF(
-//                    OutgoingCallActivity.this,
-//                    SipInstance.getInstance(getApplicationContext()).getSipCall().getInfo().getLocalUri(), //account id
-//                    SipInstance.getInstance().getSipCall().getId(),  //call id
-//                    dial);
+//            SipInstance.getInstance(getApplicationContext()).sendDial(dial);
+            checkRingerMode(dial);
+            SipInstance.getInstance().getSipCall().dialDtmf(dial);
         } catch (Exception e) {
             e.printStackTrace();
             e.printStackTrace();
         }
     }
 
-    private void playToneGenerator(String dial) {
-        int duration = 1000;
+    private void checkRingerMode(String dial) {
+        AudioManager mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        switch (mAudioManager.getRingerMode()) {
+            case AudioManager.RINGER_MODE_NORMAL: //소리모드
+                playToneGenerator(dial);
+                break;
 
+            case AudioManager.RINGER_MODE_SILENT: //무음모드
+                //nothing
+                break;
+
+            case AudioManager.RINGER_MODE_VIBRATE: //진동모드
+                //nothing
+                break;
+        }
+    }
+
+    private void playToneGenerator(String dial) {
 
         if (dial.equals("0")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0);
         } else if (dial.equals("1")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1);
         } else if (dial.equals("2")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2);
         } else if (dial.equals("3")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3);
         } else if (dial.equals("4")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4);
         } else if (dial.equals("5")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5);
         } else if (dial.equals("6")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6);
         } else if (dial.equals("7")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7);
         } else if (dial.equals("8")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8);
         } else if (dial.equals("9")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9, duration);
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9);
         } else if (dial.equals("*")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S, duration); //TONE_DTMF_S for key *
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S); //TONE_DTMF_S for key *
         } else if (dial.equals("#")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P, duration); //TONE_DTMF_P for key #
+            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P); //TONE_DTMF_P for key #
         } else {
 //            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
         }
 
-        try {
-            Thread.sleep(160);
-            dtmfGenerator.stopTone();
+        dtmfGenerator.stopTone();
 
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
     }
 
