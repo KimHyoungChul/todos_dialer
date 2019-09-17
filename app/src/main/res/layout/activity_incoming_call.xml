@@ -27,19 +27,22 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/btn_speaker"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:duplicateParentState="true"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/btn_speaker"
+                    android:id="@+id/img_speaker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
+                    android:clickable="false"
                     android:src="@drawable/ic_call_speaker" />
 
                 <TextView
@@ -52,20 +55,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_pad"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:visibility="visible"
+                android:duplicateParentState="true"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/btn_pad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
+                    android:clickable="false"
                     android:src="@drawable/ic_call_dialpad" />
 
                 <TextView
@@ -78,19 +83,22 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/btn_blue_tooth"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:duplicateParentState="true"
                 android:orientation="vertical">
 
                 <ImageButton
-                    android:id="@+id/btn_blue_tooth"
+                    android:id="@+id/img_blue_tooth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
+                    android:clickable="false"
                     android:src="@drawable/ic_bluetooth_white_24dp" />
 
                 <TextView
@@ -168,7 +176,6 @@
         android:singleLine="true"
         android:textColor="@color/text_primary"
         android:textSize="30sp"
-        android:text="김민국"
         android:textStyle="bold" />
 
     <TextView
@@ -180,7 +187,6 @@
         android:gravity="center"
         android:includeFontPadding="false"
         android:singleLine="true"
-        android:text="000-0000-0000"
         android:textColor="@color/text_primary"
         android:textSize="30sp" />
 

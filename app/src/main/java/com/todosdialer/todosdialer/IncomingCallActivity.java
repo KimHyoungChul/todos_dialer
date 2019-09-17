@@ -35,6 +35,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,9 +70,11 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
     private View mContainerBtnCalling;
     private View mContainerWaiting;
 
-    private ImageButton mBtnSpeaker;
-    private ImageButton mBtnPad;
-    private ImageButton mBtnBluetooth;
+    private LinearLayout mBtnSpeaker;
+    private LinearLayout mBtnPad;
+    private LinearLayout mBtnBluetooth;
+    private ImageButton mImgBluetooth;
+    private ImageButton mImgSpeaker;
     private ImageButton mBtnEndCall;
     private ImageView mPanelLeft;
     private ImageView mPanelRight;
@@ -174,6 +177,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
         mBtnSpeaker = findViewById(R.id.btn_speaker);
         mBtnPad = findViewById(R.id.btn_pad);
         mBtnBluetooth = findViewById(R.id.btn_blue_tooth);
+        mImgBluetooth = findViewById(R.id.img_blue_tooth);
+        mImgSpeaker = findViewById(R.id.img_speaker);
         mBtnEndCall = findViewById(R.id.btn_end_call);
 
         mPanelLeft = findViewById(R.id.panel_left);
@@ -403,7 +408,7 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                 mAudioManager.startBluetoothSco();
                 mAudioManager.setBluetoothScoOn(true);
 
-                mBtnBluetooth.setImageResource(R.drawable.ic_bluetooth_24dp);
+                mImgBluetooth.setImageResource(R.drawable.ic_bluetooth_24dp);
             }
         }
         mBtnBluetooth.setEnabled(isBluetoothAvailable());
@@ -513,12 +518,12 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                 mAudioManager.stopBluetoothSco();
                 mAudioManager.setBluetoothScoOn(false);
 
-                mBtnSpeaker.setImageResource(R.drawable.ic_call_speaker);
+                mImgSpeaker.setImageResource(R.drawable.ic_call_speaker);
             } else {
                 mAudioManager.setSpeakerphoneOn(true);
-                mBtnSpeaker.setImageResource(R.drawable.ic_volume_up_24dp);
+                mImgSpeaker.setImageResource(R.drawable.ic_volume_up_24dp);
             }
-            mBtnBluetooth.setImageResource(mAudioManager.isBluetoothScoOn() ?
+            mImgBluetooth.setImageResource(mAudioManager.isBluetoothScoOn() ?
                     R.drawable.ic_bluetooth_24dp :
                     R.drawable.ic_bluetooth_white_24dp);
         }
@@ -532,19 +537,19 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
                     mAudioManager.stopBluetoothSco();
                     mAudioManager.setBluetoothScoOn(false);
 
-                    mBtnBluetooth.setImageResource(R.drawable.ic_bluetooth_white_24dp);
+                    mImgBluetooth.setImageResource(R.drawable.ic_bluetooth_white_24dp);
                 } else {
                     mAudioManager.setSpeakerphoneOn(false);
                     mAudioManager.startBluetoothSco();
                     mAudioManager.setBluetoothScoOn(true);
 
-                    mBtnBluetooth.setImageResource(R.drawable.ic_bluetooth_24dp);
+                    mImgBluetooth.setImageResource(R.drawable.ic_bluetooth_24dp);
                 }
             } else {
                 Toast.makeText(getApplicationContext(), R.string.msg_there_is_no_paired_bluetooth, Toast.LENGTH_SHORT).show();
             }
 
-            mBtnSpeaker.setImageResource(mAudioManager.isSpeakerphoneOn() ?
+            mImgSpeaker.setImageResource(mAudioManager.isSpeakerphoneOn() ?
                     R.drawable.ic_volume_up_24dp :
                     R.drawable.ic_call_speaker);
         }
