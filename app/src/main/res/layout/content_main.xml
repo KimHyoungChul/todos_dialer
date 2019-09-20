@@ -74,9 +74,10 @@
 
             <ImageView
                 android:id="@+id/tab_under_dot_02"
-                android:layout_width="4dp"
+                android:layout_width="7dp"
                 android:layout_marginBottom="5dp"
                 android:layout_height="4dp"
+                android:paddingLeft="3dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"

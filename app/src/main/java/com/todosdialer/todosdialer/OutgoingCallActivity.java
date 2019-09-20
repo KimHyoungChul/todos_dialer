@@ -181,7 +181,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             mBtnEndCall = findViewById(R.id.btn_end_call);
 
             mIndicator.show();
-            mContainerBtnCalling.setVisibility(View.INVISIBLE);
+//            mContainerBtnCalling.setVisibility(View.INVISIBLE);
 
             mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
             if (mFriend == null) {
@@ -489,7 +489,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         }
 
         mIndicator.smoothToHide();
-        mContainerBtnCalling.setVisibility(View.VISIBLE);
+//        mContainerBtnCalling.setVisibility(View.VISIBLE);
         startTimer();
     }
 

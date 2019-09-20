@@ -60,7 +60,6 @@
             android:layout_weight="1"
             android:background="@android:color/transparent"
             android:gravity="center"
-            android:inputType="none"
             android:maxLength="20"
             android:padding="5dp"
             android:textColor="@color/text_label"

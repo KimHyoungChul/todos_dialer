@@ -7,11 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.todosdialer.todosdialer.R;
 
 public class DialFragment extends Fragment {
     private OnClickListener mDialClickListener;
+    TextView tvDTMFInput;
 
     public static DialFragment newInstance() {
 
@@ -50,6 +52,9 @@ public class DialFragment extends Fragment {
                 }
             }
         });
+
+        tvDTMFInput = rootView.findViewById(R.id.tv_dtmf_input);
+
         return rootView;
     }
 
@@ -64,6 +69,8 @@ public class DialFragment extends Fragment {
         public void onClick(View view) {
             if (mDialClickListener != null) {
                 mDialClickListener.onDialClicked(dial);
+
+                tvDTMFInput.setText(tvDTMFInput.getText() + dial);
             }
         }
     }
