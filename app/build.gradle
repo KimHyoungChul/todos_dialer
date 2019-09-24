@@ -16,8 +16,8 @@ android {
         applicationId "com.todosdialer.todosdialer"
         minSdkVersion /*17*/19
         targetSdkVersion 27
-        versionCode 16
-        versionName "2.3.01"
+        versionCode 20
+        versionName "2.3.02"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true

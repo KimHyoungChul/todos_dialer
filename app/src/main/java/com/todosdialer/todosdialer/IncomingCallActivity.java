@@ -28,6 +28,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -322,68 +323,87 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
         String serial = "";
 
         if (Pattern.matches("^[0-9]+$", mFriend.getName())) {
-            tmpName = mFriend.getName();
-            //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
-            if (tmpName.length() == 9) {
-                area = tmpName.substring(0, 2);
-                state = tmpName.substring(2, 5);
-                serial = tmpName.substring(5, 9);
-                tmpName = area + "-" + state + "-" + serial;
-            } else if (tmpName.length() == 10) {
-                if (tmpName.startsWith("02")) {
-                    area = tmpName.substring(0, 2);
-                    state = tmpName.substring(2, 6);
-                    serial = tmpName.substring(6, 10);
-                    tmpName = area + "-" + state + "-" + serial;
+//            tmpName = mFriend.getName();
+//            //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
+//            if (tmpName.length() == 9) {
+//                area = tmpName.substring(0, 2);
+//                state = tmpName.substring(2, 5);
+//                serial = tmpName.substring(5, 9);
+//                tmpName = area + "-" + state + "-" + serial;
+//            } else if (tmpName.length() == 10) {
+//                if (tmpName.startsWith("02")) {
+//                    area = tmpName.substring(0, 2);
+//                    state = tmpName.substring(2, 6);
+//                    serial = tmpName.substring(6, 10);
+//                    tmpName = area + "-" + state + "-" + serial;
+//                } else {
+//                    area = tmpName.substring(0, 3);
+//                    state = tmpName.substring(3, 6);
+//                    serial = tmpName.substring(6, 10);
+//                    tmpName = area + "-" + state + "-" + serial;
+//                }
+//            } else if (tmpName.length() == 11) {
+//                area = tmpName.substring(0, 3);
+//                state = tmpName.substring(3, 7);
+//                serial = tmpName.substring(7, 11);
+//                tmpName = area + "-" + state + "-" + serial;
+//            }
+//            mTextName.setText(tmpName);
+            try {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                    mTextName.setText(PhoneNumberUtils.formatNumber(tmpName));
                 } else {
-                    area = tmpName.substring(0, 3);
-                    state = tmpName.substring(3, 6);
-                    serial = tmpName.substring(6, 10);
-                    tmpName = area + "-" + state + "-" + serial;
+                    mTextName.setText(PhoneNumberUtils.formatNumber(tmpName, Locale.getDefault().getCountry()));
                 }
-            } else if (tmpName.length() == 11) {
-                area = tmpName.substring(0, 3);
-                state = tmpName.substring(3, 7);
-                serial = tmpName.substring(7, 11);
-                tmpName = area + "-" + state + "-" + serial;
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            mTextName.setText(tmpName);
         } else {
             mTextName.setText(mFriend.getName());
         }
 
-        if (tmpNumber.length() == 8) {
-            if (tmpNumber.startsWith("1")) {
-                state = tmpNumber.substring(0, 4);
-                serial = tmpNumber.substring(4, 8);
-                tmpNumber = state + "-" + serial;
-            }
-        } else if (tmpNumber.length() == 9) {
-            if (tmpNumber.startsWith("02")) {
-                area = tmpNumber.substring(0, 2);
-                state = tmpNumber.substring(2, 5);
-                serial = tmpNumber.substring(5, 9);
-                tmpNumber = area + "-" + state + "-" + serial;
-            }
-        } else if (tmpNumber.length() == 10) {
-            if (tmpNumber.startsWith("02")) {
-                area = tmpNumber.substring(0, 2);
-                state = tmpNumber.substring(2, 6);
-                serial = tmpNumber.substring(6, 10);
-                tmpNumber = area + "-" + state + "-" + serial;
+//        if (tmpNumber.length() == 8) {
+//            if (tmpNumber.startsWith("1")) {
+//                state = tmpNumber.substring(0, 4);
+//                serial = tmpNumber.substring(4, 8);
+//                tmpNumber = state + "-" + serial;
+//            }
+//        } else if (tmpNumber.length() == 9) {
+//            if (tmpNumber.startsWith("02")) {
+//                area = tmpNumber.substring(0, 2);
+//                state = tmpNumber.substring(2, 5);
+//                serial = tmpNumber.substring(5, 9);
+//                tmpNumber = area + "-" + state + "-" + serial;
+//            }
+//        } else if (tmpNumber.length() == 10) {
+//            if (tmpNumber.startsWith("02")) {
+//                area = tmpNumber.substring(0, 2);
+//                state = tmpNumber.substring(2, 6);
+//                serial = tmpNumber.substring(6, 10);
+//                tmpNumber = area + "-" + state + "-" + serial;
+//            } else {
+//                area = tmpNumber.substring(0, 3);
+//                state = tmpNumber.substring(3, 6);
+//                serial = tmpNumber.substring(6, 10);
+//                tmpNumber = area + "-" + state + "-" + serial;
+//            }
+//        } else if (tmpNumber.length() == 11) {
+//            area = tmpNumber.substring(0, 3);
+//            state = tmpNumber.substring(3, 7);
+//            serial = tmpNumber.substring(7, 11);
+//            tmpNumber = area + "-" + state + "-" + serial;
+//        }
+//        mTextNumber.setText(tmpNumber);
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                mTextNumber.setText(PhoneNumberUtils.formatNumber(tmpNumber));
             } else {
-                area = tmpNumber.substring(0, 3);
-                state = tmpNumber.substring(3, 6);
-                serial = tmpNumber.substring(6, 10);
-                tmpNumber = area + "-" + state + "-" + serial;
+                mTextNumber.setText(PhoneNumberUtils.formatNumber(tmpNumber, Locale.getDefault().getCountry()));
             }
-        } else if (tmpNumber.length() == 11) {
-            area = tmpNumber.substring(0, 3);
-            state = tmpNumber.substring(3, 7);
-            serial = tmpNumber.substring(7, 11);
-            tmpNumber = area + "-" + state + "-" + serial;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        mTextNumber.setText(tmpNumber);
+
         //mTextNumber.setText(mFriend.getNumber());
         if (!TextUtils.isEmpty(mFriend.getUriPhoto())) {
             Glide.with(mImgPhoto.getContext())

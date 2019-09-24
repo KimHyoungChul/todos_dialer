@@ -101,4 +101,6 @@
     <color name="color_dial_pad_alphabet">#929292</color>
 
     <color name="color_text_hint">#80000000</color>
+
+    <color name="color_dtmf_bg">#E9E9E9</color>
 </resources>

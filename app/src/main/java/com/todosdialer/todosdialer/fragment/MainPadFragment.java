@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.ContactsContract;
@@ -12,6 +13,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatEditText;
+import android.telephony.PhoneNumberUtils;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -56,6 +58,7 @@ import org.eclipse.paho.client.mqttv3.util.Strings;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import io.realm.Realm;
 
@@ -83,6 +86,7 @@ public class MainPadFragment extends Fragment {
 //    private ImageView mImgSearch;
     private ImageView mImgBackspace;
     private AppCompatEditText mEditNumber;
+    private TextView mTVNumber;
     private ContactView mContactView;
     private ImageButton mImgBtnMore;
 
@@ -135,6 +139,7 @@ public class MainPadFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main_pad, container, false);
         mEditNumber = rootView.findViewById(R.id.edit_phone_number);
         mEditNumber.setInputType(InputType.TYPE_NULL);
+        mTVNumber = rootView.findViewById(R.id.tv_phone_number);
 
         mImgAdd = rootView.findViewById(R.id.btn_add_contact);
 //        mImgSearch = rootView.findViewById(R.id.btn_search);
@@ -257,81 +262,90 @@ public class MainPadFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().matches("^[0-9\\-]*$")) {
-                    if (s.toString().startsWith("01")) { /*핸드폰 번호 '-' 표기*/
-                        if (s.length() > 3) {
-                            if (Character.isDigit(s.charAt(3))) {
-                                s.insert(3, "-");
-                            }
-                        }
-                        if (s.length() > 8) {
-                            if (Character.isDigit(s.charAt(8))) {
-                                s.insert(8, "-");
-                            }
-                        }
-
-                    } else if (s.toString().startsWith("02")) { /*일반전화 지역번호 서울일 경우 */
-
-                        if (s.length() > 2) {
-                            if (Character.isDigit(s.charAt(2))) {
-                                s.insert(2, "-");
-                            }
-                        }
-                        if (s.length() > 6 && s.length() < 12) {
-                            /* 지울때 -의 위치 변경함 국번 4-> 3*/
-                            if (s.length() == 11 && !Character.isDigit(s.charAt(7))) {
-                                s.delete(7, 8);
-                            }
-                            if (Character.isDigit(s.charAt(6))) {
-                                s.insert(6, "-");
-                            }
-                        }
-                        /*입력할때 - 위치 변경 국번 3 -> 4*/
-                        if (s.length() == 12) {
-                            if (!Character.isDigit(s.charAt(6))) {
-                                String tmp1 = s.toString().substring(0, 6);
-                                String tmp2 = s.toString().substring(7, 8);
-                                String tmp3 = s.toString().substring(8, s.length());
-
-                                mEditNumber.setText(tmp1 + tmp2 + "-" + tmp3);
-                            }
-
-                        }
-                        if (s.length() > 12) {
-                            if (Character.isDigit(s.charAt(7))) {
-                                s.insert(7, "-");
-                            }
-                        }
-                    } else { /*일반전화번호 - 서울 제외한 타지역*/
-                        if (s.length() > 3) {
-                            if (Character.isDigit(s.charAt(3))) {
-                                s.insert(3, "-");
-                            }
-                        }
-                        if (s.length() > 7 && s.length() < 13) {
-                            if (s.length() == 12 && !Character.isDigit(s.charAt(8))) {
-                                s.delete(8, 9);
-                            }
-                            if (Character.isDigit(s.charAt(7))) {
-                                s.insert(7, "-");
-                            }
-
-                        }
-                        if (s.length() == 13) {
-                            if (!Character.isDigit(s.charAt(7))) {
-                                String tmp1 = s.toString().substring(0, 7);
-                                String tmp2 = s.toString().substring(8, 9);
-                                String tmp3 = s.toString().substring(9, s.length());
-
-                                mEditNumber.setText(tmp1 + tmp2 + "-" + tmp3);
-                            }
-                        }
-                        if (s.length() > 13) {
-                            if (Character.isDigit(s.charAt(8))) {
-                                s.insert(8, "-");
-                            }
-                        }
+//                if (s.toString().matches("^[0-9\\-]*$")) {
+//                    if (s.toString().startsWith("01")) { /*핸드폰 번호 '-' 표기*/
+//                        if (s.length() > 3) {
+//                            if (Character.isDigit(s.charAt(3))) {
+//                                s.insert(3, "-");
+//                            }
+//                        }
+//                        if (s.length() > 8) {
+//                            if (Character.isDigit(s.charAt(8))) {
+//                                s.insert(8, "-");
+//                            }
+//                        }
+//
+//                    } else if (s.toString().startsWith("02")) { /*일반전화 지역번호 서울일 경우 */
+//
+//                        if (s.length() > 2) {
+//                            if (Character.isDigit(s.charAt(2))) {
+//                                s.insert(2, "-");
+//                            }
+//                        }
+//                        if (s.length() > 6 && s.length() < 12) {
+//                            /* 지울때 -의 위치 변경함 국번 4-> 3*/
+//                            if (s.length() == 11 && !Character.isDigit(s.charAt(7))) {
+//                                s.delete(7, 8);
+//                            }
+//                            if (Character.isDigit(s.charAt(6))) {
+//                                s.insert(6, "-");
+//                            }
+//                        }
+//                        /*입력할때 - 위치 변경 국번 3 -> 4*/
+//                        if (s.length() == 12) {
+//                            if (!Character.isDigit(s.charAt(6))) {
+//                                String tmp1 = s.toString().substring(0, 6);
+//                                String tmp2 = s.toString().substring(7, 8);
+//                                String tmp3 = s.toString().substring(8, s.length());
+//
+//                                mEditNumber.setText(tmp1 + tmp2 + "-" + tmp3);
+//                            }
+//
+//                        }
+//                        if (s.length() > 12) {
+//                            if (Character.isDigit(s.charAt(7))) {
+//                                s.insert(7, "-");
+//                            }
+//                        }
+//                    } else { /*일반전화번호 - 서울 제외한 타지역*/
+//                        if (s.length() > 3) {
+//                            if (Character.isDigit(s.charAt(3))) {
+//                                s.insert(3, "-");
+//                            }
+//                        }
+//                        if (s.length() > 7 && s.length() < 13) {
+//                            if (s.length() == 12 && !Character.isDigit(s.charAt(8))) {
+//                                s.delete(8, 9);
+//                            }
+//                            if (Character.isDigit(s.charAt(7))) {
+//                                s.insert(7, "-");
+//                            }
+//
+//                        }
+//                        if (s.length() == 13) {
+//                            if (!Character.isDigit(s.charAt(7))) {
+//                                String tmp1 = s.toString().substring(0, 7);
+//                                String tmp2 = s.toString().substring(8, 9);
+//                                String tmp3 = s.toString().substring(9, s.length());
+//
+//                                mEditNumber.setText(tmp1 + tmp2 + "-" + tmp3);
+//                            }
+//                        }
+//                        if (s.length() > 13) {
+//                            if (Character.isDigit(s.charAt(8))) {
+//                                s.insert(8, "-");
+//                            }
+//                        }
+//                    }
+//                }
+                try {
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        mTVNumber.setText(PhoneNumberUtils.formatNumber(s.toString()));
+                    } else {
+                        mTVNumber.setText(PhoneNumberUtils.formatNumber(s.toString(), Locale.getDefault().getCountry()));
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
