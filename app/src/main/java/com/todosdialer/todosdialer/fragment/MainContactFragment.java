@@ -122,10 +122,6 @@ public class MainContactFragment extends Fragment {
                 call(number);
             }
 
-            @Override
-            public void onDeleteClicked(long id) {
-                delete(id);
-            }
         });
         recyclerView.setAdapter(mAdapter);
 

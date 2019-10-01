@@ -323,7 +323,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
         String serial = "";
 
         if (Pattern.matches("^[0-9]+$", mFriend.getName())) {
-//            tmpName = mFriend.getName();
+            tmpName = mFriend.getName();
+
 //            //Log.d("TAG", "==================================>initViewByFriend: " + tmpName.length());
 //            if (tmpName.length() == 9) {
 //                area = tmpName.substring(0, 2);
@@ -394,6 +395,8 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
 //            tmpNumber = area + "-" + state + "-" + serial;
 //        }
 //        mTextNumber.setText(tmpNumber);
+        tmpNumber = mFriend.getNumber();
+
         try {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                 mTextNumber.setText(PhoneNumberUtils.formatNumber(tmpNumber));

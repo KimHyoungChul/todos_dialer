@@ -4,36 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.todosdialer.todosdialer.SearchFriendActivity$SignInActivity">
-
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        android:visibility="gone">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/term_login"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp" />
-        </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
+    android:background="@color/color_white"
+    tools:context="com.todospd.todospd.SearchFriendActivity$SignInActivity">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_login_gradation"
         android:scrollbarStyle="outsideOverlay"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
@@ -41,57 +17,81 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="50dp"
             android:layout_marginRight="40dp"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/logo_welcome" />
-
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginRight="15dp"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
                 <TextView
-                    style="@style/SignInLabelStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:minWidth="70dp"
-                    android:text="@string/label_email" />
+                    android:layout_height="40dp"
+                    android:text="W"
+                    android:textColor="@color/colorAccentWelcome"
+                    android:textSize="32dp"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold" />
 
-                <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/edit_email"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/color_white"
-                    android:hint="@string/hint_email"
-                    android:inputType="textEmailAddress"
-                    android:maxLength="40"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_primary"
-                    android:textSize="15sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:text="elcome"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="32dp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="20dp"
                 android:focusable="true"
+                android:gravity="center_vertical"
+                android:focusableInTouchMode="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/SignInLabelStyle"
+                    android:layout_width="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15dp"
+                    android:minWidth="60dp"
+                    android:includeFontPadding="false"
+                    android:layout_marginRight="15dp"
+                    android:textStyle="bold"
+                    android:text="@string/label_email" />
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/edit_email"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:includeFontPadding="false"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:hint="@string/hint_email"
+                    android:inputType="textEmailAddress"
+                    android:maxLength="40"
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
                 android:focusableInTouchMode="true"
                 android:orientation="horizontal">
 
@@ -99,8 +99,13 @@
                     style="@style/SignInLabelStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:minWidth="70dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold"
+                    android:textSize="15dp"
+                    android:minWidth="60dp"
+                    android:includeFontPadding="false"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical"
                     android:text="@string/label_password" />
 
                 <android.support.v7.widget.AppCompatEditText
@@ -108,50 +113,58 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/color_white"
+                    android:includeFontPadding="false"
+                    android:backgroundTint="@color/colorPrimary"
                     android:hint="@string/hint_password_in_sign_in"
                     android:inputType="textPassword"
                     android:maxLength="20"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="8dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="8dp"
-                    android:textColor="@color/text_primary"
-                    android:textColorHint="@color/text_primary"
-                    android:textSize="15sp" />
+                    android:textColor="@color/colorPrimary"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="12sp" />
             </LinearLayout>
+
+
+
+
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_sign_in"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:background="@drawable/btn_white"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/bg_radius_blue_selector"
                 android:stateListAnimator="@null"
                 android:text="@string/term_login"
-                android:textColor="@color/text_sign_label"
-                android:textSize="18sp"
+                android:includeFontPadding="false"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="45dp"
+                android:textColor="@color/text_color_main_selctor"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/btn_sign_up"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/btn_radius_blue"
+                android:layout_height="40dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:includeFontPadding="false"
+                android:background="@drawable/bg_radius_blue_line_selector"
                 android:stateListAnimator="@null"
                 android:text="@string/term_sign_up"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/text_color_sub_selctor"
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
                 android:gravity="center"
+                android:layout_marginTop="40dp"
                 android:orientation="horizontal">
-
                 <TextView
                     android:id="@+id/btn_service_info"
                     android:layout_width="wrap_content"
@@ -159,9 +172,10 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:padding="5dp"
                     android:text="@string/term_infomation"
-                    android:textColor="@color/text_primary"
+                    android:layout_marginRight="24dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
 
                 <TextView
@@ -171,19 +185,23 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center"
                     android:includeFontPadding="false"
-                    android:padding="5dp"
                     android:text="@string/term_finding_pw"
-                    android:textColor="@color/text_primary"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="15sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:includeFontPadding="false"
                 android:layout_gravity="center_horizontal"
+                android:textSize="12dp"
                 android:text="@string/msg_sign_in"
-                android:textColor="@color/text_primary" />
+                android:textColor="@color/colorPrimaryLight" />
         </LinearLayout>
     </ScrollView>
+
 
 </android.support.design.widget.CoordinatorLayout>

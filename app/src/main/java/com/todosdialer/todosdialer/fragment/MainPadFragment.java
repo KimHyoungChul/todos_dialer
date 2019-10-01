@@ -7,7 +7,6 @@ import android.media.ToneGenerator;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -62,6 +61,7 @@ import java.util.Locale;
 
 import io.realm.Realm;
 
+import static android.media.AudioManager.STREAM_DTMF;
 import static android.media.AudioManager.STREAM_VOICE_CALL;
 
 public class MainPadFragment extends Fragment {
@@ -82,7 +82,6 @@ public class MainPadFragment extends Fragment {
     private static final String DIAL_SHOP = "#";
 
     private ImageView mImgAdd;
-    //    private ImageView mImgSms;
 //    private ImageView mImgSearch;
     private ImageView mImgBackspace;
     private AppCompatEditText mEditNumber;
@@ -125,7 +124,8 @@ public class MainPadFragment extends Fragment {
         mUser = RealmManager.newInstance().loadUser(realm);
         realm.close();
 //        mToneWorker = new ToneWorker(getActivity());
-        dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME / 2);
+        dtmfGenerator = new ToneGenerator(STREAM_DTMF, ToneGenerator.MAX_VOLUME / 2);
+
     }
 
     @Override
@@ -147,10 +147,6 @@ public class MainPadFragment extends Fragment {
         mContactView = rootView.findViewById(R.id.contact_search);
         mImgBtnMore = rootView.findViewById(R.id.btn_see_more);
         mContactView.setButtonVisible(false);
-//        mImgSms = rootView.findViewById(R.id.btn_sms);
-
-//        mImgBackspace.setEnabled(false);
-//        mImgSms.setEnabled(false);
 
         makeInitSoundsMap();
 
@@ -248,20 +244,52 @@ public class MainPadFragment extends Fragment {
 
 
     private void initBtnListener() {
-        mEditNumber.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                /*Log.d("TAB","마지막 문자 : " + mEditNumber.getText().toString().charAt(mEditNumber.getText().length() - 1));*/
-                s = s.toString().replace("-", "");
-            }
+        mEditNumber.addTextChangedListener(textWatcher);
 
+        mImgAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setUiByText(mEditNumber.getText().toString());
+            public void onClick(View v) {
+                addToContact(mEditNumber.getText().toString());
             }
+        });
 
+        mImgBackspace.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void afterTextChanged(Editable s) {
+            public void onClick(View v) {
+                removeText();
+            }
+        });
+
+        mImgBackspace.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                mEditNumber.setText("");
+                return false;
+            }
+        });
+
+        mImgBtnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSearchFriendsActivity();
+            }
+        });
+    }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            /*Log.d("TAB","마지막 문자 : " + mEditNumber.getText().toString().charAt(mEditNumber.getText().length() - 1));*/
+            s = s.toString().replace("-", "");
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            setUiByText(mEditNumber.getText().toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
 //                if (s.toString().matches("^[0-9\\-]*$")) {
 //                    if (s.toString().startsWith("01")) { /*핸드폰 번호 '-' 표기*/
 //                        if (s.length() > 3) {
@@ -338,6 +366,7 @@ public class MainPadFragment extends Fragment {
 //                        }
 //                    }
 //                }
+
                 try {
                     if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
                         mTVNumber.setText(PhoneNumberUtils.formatNumber(s.toString()));
@@ -347,68 +376,35 @@ public class MainPadFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-            }
-        });
+        }
+    };
 
-        mImgAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addToContact(mEditNumber.getText().toString());
-            }
-        });
-
-        mImgBackspace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                removeText();
-            }
-        });
-
-        mImgBackspace.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                mEditNumber.setText("");
-                return true;
-            }
-        });
-
-//        mImgSms.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String number = mEditNumber.getText().toString();
-//                sendMessage(number);
-//            }
-//        });
-
-        mImgBtnMore.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showSearchFriendsActivity();
-            }
-        });
-    }
+        
 
     private void removeText() {
-        String number = mEditNumber.getText().toString();
-        int cursorPos = mEditNumber.getSelectionEnd();
-        int selection = number.length();
-        Log.e("removeText", "cursorPos : " + cursorPos);
-        Log.e("removeText", "selection : " + selection);
-        Log.e("removeText", "number : " + number);
-        if (number.length() > 0) {
-            if (cursorPos + 2 >= number.length()) {
-                number = number.substring(0, number.length() - 1);
-                selection = number.length();
-            } else if (cursorPos > 0) {
-                String subString = number.substring(cursorPos);
-                number = number.substring(0, cursorPos - 1) + subString;
-                selection = cursorPos - 1;
-            } else {
-                selection = cursorPos;
-            }
-        }
-        mEditNumber.setText(number);
-        mEditNumber.setSelection(selection);
+//        String number = mEditNumber.getText().toString();
+//        int cursorPos = mEditNumber.getSelectionEnd();
+//        int selection = number.length();
+//        Log.e("removeText", "cursorPos : " + cursorPos);
+//        Log.e("removeText", "selection : " + selection);
+//        Log.e("removeText", "number : " + number);
+//        if (number.length() > 0) {
+//            if (cursorPos + 2 >= number.length()) {
+//                number = number.substring(0, number.length() - 1);
+//                selection = number.length();
+//            } else if (cursorPos > 0) {
+//                String subString = number.substring(cursorPos);
+//                number = number.substring(0, cursorPos - 1) + subString;
+//                selection = cursorPos - 1;
+//            } else {
+//                selection = cursorPos;
+//            }
+//        }
+//        mEditNumber.setText(number);
+//        mEditNumber.setSelection(selection);
+        String phoneNumber = mEditNumber.getText().toString();
+        mEditNumber.setText(phoneNumber.substring(0, phoneNumber.length() - 1));
+        mEditNumber.setSelection(mEditNumber.getText().length());//position cursor at the end of the line
     }
 
     private void addToContact(String number) {
@@ -425,12 +421,11 @@ public class MainPadFragment extends Fragment {
             mImgBackspace.setVisibility(View.INVISIBLE);
             mImgAdd.setVisibility(View.INVISIBLE);
 //            mImgSearch.setVisibility(View.VISIBLE);
-//            mImgSms.setEnabled(false);
+
         } else {
             mImgBackspace.setVisibility(View.VISIBLE);
             mImgAdd.setVisibility(View.VISIBLE);
 //            mImgSearch.setVisibility(View.INVISIBLE);
-//            mImgSms.setEnabled(true);
         }
 
         if (mFriends != null) {
@@ -448,8 +443,8 @@ public class MainPadFragment extends Fragment {
                     }
                 }
                 /*전화번호 검색 후 번호 가져오기 - 전화번호 검색은 번호4자리 입력시부터 검색한다.*/
-                if (numberText.length() > 3) {
-                    if (numberText.matches("^[0-9\\-]*$")) {
+                if(numberText.length() > 3){
+                    if(numberText.matches("^[0-9\\-]*$")) {
                         for (int i = 0; i < mFriends.size(); i++) {
                             Friend checking = mFriends.get(i);
                             if (checking.getNumber().replace("-", "").contains(numberText.replace("-", ""))) {
@@ -478,8 +473,8 @@ public class MainPadFragment extends Fragment {
     private String convertNumberToInitSounds(String numberText) {
         StringBuilder initSounds = new StringBuilder();
         if (!TextUtils.isEmpty(numberText)) {
-            for (int i = 0; i < numberText.length(); i++) {
-                if (numberText.equals("-")) {
+            for (int i = 0; i  < numberText.length(); i++) {
+                if(numberText.equals("-")){
                     continue;
                 }
                 initSounds.append(mInitSoundsMap.get(numberText.substring(i, i + 1)));
@@ -494,7 +489,7 @@ public class MainPadFragment extends Fragment {
             /*내가 건 전화번호에 대한 정보를 표기한다*/
             for (int i = 0; i < mFriends.size(); i++) {
                 Friend checking = mFriends.get(i);
-                if (checking.getNumber().replace("-", "").contains(phoneNumber.replace("-", ""))) {
+                if (checking.getNumber().replace("-","").contains(phoneNumber.replace("-",""))) {
                     mContactView.setFriend(checking);
                     mContactView.setVisibility(View.VISIBLE);
                     mImgBtnMore.setVisibility(View.VISIBLE);
@@ -508,25 +503,25 @@ public class MainPadFragment extends Fragment {
 
     private void checkSession(final String phoneNumber) {
         RetrofitManager.retrofit(getActivity()).create(Client.Api.class)
-                .checkSessionInfo(new CheckSessionBody(getContext(), mUser.getId()))
-                .enqueue(new ApiCallback<SipSessionInfoResponse>() {
+            .checkSessionInfo(new CheckSessionBody(getContext(), mUser.getId()))
+            .enqueue(new ApiCallback<SipSessionInfoResponse>() {
 
-                    @Override
-                    public void onSuccess(SipSessionInfoResponse response) {
-                        if (response.isSuccess()) {
-                            showOutgoingCallActivity(response.result, phoneNumber);
-                        } else {
-                            mIsProcessing = false;
-                            showInvalidSessionDialog();
-                        }
-                    }
+            @Override
+            public void onSuccess(SipSessionInfoResponse response) {
+                if (response.isSuccess()) {
+                    showOutgoingCallActivity(response.result, phoneNumber);
+                } else {
+                    mIsProcessing = false;
+                    showInvalidSessionDialog();
+                }
+            }
 
-                    @Override
-                    public void onFail(int error, String msg) {
-                        mIsProcessing = false;
-                        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
+            @Override
+            public void onFail(int error, String msg) {
+                mIsProcessing = false;
+                Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void showOutgoingCallActivity(SipSessionInfo result, String phoneNumber) {
@@ -552,24 +547,24 @@ public class MainPadFragment extends Fragment {
     }
 
     private void showSearchFriendsActivity() {
-        String editText = mEditNumber.getText().toString().replace("-", "");
+        String editText = mEditNumber.getText().toString().replace("-","");
         //editText.replace("-","");
         String initSounds = convertNumberToInitSounds(editText);
         //initSounds.replace(null,"");
 
         ArrayList<String> keywords = new ArrayList<>();
-        if (editText.length() < 4) {
+        if(editText.length() < 4){
             keywords.add(initSounds);
-        } else {
+        }else {
             keywords.add(editText);
             keywords.add(initSounds);
         }
-        Log.d("TAG", "editText : " + editText);
-        Log.d("TAG", "initSound : " + initSounds);
+        Log.d("TAG","editText : " + editText);
+        Log.d("TAG","initSound : " + initSounds);
         Intent intent = new Intent(getActivity(), SearchFriendActivity.class);
-        Log.d("TAG", "KEYWORDS : " + SearchFriendActivity.EXTRA_KEY_KEYWORDS + ":" + keywords);
+        Log.d("TAG","KEYWORDS : " + SearchFriendActivity.EXTRA_KEY_KEYWORDS + ":" + keywords);
         intent.putExtra(SearchFriendActivity.EXTRA_KEY_KEYWORDS, keywords);
-        Log.d("TAG", "SEARCH_FRIENDS : " + REQUEST_SEARCH_FRIENDS);
+        Log.d("TAG","SEARCH_FRIENDS : " + REQUEST_SEARCH_FRIENDS);
         startActivityForResult(intent, REQUEST_SEARCH_FRIENDS);
     }
 
@@ -594,16 +589,16 @@ public class MainPadFragment extends Fragment {
 //        }
 //    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+        @Override
+        public void onDestroyView() {
+            super.onDestroyView();
 //        if (mToneWorker != null) {
 //            mToneWorker.release();
 //        }
-        if (dtmfGenerator != null) {
-            dtmfGenerator.release();
+            if (dtmfGenerator != null) {
+                dtmfGenerator.release();
+            }
         }
-    }
 
     /* 다이얼 버튼을 누른 경우 */
     /* 커서 위치도 확인한다*/
@@ -623,20 +618,20 @@ public class MainPadFragment extends Fragment {
                 int cursorPos = mEditNumber.getSelectionStart();
                 int selection = number.length();
                 if (original.length() > 0) {
-                    if (cursorPos + 2 >= original.length()) {
+                    if (cursorPos+2 >= original.length()) {
                         selection = number.length();
                     } else if (cursorPos > 0) {
-                        if (cursorPos < 4) {
+                        if(cursorPos < 4) {
                             String subString = original.substring(cursorPos);
                             number = original.substring(0, cursorPos) + dial;
                             selection = cursorPos + 1;
-                        } else if (cursorPos > 3 && cursorPos < 8) {
-                            String subString = original.substring(cursorPos + 1);
-                            number = original.substring(0, cursorPos + 1) + dial;
+                        }else if( cursorPos > 3 && cursorPos < 8){
+                            String subString = original.substring(cursorPos+1);
+                            number = original.substring(0, cursorPos+1) + dial;
                             selection = cursorPos + 2;
-                        } else if (cursorPos > 7) {
+                        }else if( cursorPos > 7){
                             String subString = original.substring(cursorPos);
-                            number = original.substring(0, cursorPos + 2) + dial;
+                            number = original.substring(0, cursorPos+2) + dial;
                             selection = cursorPos + 3;
                         }
                     } else {
@@ -645,78 +640,64 @@ public class MainPadFragment extends Fragment {
                     }
                 }
 
-                mEditNumber.setText(number);
-                mEditNumber.setSelection(selection);
+                    mEditNumber.setText(number);
+                    mEditNumber.setSelection(selection);
+                }
+                checkRingerMode(dial);
             }
-            checkRingerMode(dial);
         }
-    }
 
-    private void sendMessage(String number) {
-        Realm mRealm = Realm.getDefaultInstance();
-        if (RealmManager.newInstance().hasChatRoom(mRealm, number)) {
-            Intent intent = new Intent(getActivity(), ChatActivity.class);
-            intent.putExtra(ChatActivity.EXTRA_KEY_NUMBER, number);
-            startActivity(intent);
-        } else {
-            Intent intent = new Intent(getActivity(), NewChatActivity.class);
-            intent.putExtra(NewChatActivity.EXTRA_KEY_NUMBER, number);
-            startActivity(intent);
+        private void checkRingerMode(String dial) {
+            AudioManager mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
+            switch (mAudioManager.getRingerMode()) {
+                case AudioManager.RINGER_MODE_NORMAL: //소리모드
+                    playToneGenerator(dial);
+                    break;
+
+                case AudioManager.RINGER_MODE_SILENT: //무음모드
+                    //nothing
+                    break;
+
+                case AudioManager.RINGER_MODE_VIBRATE: //진동모드
+                    //nothing
+                    break;
+            }
         }
-        mRealm.close();
-    }
 
-    private void checkRingerMode(String dial) {
-        AudioManager mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
-        switch (mAudioManager.getRingerMode()) {
-            case AudioManager.RINGER_MODE_NORMAL: //소리모드
-                playToneGenerator(dial);
-                break;
+        private void playToneGenerator(String dial) {
 
-            case AudioManager.RINGER_MODE_SILENT: //무음모드
-                //nothing
-                break;
-
-            case AudioManager.RINGER_MODE_VIBRATE: //진동모드
-                //nothing
-                break;
-        }
-    }
-
-    private void playToneGenerator(String dial) {
-
-        if (dial.equals("0")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0);
-        } else if (dial.equals("1")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1);
-        } else if (dial.equals("2")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2);
-        } else if (dial.equals("3")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3);
-        } else if (dial.equals("4")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4);
-        } else if (dial.equals("5")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5);
-        } else if (dial.equals("6")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6);
-        } else if (dial.equals("7")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7);
-        } else if (dial.equals("8")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8);
-        } else if (dial.equals("9")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9);
-        } else if (dial.equals("*")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S); //TONE_DTMF_S for key *
-        } else if (dial.equals("#")) {
-            dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P); //TONE_DTMF_P for key #
-        } else {
+            if (dial.equals("0")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_0);
+            } else if (dial.equals("1")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_1);
+            } else if (dial.equals("2")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_2);
+            } else if (dial.equals("3")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_3);
+            } else if (dial.equals("4")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_4);
+            } else if (dial.equals("5")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_5);
+            } else if (dial.equals("6")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_6);
+            } else if (dial.equals("7")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_7);
+            } else if (dial.equals("8")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_8);
+            } else if (dial.equals("9")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_9);
+            } else if (dial.equals("*")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_S); //TONE_DTMF_S for key *
+            } else if (dial.equals("#")) {
+                dtmfGenerator.startTone(ToneGenerator.TONE_DTMF_P); //TONE_DTMF_P for key #
+            } else {
 //            dtmfGenerator.startTone(ToneGenerator.TONE_UNKNOWN, duration);
-        }
+            }
 
-        dtmfGenerator.stopTone();
+            dtmfGenerator.stopTone();
+
+
+        }
 
 
     }
-
-
-}

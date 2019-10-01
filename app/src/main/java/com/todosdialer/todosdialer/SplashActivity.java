@@ -51,31 +51,26 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
+        setContentView(R.layout.activity_splash);
 
-            setContentView(R.layout.activity_splash);
+        mRealm = Realm.getDefaultInstance();
 
-            mRealm = Realm.getDefaultInstance();
+        Utils.loadNativeLibraries(getApplicationContext());
 
-            Utils.loadNativeLibraries(getApplicationContext());
-
-            if (hasPermissions(Utils.checkPermissions(getApplicationContext()))) {
-                if (RealmManager.newInstance().loadFriendsSize(mRealm) == 0) {
-                    new DumpContactTask().execute();
-                } else {
-                    goNext();
-                }
-
+        if (hasPermissions(Utils.checkPermissions(getApplicationContext()))) {
+            if (RealmManager.newInstance().loadFriendsSize(mRealm) == 0) {
+                new DumpContactTask().execute();
+            } else {
+                goNext();
             }
 
-            //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
-            if (savedInstanceState != null) {
+        }
+
+        //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
+        if (savedInstanceState != null) {
                 Log.d("SplashActivity", "savedInstanceState is not null");
-                finish();
-                return;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            finish();
+            return;
         }
     }
 

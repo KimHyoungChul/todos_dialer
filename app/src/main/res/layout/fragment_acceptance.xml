@@ -3,50 +3,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:orientation="vertical"
-    android:padding="30dp">
+    android:paddingTop="40dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_phone"
+        android:includeFontPadding="false"
         android:textColor="@color/color_acceptance_title_text"
         android:textStyle="bold"
-        android:textSize="20dp" />
+        android:textSize="16dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center_vertical"
+        android:layout_marginTop="10dp"
+        android:gravity="bottom"
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/edit_phone"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="25dp"
             android:layout_weight="3"
             android:background="@android:color/transparent"
             android:inputType="numberDecimal"
             android:maxLength="20"
-            android:paddingBottom="8dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="8dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/color_acceptance_title_text"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
             android:textSize="13sp" />
 
 
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_check_phone"
-            android:layout_width="0dp"
-            android:layout_height="36dp"
-            android:layout_weight="1"
+            android:layout_width="65dp"
+            android:layout_height="25dp"
             android:includeFontPadding="false"
             android:background="@drawable/btn_acceptance_duplicate_selector"
             android:text="@string/term_check_email"
             android:textColor="@color/acceptance_text_color_selector"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
 
 
@@ -110,12 +113,12 @@
         android:id="@+id/check_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:includeFontPadding="false"
         android:backgroundTint="@color/color_acceptance_sub_text"
         android:textColor="@color/color_acceptance_sub_text"
         android:text="@string/term_all_accept"
-        android:textSize="13sp" />
+        android:textSize="11sp" />
 
 
 
@@ -132,7 +135,7 @@
             android:backgroundTint="@color/color_acceptance_sub_text"
             android:textColor="@color/color_acceptance_sub_text"
             android:text="@string/term_accept_service"
-            android:textSize="13sp" />
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/btn_show_service"
@@ -143,7 +146,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@string/term_show_all_with"
-            android:textSize="13sp" />
+            android:textSize="11sp" />
     </RelativeLayout>
 
 
@@ -160,7 +163,7 @@
             android:backgroundTint="@color/color_acceptance_sub_text"
             android:textColor="@color/color_acceptance_sub_text"
             android:text="@string/term_accept_private"
-            android:textSize="13sp" />
+            android:textSize="11sp" />
 
         <TextView
             android:id="@+id/btn_show_private"
@@ -171,19 +174,19 @@
             android:layout_centerVertical="true"
             android:text="@string/term_show_all_with"
             android:textColor="@color/color_acceptance_sub_text"
-
-            android:textSize="13sp" />
+            android:textSize="11sp" />
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_next"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_height="35dp"
+        android:includeFontPadding="false"
+        android:layout_marginTop="50dp"
         android:background="@drawable/bg_blue_line_selector"
         android:text="@string/term_btn_next"
         android:stateListAnimator="@null"
         android:textColor="@color/acceptance_btn_common_selector"
         android:textStyle="bold"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 </LinearLayout>

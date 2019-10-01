@@ -3,18 +3,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/color_white"
-    android:paddingLeft="30dp"
-    android:paddingRight="30dp"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    android:paddingTop="40dp"
+    android:fillViewport="true"
     android:scrollbarStyle="outsideOverlay">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginBottom="90dp"
             android:orientation="vertical">
 
             <TextView
@@ -23,13 +25,13 @@
                 android:includeFontPadding="false"
                 android:text="@string/label_email"
                 android:textColor="@color/color_acceptance_title_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -37,17 +39,17 @@
                     android:id="@+id/edit_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
+                    android:layout_weight="1"
                     android:background="@drawable/bg_input_primary"
                     android:hint="@string/hint_email"
                     android:includeFontPadding="false"
                     android:inputType="textEmailAddress"
                     android:maxLength="40"
-                    android:paddingLeft="16dp"
-                    android:paddingTop="8dp"
-                    android:paddingRight="16dp"
-                    android:paddingBottom="8dp"
-                    android:textSize="13sp" />
+                    android:paddingLeft="10dp"
+                    android:paddingTop="3dp"
+                    android:paddingBottom="3dp"
+                    android:paddingRight="10dp"
+                    android:textSize="11sp" />
 
                 <View
                     android:layout_width="8dp"
@@ -56,14 +58,13 @@
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_check_id"
-                    android:layout_width="0dp"
-                    android:layout_height="38dp"
-                    android:layout_weight="1"
+                    android:layout_width="65dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/btn_acceptance_duplicate_selector"
                     android:includeFontPadding="false"
                     android:text="@string/term_check_email"
                     android:textColor="@color/acceptance_text_color_selector"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <View
@@ -76,28 +77,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:includeFontPadding="false"
                 android:text="@string/label_name"
                 android:textColor="@color/color_acceptance_title_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_input_primary"
                 android:hint="@string/hint_name"
                 android:includeFontPadding="false"
                 android:inputType="text"
                 android:maxLength="20"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="13sp" />
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="11sp" />
 
             <View
                 android:layout_width="match_parent"
@@ -108,28 +109,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:includeFontPadding="false"
                 android:text="@string/label_birthday"
                 android:textColor="@color/color_acceptance_title_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/edit_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_input_primary"
                 android:hint="@string/hint_birthday"
                 android:includeFontPadding="false"
                 android:inputType="numberDecimal"
                 android:maxLength="20"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="13sp" />
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="11sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -139,28 +140,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:includeFontPadding="false"
                 android:text="@string/label_password"
                 android:textColor="@color/color_acceptance_title_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_input_primary"
                 android:hint="@string/hint_password"
                 android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="13sp" />
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="11sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
@@ -170,54 +171,55 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:includeFontPadding="false"
                 android:text="@string/label_pw_again"
                 android:textColor="@color/color_acceptance_title_text"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/edit_pw_again"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="5dp"
                 android:background="@drawable/bg_input_primary"
                 android:hint="@string/hint_pw_again"
                 android:includeFontPadding="false"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="8dp"
-                android:textSize="13sp" />
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:textSize="11sp" />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/color_acceptance_check_duplicate_btn_back"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_sign_up"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="42dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/bg_blue_line_selector"
-                android:text="@string/term_sign_up"
-                android:textStyle="bold"
-                android:stateListAnimator="@null"
-                android:textColor="@color/acceptance_btn_common_selector"
-                android:textSize="20sp" />
+
         </LinearLayout>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginBottom="45dp"
+            android:background="@drawable/bg_blue_line_selector"
+            android:text="@string/term_sign_up"
+            android:layout_alignParentBottom="true"
+            android:textStyle="bold"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"
+            android:textColor="@color/acceptance_btn_common_selector"
+            android:textSize="15sp" />
 
         <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="120dp" />
-    </FrameLayout>
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 </ScrollView>

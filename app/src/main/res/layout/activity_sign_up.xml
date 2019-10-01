@@ -7,45 +7,46 @@
     android:layout_height="match_parent"
     tools:context="com.todosdialer.todosdialer.SignUpActivity">
 
-<!--    <android.support.design.widget.AppBarLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:theme="@style/AppTheme.AppBarOverlay">-->
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-<!--        <android.support.v7.widget.Toolbar-->
-<!--            android:id="@+id/toolbar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="@color/colorPrimary"-->
-<!--            app:popupTheme="@style/AppTheme.PopupOverlay">-->
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/action_bar_height"
+            android:background="@color/colorAccent"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-<!--            <FrameLayout-->
-<!--                android:id="@+id/btn_back"-->
-<!--                android:layout_width="50dp"-->
-<!--                android:layout_height="match_parent">-->
+            <FrameLayout
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
 
-<!--                <ImageView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_gravity="center_vertical"-->
-<!--                    android:contentDescription="@string/app_name"-->
-<!--                    android:scaleType="centerInside"-->
-<!--                    android:src="@drawable/arrow_left" />-->
-<!--            </FrameLayout>-->
+                <ImageView
+                    android:layout_width="31dp"
+                    android:layout_height="35dp"
+                    android:padding="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_left" />
+            </FrameLayout>
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:text="@string/term_sign_up"-->
-<!--                android:textColor="@color/text_primary"-->
-<!--                android:textSize="18sp" />-->
-<!--        </android.support.v7.widget.Toolbar>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/term_sign_up"
+                android:includeFontPadding="false"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp" />
+        </android.support.v7.widget.Toolbar>
 
-<!--    </android.support.design.widget.AppBarLayout>-->
+    </android.support.design.widget.AppBarLayout>
 
-    <include
-        layout="@layout/common_actionbar_title" />
+
 
     <FrameLayout
         android:id="@+id/fragment_container"

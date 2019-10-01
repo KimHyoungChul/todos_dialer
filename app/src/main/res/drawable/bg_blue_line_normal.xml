@@ -3,5 +3,5 @@
 
     <stroke
         android:width="2dp"
-        android:color="@color/color_acceptance_btn_common" />
+        android:color="@color/colorAccent" />
 </shape>

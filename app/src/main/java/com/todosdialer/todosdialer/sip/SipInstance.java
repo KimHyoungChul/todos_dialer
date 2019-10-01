@@ -80,7 +80,7 @@ public class SipInstance {
         mHandler.post(paramRunnable);
     }
 
-    TodosSipAccount getTodosAccount() {
+    public TodosSipAccount getTodosAccount() {
         return mTodosAccount;
     }
 

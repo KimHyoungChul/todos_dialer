@@ -1,5 +1,6 @@
 package com.todosdialer.todosdialer.adapter;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -25,6 +26,12 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
     private List<ChatRoom> mChatRoomList = new ArrayList<>();
     private OnItemClickListener mListener;
 
+    Context mContext;
+
+    public ChatRoomListAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
     public void setOnItemClickListener(OnItemClickListener listener) {
         mListener = listener;
     }
@@ -43,12 +50,7 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        try {
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_chat_room, parent, false));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_chat_room, parent, false));
     }
 
     @Override

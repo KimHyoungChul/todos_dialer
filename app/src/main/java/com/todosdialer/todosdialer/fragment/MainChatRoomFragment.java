@@ -53,7 +53,7 @@ public class MainChatRoomFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(R.id.chat_room_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        mAdapter = new ChatRoomListAdapter();
+        mAdapter = new ChatRoomListAdapter(getActivity().getApplicationContext());
         mAdapter.setOnItemClickListener(new ChatRoomListAdapter.OnItemClickListener() {
             @Override
             public void onRoomClicked(ChatRoom chatRoom) {

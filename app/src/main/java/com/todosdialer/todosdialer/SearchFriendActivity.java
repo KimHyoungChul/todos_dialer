@@ -93,10 +93,7 @@ public class SearchFriendActivity extends AppCompatActivity {
                     call(number);
                 }
 
-                @Override
-                public void onDeleteClicked(long id) {
 
-                }
             });
             recyclerView.setAdapter(mAdapter);
 

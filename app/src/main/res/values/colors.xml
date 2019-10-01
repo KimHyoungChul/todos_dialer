@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1b3645</color>
-        // 활성버튼 색(등록/수정 등)
-    <color name="colorPrimaryDark">#081025</color>
-
+    <color name="colorPrimary">#868485</color>
+    <color name="colorPrimaryDark">#858585</color>
+    <color name="colorPrimaryLight">#8A8989</color>
 
     <color name="colorSub">#ffa200</color>
-    // 비활성버튼 색(취소/삭제 등)
     <color name="colorSubDark">#C35149</color>
     <color name="colorSubLight">#f9ebc6</color>
-    <color name="colorAccent">#0088CC</color>
 
+    <color name="colorAccentWelcome">#5EC6CF</color>
+    <color name="colorAccent">#63CAD3</color>
 
     <color name="color_white">#ffffff</color>
     <color name="color_white_dark">#ececec</color>
@@ -82,9 +81,9 @@
 
     //휴대폰 인증
     <color name="color_acceptance_content_text">#555555</color>
-    <color name="color_acceptance_check_duplicate_btn_back">#7298BD</color>
-    <color name="color_acceptance_sub_text">#848484</color>
-    <color name="color_acceptance_title_text">#789EC3</color>
+    <color name="color_acceptance_check_duplicate_btn_back">#8FC2C6</color>
+    <color name="color_acceptance_sub_text">#525252</color>
+    <color name="color_acceptance_title_text">#8A8889</color>
     <color name="color_acceptance_et_under_line">#94ACC5</color>
     <color name="color_acceptance_btn_common">#68ACF1</color>
 

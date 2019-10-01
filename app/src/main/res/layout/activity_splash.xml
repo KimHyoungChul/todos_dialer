@@ -5,10 +5,10 @@
     android:background="@color/color_white">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="-50dp"
+        android:layout_width="174dp"
+        android:layout_height="129dp"
+        android:layout_marginTop="230dp"
+        android:layout_gravity="center_horizontal"
         android:contentDescription="@string/app_name"
         android:src="@drawable/logo_main_ch" />
 </FrameLayout>

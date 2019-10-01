@@ -29,9 +29,6 @@ import java.util.Locale;
 
 public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.ItemViewHolder> {
 
-    //    private static final String FORMAT_TIME = "yyyy/MM/dd a hh:mm";
-    private static final String FORMAT_TIME = "yyyy. MM. dd E요일";
-    private static final String FORMAT_CALL_TIME = "hh:mm";
     private List<Friend> mFriendList = new ArrayList<>();
     private FriendListAdapter.OnItemClickListener mListener;
 
@@ -345,14 +342,6 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.It
                 }
             });
 
-            mbtnDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null) {
-                        mListener.onDeleteClicked(mFriend.getPid());
-                    }
-                }
-            });
         }
 
         private void setDuration(long time) {
@@ -370,8 +359,6 @@ public class FriendListAdapter extends RecyclerView.Adapter<FriendListAdapter.It
         void onMessageClicked(String number);
 
         void onCallClicked(String number);
-
-        void onDeleteClicked(long id);
     }
 
 }

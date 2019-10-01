@@ -78,7 +78,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
     private TextView mTextTimer;
 
     private ImageView mImgPhoto;
-    private View mContainerBtnCalling;
+//    private View mContainerBtnCalling;
 
     private LinearLayout mBtnSpeaker;
     private LinearLayout mBtnPad;
@@ -136,6 +136,8 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
                     mNoOngoingNotification = true;
 
+                    endCall();
+
                     finish();
                 }
             }
@@ -146,15 +148,12 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        try {
-            super.onCreate(savedInstanceState);
-            TodosApplication.onCalling(true);
-            initWindowFlag();
-
-            setContentView(R.layout.activity_outgoing_call);
-
-            mRealm = Realm.getDefaultInstance();
-            String phoneNumber = getIntent().getStringExtra(EXTRA_KEY_PHONE_NUMBER);
+        super.onCreate(savedInstanceState);
+        TodosApplication.onCalling(true);
+        initWindowFlag();
+        setContentView(R.layout.activity_outgoing_call);
+        mRealm = Realm.getDefaultInstance();
+        String phoneNumber = getIntent().getStringExtra(EXTRA_KEY_PHONE_NUMBER);
 
             if (TextUtils.isEmpty(phoneNumber)) {
                 String errorMsg = "[OutgoingCallActivity] Phone number is not valid! Can not calling.";
@@ -165,65 +164,56 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 
             setActionbar(getString(R.string.app_name));
 
-            mIndicator = findViewById(R.id.indicator);
-            mTextName = findViewById(R.id.text_f_name);
-            mTextNumber = findViewById(R.id.text_f_phone_number);
-            mImgPhoto = findViewById(R.id.img_f_photo);
-            mTextTimer = findViewById(R.id.text_call_timer);
-            mTextTimer.setVisibility(View.GONE);
+        mIndicator = findViewById(R.id.indicator);
+        mTextName = findViewById(R.id.text_f_name);
+        mTextNumber = findViewById(R.id.text_f_phone_number);
+        mImgPhoto = findViewById(R.id.img_f_photo);
+        mTextTimer = findViewById(R.id.text_call_timer);
+        mTextTimer.setVisibility(View.GONE);
 
-            mContainerBtnCalling = findViewById(R.id.container_btn_calling);
-            mBtnSpeaker = findViewById(R.id.btn_speaker);
-            mBtnPad = findViewById(R.id.btn_pad);
-            mBtnBluetooth = findViewById(R.id.btn_blue_tooth);
-
+//        mContainerBtnCalling = findViewById(R.id.container_btn_calling);
+        mBtnSpeaker = findViewById(R.id.btn_speaker);
+        mBtnPad = findViewById(R.id.btn_pad);
+        mBtnBluetooth = findViewById(R.id.btn_blue_tooth);
             mImgSpeaker = findViewById(R.id.img_speaker);
             mImgBluetooth = findViewById(R.id.img_blue_tooth);
-            mBtnEndCall = findViewById(R.id.btn_end_call);
+        mBtnEndCall = findViewById(R.id.btn_end_call);
 
-            mIndicator.show();
-//            mContainerBtnCalling.setVisibility(View.INVISIBLE);
+        mIndicator.show();
+//        mContainerBtnCalling.setVisibility(View.INVISIBLE);
 
-            mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
-            if (mFriend == null) {
-                mFriend = new Friend();
-                mFriend.setName(phoneNumber);
-                mFriend.setNumber(phoneNumber);
-            }
+        mFriend = RealmManager.newInstance().findFriend(mRealm, phoneNumber);
+        if (mFriend == null) {
+            mFriend = new Friend();
+            mFriend.setName(phoneNumber);
+            mFriend.setNumber(phoneNumber);
+        }
 
-            //wifi 상태 확인
-            registerReceiver(rssiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+        //wifi 상태 확인
+        registerReceiver(rssiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
 
-            initViewByFriend();
+        initViewByFriend();
 
-            initWakeLock();
+        initWakeLock();
 
-            initAudioManager();
+        initAudioManager();
 
-            initProximitySensor();
+        initProximitySensor();
 
-            initListener();
+        initListener();
 
-            mCreatedAt = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault()).getTimeInMillis();
+        mCreatedAt = Calendar.getInstance(TimeZone.getDefault(), Locale.getDefault()).getTimeInMillis();
 
-            registerReceiver();
+        registerReceiver();
 
-            sendCall();
+        sendCall();
 
-//            mToneWorker = new ToneWorker(getApplicationContext());
-//            mToneWorker.start();
-
-            dtmfGenerator = new ToneGenerator(STREAM_VOICE_CALL, ToneGenerator.MAX_VOLUME / 2);
-
-            //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
-            if (savedInstanceState != null) {
+            dtmfGenerator = new ToneGenerator(STREAM_DTMF, ToneGenerator.MAX_VOLUME / 2);
+        //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
+        if (savedInstanceState != null) {
                 Log.d("OutgoingCallActivity", "savedInstanceState is not null");
-                finish();
-                return;
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            finish();
+            return;
         }
     }
 
@@ -352,7 +342,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
 //        mTextNumber.setText(tmpNumber);
 
 
-        String textNumber = mTextNumber.getText().toString();
+      String textNumber = mTextNumber.getText().toString();
 
         if(mTextName.equals(textNumber)) {
             mTextNumber.setText("");
@@ -374,9 +364,9 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         if (mAudioManager != null) {
-            mAudioManager.requestAudioFocus(null, AudioManager.STREAM_VOICE_CALL, AudioManager.AUDIOFOCUS_GAIN);
+            mAudioManager.requestAudioFocus(null, STREAM_VOICE_CALL, AudioManager.AUDIOFOCUS_GAIN);
             mAudioManager.setMode(AudioManager.MODE_IN_COMMUNICATION);
-            setVolumeControlStream(AudioManager.STREAM_VOICE_CALL);
+            setVolumeControlStream(STREAM_VOICE_CALL);
             mAudioManager.setSpeakerphoneOn(false);
 
             if (isBluetoothAvailable()) {
@@ -576,12 +566,6 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         RealmManager.newInstance().insertCallLog(mRealm, mFriend, callDuration, CallLog.STATE_OUTGOING, mCreatedAt);
     }
 
-//    private void generateTone(String dial) {
-//        if (mToneWorker != null) {
-//            mToneWorker.addDialer(dial);
-//        }
-//    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -613,7 +597,7 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
         //wifi 감시 해제
         unregisterReceiver(rssiReceiver);
         //통화 종료 후 wifi 상태가 3G/LTE 라면 wifi로 상태 변경
-        if (wifiStat == false) {
+        if(wifiStat == false) {
             @SuppressLint("WifiManagerLeak") WifiManager wman = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             wman.setWifiEnabled(true);
             wifiStat = true;
@@ -719,7 +703,6 @@ public class OutgoingCallActivity extends AppCompatActivity implements SensorEve
             checkRingerMode(dial);
             SipInstance.getInstance().getSipCall().dialDtmf(dial);
         } catch (Exception e) {
-            e.printStackTrace();
             e.printStackTrace();
         }
     }
