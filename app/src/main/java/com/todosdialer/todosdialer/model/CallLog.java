@@ -11,6 +11,7 @@ public class CallLog extends RealmObject {
 
     @PrimaryKey
     private long id;
+    private String userID;
     private String number;
     private int state;
     private long duration;
@@ -29,6 +30,15 @@ public class CallLog extends RealmObject {
         this.name = name;
         this.number = number;
     }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
+
 
     public void setId(long id) {
         this.id = id;

@@ -27,6 +27,7 @@ import com.todosdialer.todosdialer.TodosApplication;
 import com.todosdialer.todosdialer.manager.BusManager;
 import com.todosdialer.todosdialer.manager.PushManager;
 import com.todosdialer.todosdialer.manager.RealmManager;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.model.Message;
 import com.todosdialer.todosdialer.model.SipSessionInfo;
@@ -219,6 +220,9 @@ public class TodosService extends Service {
             Log.i(getClass().getSimpleName(), "REGISTER_SIP info id: " + info.getSipID());
             Log.i(getClass().getSimpleName(), "REGISTER_SIP info pw: " + info.getSipPW());
 
+//            SharedPreferenceManager mSP = new SharedPreferenceManager();
+//            mSP.setString(getApplicationContext(), "SipID", info.getSipID());
+
             registerSipServer(info.getSipSVRIP(),
                     port,
                     info.getSipID(),
@@ -368,7 +372,9 @@ public class TodosService extends Service {
                 Message.READ_STATE_READ :
                 Message.READ_STATE_UNREAD;
 
-        Message message = mRealmManager.insertMessage(mRealm, friend,
+        Message message = mRealmManager.insertMessage(mRealm,
+                SharedPreferenceManager.getString(getApplicationContext(), "SipID"),
+                friend,
                 messageBody,
                 Message.INPUT_STATE_OUT,
                 readState,

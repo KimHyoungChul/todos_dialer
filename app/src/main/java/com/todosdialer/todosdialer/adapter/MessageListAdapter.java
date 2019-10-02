@@ -1,6 +1,7 @@
 package com.todosdialer.todosdialer.adapter;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.todosdialer.todosdialer.R;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.Message;
 import com.todosdialer.todosdialer.util.Utils;
 
@@ -22,6 +24,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private ArrayList<Message> mMessageList = new ArrayList<>();
     private OnInItemClickListener mOnInItemClickListener;
 
+    Context mContext;
+
+    public MessageListAdapter(Context mContext) {
+        this.mContext = mContext;
+    }
+
     public void setOnInItemClickListener(OnInItemClickListener listener) {
         mOnInItemClickListener = listener;
     }
@@ -32,8 +40,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         if (messageList != null) {
             for (int i = 0; i < messageList.size(); i++) {
-                mMessageList.add(messageList.get(i));
-                notifyItemInserted(mMessageList.size());
+                if(messageList.get(i).getUserID().equals(SharedPreferenceManager.getString(mContext, "SipID"))) {
+                    mMessageList.add(messageList.get(i));
+                    notifyItemInserted(mMessageList.size());
+                }
             }
         }
     }

@@ -24,13 +24,16 @@ import android.widget.Toast;
 import com.todosdialer.todosdialer.adapter.FriendListAdapter;
 import com.todosdialer.todosdialer.api.ApiCallback;
 import com.todosdialer.todosdialer.api.Client;
+import com.todosdialer.todosdialer.api.body.AppMemberInfoBody;
 import com.todosdialer.todosdialer.api.body.CheckSessionBody;
 import com.todosdialer.todosdialer.api.body.SignInBody;
+import com.todosdialer.todosdialer.api.response.AppMemberInfoResponse;
 import com.todosdialer.todosdialer.api.response.BaseResponse;
 import com.todosdialer.todosdialer.api.response.SipSessionInfoResponse;
 import com.todosdialer.todosdialer.manager.BusManager;
 import com.todosdialer.todosdialer.manager.RealmManager;
 import com.todosdialer.todosdialer.manager.RetrofitManager;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.model.SipSessionInfo;
 import com.todosdialer.todosdialer.model.User;
@@ -399,7 +402,7 @@ public class SearchFriendActivity extends AppCompatActivity {
                         public void onSuccess(BaseResponse response) {
                             if (response.isSuccess()) {
                                 saveUserInfo(email, password);
-
+                                loadAppMemberInfo(email);
                                 checkSession(email);
                             } else {
                                 Toast.makeText(getApplicationContext(), response.message, Toast.LENGTH_SHORT).show();
@@ -421,6 +424,29 @@ public class SearchFriendActivity extends AppCompatActivity {
 
             RealmManager.newInstance().saveUser(realm, user);
             realm.close();
+        }
+
+        private void loadAppMemberInfo(String email) {
+            RetrofitManager.retrofit(getApplicationContext()).create(Client.Api.class)
+                    .loadAppMemberInfo(new AppMemberInfoBody(this, email))
+                    .enqueue(new ApiCallback<AppMemberInfoResponse>() {
+                        @Override
+                        public void onSuccess(AppMemberInfoResponse response) {
+                            if (response.isSuccess()) {
+
+                                SharedPreferenceManager mSP = new SharedPreferenceManager();
+                                mSP.setString(getApplicationContext(), "SipID", response.result.phone);
+                                Log.d("SignInActivity", "SipID: " + response.result.phone);
+                            } else {
+                                Toast.makeText(getApplicationContext(), response.message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFail(int error, String msg) {
+                            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                        }
+                    });
         }
 
         private void checkSession(String email) {

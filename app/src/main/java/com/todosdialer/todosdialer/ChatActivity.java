@@ -146,7 +146,7 @@ public class ChatActivity extends AppCompatActivity {
         mMessageRecyclerView.setLayoutManager(mLayoutManager);
         mMessageRecyclerView.setNestedScrollingEnabled(false);
 
-        mAdapter = new MessageListAdapter();
+        mAdapter = new MessageListAdapter(getApplicationContext());
         mAdapter.setOnInItemClickListener(new MessageListAdapter.OnInItemClickListener() {
             @Override
             public void onMessageClicked(Message message) {
@@ -345,14 +345,14 @@ public class ChatActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void sendToServer(String sipId, String sipPw, String url, final String phoneNumber, final String body) {
+    private void sendToServer(final String sipId, String sipPw, String url, final String phoneNumber, final String body) {
         String formattedSipId = sipId.replace(" ", "").replace("-", "");
         RetrofitManager.messagingRetrofit(this, url).create(Client.MessageApi.class)
                 .sendMessage(formattedSipId, sipPw, new SendingMessageBody(phoneNumber, body))
                 .enqueue(new ApiCallback<BaseResponse>() {
                     @Override
                     public void onSuccess(BaseResponse response) {
-                        updateDbAndSend(phoneNumber, body, response.code == 0 ? Message.SEND_STATE_SUCCESS : Message.SEND_STATE_FAIL);
+                        updateDbAndSend(sipId, phoneNumber, body, response.code == 0 ? Message.SEND_STATE_SUCCESS : Message.SEND_STATE_FAIL);
                         mProgressBar.setVisibility(View.GONE);
                     }
 
@@ -363,8 +363,9 @@ public class ChatActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateDbAndSend(String phoneNumber, String body, int sendState) {
+    private void updateDbAndSend(String userID, String phoneNumber, String body, int sendState) {
         Message message = mRealmManager.insertMessage(mRealm,
+                userID,
                 mFriend,
                 body,
                 Message.INPUT_STATE_IN,

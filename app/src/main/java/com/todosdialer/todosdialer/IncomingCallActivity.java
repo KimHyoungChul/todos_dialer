@@ -45,6 +45,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.todosdialer.todosdialer.fragment.DialFragment;
 import com.todosdialer.todosdialer.manager.PushManager;
 import com.todosdialer.todosdialer.manager.RealmManager;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.CallLog;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.sip.SipInstance;
@@ -638,7 +639,9 @@ public class IncomingCallActivity extends AppCompatActivity implements SensorEve
     private void insertCallLog() {
         long callDuration = mStartTime != 0 ? (Calendar.getInstance().getTimeInMillis() - mStartTime) : 0;
 
-        CallLog callLog = RealmManager.newInstance().insertCallLog(mRealm,
+        CallLog callLog = RealmManager.newInstance().insertCallLog(
+                mRealm,
+                SharedPreferenceManager.getString(getApplicationContext(), "SipID"),
                 mFriend,
                 callDuration,
                 mCallState,

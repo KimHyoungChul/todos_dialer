@@ -23,6 +23,7 @@ public class Message extends RealmObject {
     @PrimaryKey
     private long id;
     @Index
+    private String userID;
     private String phoneNumber;
     private String body;
     private long createdAt;
@@ -33,6 +34,14 @@ public class Message extends RealmObject {
     private long fid;
     private String name;
     private String uriPhoto;
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 
     public void setId(long id) {
         this.id = id;

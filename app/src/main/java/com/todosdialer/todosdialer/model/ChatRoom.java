@@ -6,6 +6,7 @@ import io.realm.annotations.PrimaryKey;
 public class ChatRoom extends RealmObject {
     @PrimaryKey
     private String phoneNumber;
+    private String userID;
     private String name;
     private long fid = 0;
     private String uriPhoto;
@@ -17,6 +18,14 @@ public class ChatRoom extends RealmObject {
     private int inputState = 0;
 
     private int unreadCount = 0;
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public String getUserID() {
+        return userID;
+    }
 
     public void setPhoneNumber(String phoneNumber) {
         phoneNumber.replace("-","");

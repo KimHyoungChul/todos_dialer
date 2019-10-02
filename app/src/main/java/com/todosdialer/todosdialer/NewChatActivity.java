@@ -287,7 +287,7 @@ public class NewChatActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void sendToServer(String sipId, String sipPw, String url, final String phoneNumber, final String body) {
+    private void sendToServer(final String sipId, String sipPw, String url, final String phoneNumber, final String body) {
         String formattedSipId = sipId.replace(" ", "").replace("-", "");
         RetrofitManager.messagingRetrofit(this, url).create(Client.MessageApi.class)
                 .sendMessage(formattedSipId, sipPw, new SendingMessageBody(phoneNumber, body))
@@ -296,7 +296,7 @@ public class NewChatActivity extends AppCompatActivity {
                     public void onSuccess(BaseResponse response) {
                         mProgressBar.setVisibility(View.GONE);
                         mBtnSend.setEnabled(true);
-                        updateDbAndSend(phoneNumber, body, response.code == 0 ? Message.SEND_STATE_SUCCESS : Message.SEND_STATE_FAIL);
+                        updateDbAndSend(sipId, phoneNumber, body, response.code == 0 ? Message.SEND_STATE_SUCCESS : Message.SEND_STATE_FAIL);
                         startChatActivity(phoneNumber);
                     }
 
@@ -310,7 +310,7 @@ public class NewChatActivity extends AppCompatActivity {
     }
 
 
-    private void updateDbAndSend(String phoneNumber, String body, int sendState) {
+    private void updateDbAndSend(String userID, String phoneNumber, String body, int sendState) {
         RealmManager realmManager = RealmManager.newInstance();
         phoneNumber.replace("-","");
         Friend friend = realmManager.findFriend(mRealm, phoneNumber);
@@ -321,6 +321,7 @@ public class NewChatActivity extends AppCompatActivity {
         }
 
         Message message = realmManager.insertMessage(mRealm,
+                userID,
                 friend,
                 body,
                 Message.INPUT_STATE_IN,

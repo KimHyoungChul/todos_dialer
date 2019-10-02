@@ -173,14 +173,15 @@ public class RealmManager {
     }
 
 
-    public void insertCallLog(Realm realm, Friend friend, long callDuration, int state, long createdAt) {
-        insertCallLog(realm, friend, callDuration, state, createdAt, true);
+    public void insertCallLog(Realm realm, String userID, Friend friend, long callDuration, int state, long createdAt) {
+        insertCallLog(realm, userID, friend, callDuration, state, createdAt, true);
     }
 
-    public CallLog insertCallLog(Realm realm, Friend friend, long callDuration, int state, long createdAt, boolean isChecked) {
+    public CallLog insertCallLog(Realm realm, String userID, Friend friend, long callDuration, int state, long createdAt, boolean isChecked) {
         long newId = makeNextId(realm, CallLog.class);
         CallLog callLog = new CallLog();
         callLog.setId(newId);
+        callLog.setUserID(userID);
         callLog.setNumber(friend.getNumber());
         callLog.setState(state);
         callLog.setDuration(callDuration);
@@ -198,9 +199,10 @@ public class RealmManager {
     }
 
 
-    public Message insertMessage(Realm realm, Friend friend, String body, int inputState, int readState, int sendState) {
+    public Message insertMessage(Realm realm, String userID, Friend friend, String body, int inputState, int readState, int sendState) {
         long newId = makeNextId(realm, Message.class);
         Message message = new Message();
+        message.setUserID(userID);
         message.setId(newId);
         message.setBody(body);
         message.setPhoneNumber(friend.getNumber());
@@ -256,6 +258,7 @@ public class RealmManager {
         ChatRoom chatRoom = findChatRoom(realm, message.getPhoneNumber());
         if (chatRoom == null) { //create
             chatRoom = new ChatRoom();
+            chatRoom.setUserID(message.getUserID());
             chatRoom.setPhoneNumber(message.getPhoneNumber());
             chatRoom.setName(message.getName());
             chatRoom.setFid(message.getFid());
@@ -269,6 +272,7 @@ public class RealmManager {
             chatRoom.setSendState(message.getSendState());
             chatRoom.setUnreadCount(unreadCount);
         } else { //update
+            chatRoom.setUserID(message.getUserID());
             chatRoom.setPhoneNumber(message.getPhoneNumber());
             chatRoom.setName(message.getName());
             chatRoom.setFid(message.getFid());

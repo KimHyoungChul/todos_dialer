@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.todosdialer.todosdialer.R;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.ChatRoom;
 import com.todosdialer.todosdialer.util.Utils;
 
@@ -42,8 +43,16 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
         if (chatRooms != null) {
             for (int i = 0; i < chatRooms.size(); i++) {
-                mChatRoomList.add(chatRooms.get(i));
-                notifyItemChanged(mChatRoomList.size());
+                //useid 값이 없으면 현재 userid값을 넣어준다(이전 문자 내역을 가진 사용자를 위해)
+                if (chatRooms.size() != 0 && chatRooms.get(i).getUserID() == null) {
+                    chatRooms.get(i).setUserID(SharedPreferenceManager.getString(mContext, "SipID"));
+                }
+
+                //chatroom의 user아이디를 가져와서 현재 아이디와 일치하는 항목만 가져온다.
+                if (chatRooms.get(i).getUserID().equals(SharedPreferenceManager.getString(mContext, "SipID"))) {
+                    mChatRoomList.add(chatRooms.get(i));
+                    notifyItemChanged(mChatRoomList.size());
+                }
             }
         }
     }

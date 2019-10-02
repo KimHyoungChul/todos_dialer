@@ -21,13 +21,16 @@ import android.widget.Toast;
 
 import com.todosdialer.todosdialer.api.ApiCallback;
 import com.todosdialer.todosdialer.api.Client;
+import com.todosdialer.todosdialer.api.body.AppMemberInfoBody;
 import com.todosdialer.todosdialer.api.body.CheckSessionBody;
 import com.todosdialer.todosdialer.api.body.SignInBody;
+import com.todosdialer.todosdialer.api.response.AppMemberInfoResponse;
 import com.todosdialer.todosdialer.api.response.BaseResponse;
 import com.todosdialer.todosdialer.api.response.SipSessionInfoResponse;
 import com.todosdialer.todosdialer.manager.BusManager;
 import com.todosdialer.todosdialer.manager.RealmManager;
 import com.todosdialer.todosdialer.manager.RetrofitManager;
+import com.todosdialer.todosdialer.manager.SharedPreferenceManager;
 import com.todosdialer.todosdialer.model.Friend;
 import com.todosdialer.todosdialer.model.User;
 import com.todosdialer.todosdialer.service.TodosService;
@@ -68,7 +71,7 @@ public class SplashActivity extends AppCompatActivity {
 
         //home 버튼을 이용해 앱을 나갔다가 다시 실행할때 죽는 문제 해결
         if (savedInstanceState != null) {
-                Log.d("SplashActivity", "savedInstanceState is not null");
+            Log.d("SplashActivity", "savedInstanceState is not null");
             finish();
             return;
         }
@@ -173,6 +176,29 @@ public class SplashActivity extends AppCompatActivity {
         return false;
     }
 
+    private void loadAppMemberInfo(String email) {
+        RetrofitManager.retrofit(getApplicationContext()).create(Client.Api.class)
+                .loadAppMemberInfo(new AppMemberInfoBody(this, email))
+                .enqueue(new ApiCallback<AppMemberInfoResponse>() {
+                    @Override
+                    public void onSuccess(AppMemberInfoResponse response) {
+                        if (response.isSuccess()) {
+
+                            SharedPreferenceManager mSP = new SharedPreferenceManager();
+                            mSP.setString(getApplicationContext(), "SipID", response.result.phone);
+                            Log.d("SignInActivity", "SipID: " + response.result.phone);
+                        } else {
+                            Toast.makeText(getApplicationContext(), response.message, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFail(int error, String msg) {
+                        Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
     private void signIn(final String email, final String password) {
         RetrofitManager.retrofit(getApplicationContext()).create(Client.Api.class)
                 .signIn(new SignInBody(getApplicationContext(), email, password))
@@ -181,7 +207,7 @@ public class SplashActivity extends AppCompatActivity {
                     public void onSuccess(BaseResponse response) {
                         if (response.isSuccess()) {
                             saveUserInfo(email, password);
-
+                            loadAppMemberInfo(email);
                             checkSession(email);
                         } else {
                             Log.e("signIn", "Fail to sign in: " + response.message);
@@ -218,6 +244,10 @@ public class SplashActivity extends AppCompatActivity {
                                     TodosService.Request.REQUEST_REGISTER_SIP,
                                     response.result));
                         }
+
+                        SharedPreferenceManager mSP = new SharedPreferenceManager();
+                        mSP.setString(getApplicationContext(), "SipID", response.result.getSipID());
+
                         startMainActivity();
                     }
 
