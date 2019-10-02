@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F5F5F5"
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
@@ -20,13 +21,14 @@
             android:id="@+id/contact_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:visibility="invisible" />
 
         <ImageButton
             android:id="@+id/btn_see_more"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="22dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal|bottom"
             android:background="@android:color/transparent"
             android:contentDescription="@string/app_name"
@@ -46,8 +48,8 @@
 
         <ImageView
             android:id="@+id/btn_add_contact"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
+            android:layout_width="16dp"
+            android:layout_height="17dp"
             android:contentDescription="@string/app_name"
             android:scaleType="centerInside"
             android:src="@drawable/ic_add_circle_outline_white_24dp"
@@ -91,8 +93,8 @@
 
             <ImageView
                 android:id="@+id/btn_backspace"
-                android:layout_width="29dp"
-                android:layout_height="29dp"
+                android:layout_width="23dp"
+                android:layout_height="16dp"
                 android:contentDescription="@string/app_name"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_backspace_white_24dp"
@@ -112,6 +114,8 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:gravity="center_horizontal">
 
             <TableRow
@@ -122,7 +126,7 @@
                 <com.todosdialer.todosdialer.view.DialView
                     android:id="@+id/btn_dial_one"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="@string/dial_two"
                     android:background="#C6C6C6"
@@ -132,7 +136,7 @@
                 <com.todosdialer.todosdialer.view.DialView
                     android:id="@+id/btn_dial_two"
                     android:layout_width="wrap_content"
-                    android:layout_height="60dp"
+                    android:layout_height="50dp"
                     android:layout_weight="1"
                     android:text="@string/dial_two"
                     android:textColor="@android:color/black"
@@ -264,7 +268,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="15dp"
             android:weightSum="3">
 

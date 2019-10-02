@@ -7,7 +7,6 @@
         <item name="colorAccent">@color/colorAccentWelcome</item>
         <item name="android:windowIsTranslucent">false</item>
         <item name="android:windowIsFloating">false</item>
-
         <item name="android:buttonStyle">@style/FontButtonStyle</item>
         <item name="android:editTextStyle">@style/FontEditTextStyle</item>
         <item name="android:radioButtonStyle">@style/FontRadioButtonStyle</item>

@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#858585</color>
     <color name="colorPrimaryLight">#8A8989</color>
 
-    <color name="colorSub">#ffa200</color>
+    <color name="colorSub">#F79091</color>
     <color name="colorSubDark">#C35149</color>
     <color name="colorSubLight">#f9ebc6</color>
 
@@ -58,7 +58,7 @@
     <color name="color_contact_under_line">#AEAEAE</color>
 <!--    <color name="color_expandable_back">#c7d3df</color>-->
     <color name="color_expandable_back">#b2bfcd</color>
-    <color name="color_tab_under_line">#AFAFAF</color>
+    <color name="color_tab_under_line">#BABABA</color>
 
     //log in
     <color name="color_sign_in_back">#62a9f1</color>

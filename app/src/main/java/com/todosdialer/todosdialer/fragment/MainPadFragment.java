@@ -61,8 +61,7 @@ import java.util.Locale;
 
 import io.realm.Realm;
 
-import static android.media.AudioManager.STREAM_DTMF;
-import static android.media.AudioManager.STREAM_VOICE_CALL;
+import static android.media.AudioManager.STREAM_SYSTEM;
 
 public class MainPadFragment extends Fragment {
     private static final int REQUEST_ACTIVITY = 983;
@@ -124,7 +123,7 @@ public class MainPadFragment extends Fragment {
         mUser = RealmManager.newInstance().loadUser(realm);
         realm.close();
 //        mToneWorker = new ToneWorker(getActivity());
-        dtmfGenerator = new ToneGenerator(STREAM_DTMF, ToneGenerator.MAX_VOLUME / 2);
+        dtmfGenerator = new ToneGenerator(STREAM_SYSTEM, ToneGenerator.MAX_VOLUME / 2);
 
     }
 

@@ -16,6 +16,9 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/action_bar_height"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            android:paddingLeft="0dp"
             android:background="@color/colorAccent"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
@@ -28,6 +31,7 @@
                     android:layout_width="31dp"
                     android:layout_height="35dp"
                     android:padding="10dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_gravity="center_vertical"
                     android:contentDescription="@string/app_name"
                     android:scaleType="centerInside"

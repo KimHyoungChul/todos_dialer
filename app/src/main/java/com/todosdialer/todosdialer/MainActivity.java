@@ -127,7 +127,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initListeners();
 
-        setLogoActionbar();
         setUncheckedSizeText();
 
         mRealm.addChangeListener(mRealmListener);
@@ -561,25 +560,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mRealm.close();
     }
 
-    private void setLogoActionbar() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setContentInsetsAbsolute(0, 0); //좌우 여백 제거
-        setSupportActionBar(toolbar);
 
-        try {
-            // Get the ActionBar here to configure the way it behaves.
-            ActionBar actionBar = getSupportActionBar();
-            actionBar.setDisplayShowCustomEnabled(true);
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayHomeAsUpEnabled(false);
-//            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-//            actionBar.setHomeButtonEnabled(true);
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

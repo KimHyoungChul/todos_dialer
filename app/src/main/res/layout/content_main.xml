@@ -19,9 +19,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="45dp"
         android:background="@color/color_white"
-        android:gravity="center"
         android:orientation="horizontal"
         android:paddingLeft="50dp"
         android:paddingRight="50dp">
@@ -35,19 +34,19 @@
             android:duplicateParentState="true">
 
             <ImageButton
-                android:layout_width="20dp"
-                android:layout_height="20dp"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
                 android:layout_centerInParent="true"
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="fitXY"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_dial_pad_selector" />
 
             <ImageView
                 android:id="@+id/tab_under_dot_01"
                 android:layout_width="4dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="6dp"
                 android:layout_height="4dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
@@ -63,21 +62,20 @@
             android:duplicateParentState="true">
 
             <ImageButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_centerInParent="true"
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="fitXY"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_contact_selector" />
 
             <ImageView
                 android:id="@+id/tab_under_dot_02"
-                android:layout_width="7dp"
-                android:layout_marginBottom="5dp"
+                android:layout_width="4dp"
+                android:layout_marginBottom="6dp"
                 android:layout_height="4dp"
-                android:paddingLeft="3dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
@@ -94,13 +92,13 @@
 
             <ImageButton
                 android:id="@+id/ic_call_log"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:layout_centerInParent="true"
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="fitXY"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_call_log_selector" />
 
             <TextView
@@ -131,7 +129,7 @@
             <ImageView
                 android:id="@+id/tab_under_dot_03"
                 android:layout_width="4dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="6dp"
                 android:layout_height="4dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"
@@ -151,13 +149,13 @@
 
             <ImageButton
                 android:id="@+id/ic_message"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
+                android:layout_width="27dp"
+                android:layout_height="19dp"
                 android:layout_centerInParent="true"
                 android:background="@color/color_white"
                 android:clickable="false"
                 android:contentDescription="@string/app_name"
-                android:scaleType="fitCenter"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_sms_selector" />
 
             <TextView
@@ -188,7 +186,7 @@
             <ImageView
                 android:id="@+id/tab_under_dot_04"
                 android:layout_width="4dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginBottom="6dp"
                 android:layout_height="4dp"
                 android:visibility="invisible"
                 android:layout_alignParentBottom="true"

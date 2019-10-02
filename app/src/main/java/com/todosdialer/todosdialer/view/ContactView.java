@@ -166,7 +166,7 @@ public class ContactView extends FrameLayout {
                     .apply(RequestOptions.centerCropTransform())
                     .into(mImgPhoto);
         } else {
-            mImgPhoto.setImageResource(R.drawable.ic_account_circle_white_24dp);
+            mImgPhoto.setImageResource(R.drawable.ic_account_circle_48dp);
         }
     }
 
